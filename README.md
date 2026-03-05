@@ -37,6 +37,4 @@ Deux approches coexistent dans notre projet :
 
 ## 5. Références
 
-* **Recherche Académique :** La base de données *PT-FireSprd* (ESSD, 2023) et les études de pyrologie de l'Université de Coimbra (ADAI) sur la dynamique des incendies.
-* **Data Journalism :** Des enquêtes visuelles telles que *"Portugal's deadly fires"* par Reuters Graphics ou les travaux d'investigation du *European Data Journalism Network* sur la malédiction de l'eucalyptus.
-* **Esthétique visuelle :** L'utilisation de webGL et D3.js pour modéliser des flux et des particules s'inspire des travaux de vulgarisation interactive de plateformes comme *The Pudding*.
+**à compléter**
