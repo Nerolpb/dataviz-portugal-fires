@@ -1,6 +1,6 @@
 > **Projet réalisé dans le cadre du cours VisualDon (Visualisation de données) à la HEIG-VD.**
 
-## 1. Le Projet (Sujet & Problématique)
+## 1. Le Projet 
 
 **Le Sujet :** L'aménagement du territoire portugais a subi des mutations profondes au cours du dernier demi-siècle. Pour maximiser les rendements à court terme et propulser son industrie de la pâte à papier, le pays a massivement planté l'Eucalyptus globulus, une essence exotique originaire d'Australie. Aujourd'hui, le Portugal détient le record mondial de la plus forte densité d'eucalyptus, recouvrant environ 26% de ses surfaces forestières.
 
@@ -24,8 +24,8 @@ Les données portent la trace des entités qui les publient. Par exemple, les cl
 ## 3. Description des Données
 **Structure, format et attributs :**
 Notre architecture d'information repose sur :
-* **Données Spatiales :** Fichiers Shapefile (.shp) et GeoJSON provenant de l'ICNF (polygones des zones brûlées depuis 1975) et de la DGT (zones d'eucalyptus).
-* **Données Quantitatives :** Fichiers CSV contenant la vitesse de propagation du feu, la surface brûlée (en hectares), et les volumes d'exportation papetière (en milliards d'euros).
+
+Fichiers Shapefile (.shp) et GeoJSON provenant de l'ICNF (polygones des zones brûlées depuis 1975) et de la DGT (zones d'eucalyptus).
 
 ## 4. Notre But
 Deux approches coexistent dans notre projet :
