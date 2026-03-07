@@ -8,7 +8,7 @@
 
 **Le Problème :** Il existe une corrélation tragique entre cette sylviculture industrielle et la vulnérabilité du pays face aux méga-feux de forêt (comme ceux ravageurs de 2017). L'eucalyptus est une essence hautement inflammable par rapport aux espèces comme le chêne-liège. La prolifération de ces plantations, gérées pour la production de papier, modifie profondément le régime des incendies (vitesse de propagation, intensité). 
 
-**Notre But :** Ce projet vise à modéliser spatialement et visuellement cette causalité systémique. ... **à compléter**
+**Notre But : Notre visualisation a pour but de dénoncer. Raconter l'histoire d'un désastre "manufacturé". Nous voulons vulgariser la corrélation entre les choix d'aménagement du territoire et l'aggravation des incendies, en expliquant visuellement pourquoi cette monoculture agit comme une bombe à retardement. En parallèle, nous voulons offrir à l'utilisateur la liberté d'explorer les données spatiales par lui-même. À travers une cartographie interactive, le public pourra superposer l'historique des surfaces brûlées avec la densité des plantations d'eucalyptus, afin de constater de ses propres yeux la réalité géographique du problème, région par région. 
 
 ---
 
@@ -37,4 +37,14 @@ Deux approches coexistent dans notre projet :
 
 ## 5. Références
 
-**à compléter**
+Bien que la création d'une cartographie interactive dédiée spécifiquement à ce sujet soit une démarche novatrice, l'utilisation croisée des données forestières et incendies a déjà été abordée dans d'autres sphères. 
+
+**Dans les médias et la presse d'information :**
+Plusieurs grands médias publics européens se sont emparés de ce sujet pour alerter l'opinion, confirmant la pertinence journalistique de notre démarche :
+* **RTS (Radio Télévision Suisse) :** A publié un article pointant du doigt l'eucalyptus comme un "arbre qui attise les feux de forêt" (en se penchant notamment sur la péninsule ibérique).
+    * *Leur but :* Informer le grand public sur le danger de ces monocultures face au changement climatique.
+* **Radio France (France Inter) :** A consacré un épisode du "Zoom de la rédaction" (mai 2023) à l'impact controversé de l'eucalyptus.
+    * *Leur but :* Documenter, via le reportage de terrain, le conflit entre la rentabilité de l'industrie papetière et le désespoir des populations locales face aux incendies.
+
+**Inspirations visuelles et méthodologiques :**
+* **The Pudding / The New York Times (Visual Investigations) :** Bien que ces médias n'aient pas traité spécifiquement de la forêt portugaise, nous nous inspirons fortement de leurs méthodes de *scrollytelling*.
