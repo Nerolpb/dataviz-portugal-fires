@@ -1,52 +1,52 @@
 > **Projet réalisé dans le cadre du cours VisualDon (Visualisation de données) à la HEIG-VD.**
 
-## 1. Portugal : L'eucalyptus, l'or vert qui attise les flammes.
+# 1. Portugal : L'eucalyptus, l'or vert qui attise les flammes.
 
-**Le Sujet :** L'aménagement du territoire portugais a subi des mutations profondes au cours du dernier demi-siècle. Pour maximiser les rendements à court terme et propulser son industrie de la pâte à papier, le pays a massivement planté l'Eucalyptus globulus, une essence exotique originaire d'Australie. Aujourd'hui, le Portugal détient le record mondial de la plus forte densité d'eucalyptus, recouvrant environ 26% de ses surfaces forestières.
+**Le Sujet :** Le paysage du Portugal a beaucoup changé ces 50 dernières années. Pour produire plus de pâte à papier rapidement, le pays a planté énormément d'Eucalyptus globulus, un arbre qui vient d'Australie. Aujourd'hui, le Portugal bat le record mondial de densité d'eucalyptus : cette espèce recouvre près d'un tiers (environ 26%) de ses forêts.
 
+**Le Problème :** L'eucalyptus ne fait pas qu'occuper de la place, il aggrave les incendies. En remplaçant les arbres locaux (comme les chênes-lièges) par des rangées de "torches" industrielles, le pays a transformé ses forêts en barils de poudre. Ce lien direct entre ces plantations industrielles et les méga-feux (comme ceux, tragiques, de 2017) est le cœur de notre projet. L'eucalyptus brûle beaucoup plus vite et plus fort que les arbres natifs, ce qui change complètement la façon dont les feux se propagent.
 
-
-**Le Problème :** 
-Plus qu'une simple corrélation, l'eucalyptus agit comme un catalyseur de catastrophe. En remplaçant les barrières naturelles (chênes-lièges) par des rangées de 'torches' industrielles, le pays a transformé ses forêts en barils de poudre.
-Cette corrélation tragique entre cette sylviculture industrielle et la vulnérabilité du pays face aux méga-feux de forêt (comme ceux ravageurs de 2017). L'eucalyptus a des propiété hautement inflammable par rapport aux espèces comme le chêne-liège. La prolifération de ces plantations, gérées pour la production de papier, modifie profondément le régime des incendies (vitesse de propagation, intensité). 
-
-**Notre But** : Notre visualisation a pour but de dénoncer. Raconter l'histoire d'un désastre "manufacturé". Nous voulons vulgariser la corrélation entre les choix d'aménagement du territoire et l'aggravation des incendies, en expliquant visuellement pourquoi cette monoculture agit comme une bombe à retardement. En parallèle, nous voulons offrir à l'utilisateur la liberté d'explorer les données spatiales par lui-même. À travers une cartographie interactive, le public pourra superposer l'historique des surfaces brûlées avec la densité des plantations d'eucalyptus, afin de constater de ses propres yeux la réalité géographique du problème, région par région. 
+**Notre But :** Nous voulons raconter l'histoire d'un désastre créé par l'homme. Notre objectif est d'expliquer simplement le lien entre ces choix politiques et les incendies, en montrant pourquoi cette monoculture est une bombe à retardement. En parallèle, nous voulons offrir une preuve visuelle claire. Grâce à une carte interactive, le public pourra superposer les zones brûlées et les forêts d'eucalyptus pour comprendre le problème en un coup d'œil.
 
 ---
 
 ## 2. Contexte des Données
-**D'où viennent les données et qui les a créées ?**
-Pour prouver cette corrélation, nous agrégeons des données ouvertes (Open Data) provenant de multiples strates institutionnelles et scientifiques :
-* **Incendies (Historique et Cinématique) :** Les données proviennent de l'**ICNF** (Instituto da Conservação da Natureza e das Florestas).
-* **Occupation des Sols :** La **DGT** (Direção-Geral do Território).
 
-**Quels biais ou absences peut-on identifier ?**
-Les données portent la trace des entités qui les publient. Par exemple, les classifications de la DGT ou de l'ICNF regroupent souvent l'eucalyptus sous le terme générique de "forêt", ce qui masque aux yeux du grand public la différence entre un écosystème naturel résilient et une monoculture industrielle. L'Open Data n'est jamais neutre. En classant l'eucalyptus sous l'étiquette générique de 'forêt', les institutions (DGT/ICNF) opèrent un effacement sémantique. Notre projet vise à 'dé-brouiller' cette nomenclature pour isoler la monoculture industrielle de la forêt résiliente.
+**D'où viennent les données ?** Pour prouver ce lien, nous utilisons des données publiques (Open Data) qui proviennent d'institutions officielles :
+
+* **Incendies (Historique) :** Les données viennent de l'ICNF (Institut pour la Conservation de la Nature et des Forêts).
+* **Occupation des Sols :** Les données viennent de la DGT (Direction Générale du Territoire).
+
+**Quels sont les biais ou les problèmes rencontrés ?** Nous avons un gros problème de dates : les données sur les feux sont complètes et vont de 1975 à 2024, mais les recensements sur les eucalyptus n'ont été faits que pour certaines années (1995, 2000, 2005, 2015). À cause de cela, nous ne pouvons pas proposer un curseur "année par année" totalement libre à l'utilisateur, car inventer les données manquantes serait trompeur.
+
+Un autre défi technique vient du format des cartes : les données d'origine utilisent un système de coordonnées GPS spécifique au Portugal. Nous avons dû faire plusieurs manipulations techniques pour pouvoir les afficher correctement sur nos cartes web.
+
+---
 
 ## 3. Description des Données
-**Structure, format et attributs :**
-Notre architecture d'information repose sur :
 
-Fichiers Shapefile (.shp) et GeoJSON provenant de l'ICNF (polygones des zones brûlées depuis 1975) et de la DGT (zones d'eucalyptus).
+Nous utilisons des formats de données géographiques standards : des fichiers Shapefile (.shp) et GeoJSON venant de l'ICNF (pour dessiner les zones brûlées) et de la DGT (pour dessiner les forêts d'eucalyptus, uniquement pour les années disponibles).
+
+---
 
 ## 4. Notre But
-Deux approches coexistent dans notre projet :
 
-* **Expliquer :** Le visiteur sera guidé par un récit (*scrollytelling*) expliquant la biologie de la combustion et la logique économique de l'industrie papetière.
-* **Explorer :** L'utilisateur pourra interagir avec la carte, filtrer les années, et voir par lui-même la superposition des polygones "Eucalyptus" avec les "Cicatrices de feu" dans sa propre région.
+Notre projet se divise en deux parties :
 
-**Le message :** Les incendies extrêmes au Portugal ne sont pas qu'une fatalité climatique, mais le sous-produit d'une politique d'aménagement du territoire dictée par des intérêts industriels et économiques tout en délaissant l'aspect écologique. 
+* **Expliquer :** Le visiteur sera guidé par un récit interactif (scrollytelling) qui explique pourquoi l'eucalyptus brûle si bien, les enjeux financiers du papier, et le bilan terrible des incendies, surtout l'année noire de 2017.
+* **Explorer :** Pour éviter de fausser l'information à cause des "trous" dans nos données, l'utilisateur sera accompagné dans sa découverte. Une animation cartographique lui montrera clairement la superposition entre l'eucalyptus et les zones détruites par le feu.
+
+**Le message :** Les grands incendies au Portugal ne sont pas qu'une fatalité liée au climat. Ils sont aussi le résultat de choix politiques et industriels faits au détriment de l'écologie.
+
+---
 
 ## 5. Références
 
-Bien que la création d'une cartographie interactive dédiée spécifiquement à ce sujet soit une démarche novatrice, l'utilisation croisée des données forestières et incendies a déjà été abordée dans d'autres sphères. 
+Même si notre approche de carte interactive est nouvelle, le lien entre l'eucalyptus et les incendies a déjà été traité par plusieurs grands médias, ce qui confirme l'intérêt de notre projet :
 
-**Dans les médias et la presse d'information :**
-Plusieurs grands médias publics européens se sont emparés de ce sujet pour alerter l'opinion, confirmant la pertinence journalistique de notre démarche :
-* **RTS (Radio Télévision Suisse) :** A publié un article pointant du doigt l'eucalyptus comme un "arbre qui attise les feux de forêt" (en se penchant notamment sur la péninsule ibérique).
-    * *Leur but :* Informer le grand public sur le danger de ces monocultures face au changement climatique.
-* **Radio France (France Inter) :** A consacré un épisode du "Zoom de la rédaction" (mai 2023) à l'impact controversé de l'eucalyptus.
-    * *Leur but :* Documenter, via le reportage de terrain, le conflit entre la rentabilité de l'industrie papetière et le désespoir des populations locales face aux incendies.
+* **RTS (Radio Télévision Suisse) :** A publié un article pointant du doigt l'eucalyptus comme un "arbre qui attise les feux de forêt". Leur but : alerter le public sur le danger de cette monoculture face au changement climatique.
+* **Radio France (France Inter) :** A consacré un reportage sur le terrain à ce sujet. Leur but : documenter le conflit entre l'industrie du papier et les populations locales qui subissent les feux.
 
-**Inspirations visuelles et méthodologiques :**
-* **The Pudding / The New York Times (Visual Investigations) :** Bien que ces médias n'aient pas traité spécifiquement de la forêt portugaise, nous nous inspirons fortement de leurs méthodes de *scrollytelling*.
+**Inspirations visuelles :**
+
+* **The Pudding / The New York Times (Visual Investigations) :** Même s'ils n'ont pas parlé de ce sujet précis, nous nous inspirons beaucoup de leur façon de raconter des histoires de manière très visuelle et fluide (scrollytelling).
