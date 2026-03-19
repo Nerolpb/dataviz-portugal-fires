@@ -30,7 +30,9 @@ Un autre défi technique vient du format des données géographique : les donné
 
 ## 3. Description des Données
 
-Nous utilisons des formats de données géographiques standards : des fichiers Shapefile (.shp) venant de l'ICNF (pour dessiner les zones brûlées et les forêts d'eucalyptus)
+Nous utilisons des formats de données géographiques standards : des fichiers Shapefile (.shp) venant de l'ICNF (pour dessiner les zones brûlées et les forêts d'eucalyptus).
+
+---
 
 ## 4. Transformation des Données
 
