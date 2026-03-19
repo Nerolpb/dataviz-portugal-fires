@@ -1,6 +1,6 @@
 > **Projet réalisé dans le cadre du cours VisualDon (Visualisation de données) à la HEIG-VD.**
 
-# 1. Portugal : L'eucalyptus, l'or vert qui attise les flammes.
+# 1. Contexte du Projet
 
 **Le Sujet :**
 Le paysage du Portugal a beaucoup changé ces 50 dernières années. Pour produire plus de pâte à papier rapidement, le pays a planté énormément d'Eucalyptus globulus, un arbre qui vient d'Australie. Aujourd'hui, le Portugal bat le record mondial de densité d'eucalyptus : cette espèce recouvre près d'un tiers de ses forêts.
@@ -87,4 +87,5 @@ Même si notre approche de carte interactive est nouvelle, le lien entre l'eucal
 ## 7. Wireframe
 
 Lien Figma : https://www.figma.com/design/8dw0vXh8VyPJ0hsZXwik8A/VisualDon---Wireframe?node-id=0-1&t=QX3HgHBPznadx6dO-1
+
 Lien Prototype Figma (Preview) : https://www.figma.com/proto/8dw0vXh8VyPJ0hsZXwik8A/VisualDon---Wireframe?page-id=0%3A1&node-id=81-284&viewport=-409%2C-67%2C0.12&t=ZJyGRVehw6rPDiwq-1&scaling=contain&content-scaling=fixed
