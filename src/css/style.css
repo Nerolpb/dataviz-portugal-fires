@@ -1,0 +1,331 @@
+/* ============================================================
+   VARIABLES GLOBALES
+   ============================================================ */
+:root {
+  --bg-rouge:   #AF381A;
+  --blanc:      #FFFFFF;
+  --vert-elec:  #00E676;
+  --emeraude:   #1DE9B6;
+  --jaune-feu:  #FFEA00;
+
+  /* Typographie */
+  --font-body:  "pacaembu", sans-serif;
+  --font-ui:    "pacaembu", sans-serif;
+  --fs-xl:      clamp(2.5rem, 6vw, 5rem);
+  --fs-lg:      clamp(1.5rem, 3vw, 2.5rem);
+  --fs-md:      clamp(1rem, 1.8vw, 1.25rem);
+  --fs-sm:      0.875rem;
+
+  /* Spacing */
+  --space-s:    1rem;
+  --space-m:    2rem;
+  --space-l:    4rem;
+
+  /* Transitions */
+  --slide-duration: 700ms;
+  --slide-easing:   cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-rouge);
+  color: var(--blanc);
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  overflow: hidden;          /* Bloque le scroll natif — le slider gère la nav */
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SLIDER LAYOUT
+   ============================================================ */
+#slider-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  transition: transform var(--slide-duration) var(--slide-easing);
+  will-change: transform;
+}
+
+.screen {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen__content {
+  max-width: 900px;
+  width: 90%;
+  padding: var(--space-m);
+  z-index: 1;
+}
+
+/* Fullbleed : pour la slide carte (le contenu occupe tout l'écran) */
+.screen__content--fullbleed {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   TYPOGRAPHIE
+   ============================================================ */
+.title-main {
+  font-size: var(--fs-xl);
+  font-family: "pacaembu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.1;
+  color: var(--blanc);
+  margin-bottom: var(--space-m);
+}
+
+.subtitle {
+  font-size: var(--fs-lg);
+  color: var(--emeraude);
+  margin-bottom: var(--space-l);
+  max-width: 600px;
+}
+
+.cta-hint {
+  font-size: var(--fs-sm);
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+}
+
+.cta-hint kbd {
+  display: inline-block;
+  padding: 0.1em 0.4em;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 3px;
+  font-family: var(--font-ui);
+}
+
+.section-title {
+  font-size: var(--fs-lg);
+  font-family: "pacaembu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--jaune-feu);
+  margin-bottom: var(--space-s);
+}
+
+.section-title--overlay {
+  position: absolute;
+  top: var(--space-m);
+  left: var(--space-m);
+  z-index: 10;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.section-intro {
+  font-size: var(--fs-sm);
+  opacity: 0.75;
+  margin-bottom: var(--space-m);
+  max-width: 600px;
+}
+
+/* ============================================================
+   HERO (écran 1)
+   ============================================================ */
+.screen__content--hero {
+  max-width: 1100px;
+  width: 90%;
+  padding: var(--space-l) var(--space-m);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.hero-body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-l);
+  margin-bottom: var(--space-l);
+}
+
+.hero-text {
+  flex: 1;
+  font-size: var(--fs-lg);
+  line-height: 1.4;
+}
+
+.hero-image-placeholder {
+  flex: 1;
+  aspect-ratio: 4 / 3;
+  border: 2px dashed rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-lg);
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.hero-cta {
+  text-align: center;
+}
+
+.cta-button {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: #000;
+  background: var(--blanc);
+  border: none;
+  border-radius: 999px;
+  padding: 0.75em 2em;
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   HIGHLIGHT (mot surligné en vert)
+   ============================================================ */
+.highlight-green {
+  position: relative;
+  z-index: 0;
+}
+
+.highlight-green::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  bottom: 0;
+  height: 40%;
+  background: var(--vert-elec);
+  z-index: -1;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   NAVIGATION FLÈCHES
+   ============================================================ */
+#slide-nav-arrows {
+  position: fixed;
+  bottom: var(--space-m);
+  left: var(--space-m);
+  z-index: 100;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--blanc);
+  color: #000;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 200ms ease, transform 200ms ease;
+  font-weight: 700;
+}
+
+.nav-arrow:hover {
+  transform: scale(1.1);
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+  transform: none;
+}
+
+/* ============================================================
+   CHARTS (conteneurs D3)
+   ============================================================ */
+#chart-trees,
+#chart-fires {
+  width: 100%;
+  /* La hauteur sera définie dynamiquement par D3 via viewBox */
+}
+
+#chart-trees svg,
+#chart-fires svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================
+   CARTE MAPBOX
+   ============================================================ */
+#map-portugal {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================
+   NAVIGATION (dots + compteur)
+   ============================================================ */
+#slide-nav {
+  position: fixed;
+  bottom: var(--space-m);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#slide-counter {
+  font-size: var(--fs-sm);
+  opacity: 0.5;
+  font-family: var(--font-ui);
+  letter-spacing: 0.1em;
+}
+
+#nav-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  cursor: pointer;
+  transition: background 300ms, transform 300ms;
+  padding: 0;
+}
+
+.dot.active {
+  background: var(--blanc);
+  transform: scale(1.4);
+}
