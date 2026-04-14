@@ -40,7 +40,7 @@ html {
 }
 
 body {
-  background-color: var(--bg-rouge);
+  background-color: #000;
   color: var(--blanc);
   font-family: var(--font-body);
   font-size: var(--fs-md);
@@ -53,6 +53,7 @@ body {
    ============================================================ */
 #slider-container {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   transition: transform var(--slide-duration) var(--slide-easing);
@@ -60,7 +61,7 @@ body {
 }
 
 .screen {
-  flex: 0 0 100vw;
+  flex: 0 0 100vh;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -93,7 +94,7 @@ body {
 .title-main {
   font-size: var(--fs-xl);
   font-family: "pacaembu", sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
   line-height: 1.1;
   color: var(--blanc);
@@ -208,20 +209,7 @@ body {
    HIGHLIGHT (mot surligné en vert)
    ============================================================ */
 .highlight-green {
-  position: relative;
-  z-index: 0;
-}
-
-.highlight-green::after {
-  content: "";
-  position: absolute;
-  left: -4px;
-  right: -4px;
-  bottom: 0;
-  height: 40%;
-  background: var(--vert-elec);
-  z-index: -1;
-  border-radius: 3px;
+  color: var(--vert-elec);
 }
 
 /* ============================================================
@@ -230,9 +218,10 @@ body {
 #slide-nav-arrows {
   position: fixed;
   bottom: var(--space-m);
-  left: var(--space-m);
+  right: var(--space-m);
   z-index: 100;
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
@@ -263,15 +252,193 @@ body {
 }
 
 /* ============================================================
-   CHARTS (conteneurs D3)
+   ÉCRAN 3 — Graphique arbres
    ============================================================ */
-#chart-trees,
-#chart-fires {
-  width: 100%;
-  /* La hauteur sera définie dynamiquement par D3 via viewBox */
+.screen__content--trees {
+  max-width: 1200px;
+  width: 95%;
+  height: 100%;
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
 }
 
-#chart-trees svg,
+.title-main--right {
+  text-align: right;
+  margin-bottom: var(--space-s);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+#screen-trees.screen--active .title-main--right {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#chart-trees {
+  flex: 1;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+#screen-trees.screen--chart-visible #chart-trees {
+  opacity: 1;
+}
+
+#chart-trees svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Hide D3 axis domain lines but keep ticks */
+.axis--y .domain {
+  stroke: var(--blanc);
+}
+
+.axis--y .tick line {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+
+.axis--y .tick text {
+  fill: var(--blanc);
+  font-size: 13px;
+  font-family: "pacaembu", sans-serif;
+}
+
+/* ============================================================
+   ÉCRAN 4 — Carte plantations eucalyptus
+   ============================================================ */
+.screen__content--map {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.map-label {
+  display: inline-block;
+  align-self: flex-start;
+  background: #0000FF;
+  color: var(--blanc);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  padding: 0.5em 1.2em;
+  margin-bottom: var(--space-l);
+}
+
+.map-body {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-l);
+  min-height: 0;
+}
+
+.map-text {
+  flex: 0 0 280px;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+}
+
+#map-eucalyptus {
+  flex: 1;
+  min-height: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: transparent;
+}
+
+#map-eucalyptus .maplibregl-canvas-container,
+#map-eucalyptus .maplibregl-canvas {
+  background: transparent !important;
+}
+
+.map-surface {
+  position: absolute;
+  bottom: var(--space-m);
+  right: var(--space-m);
+  background: var(--blanc);
+  color: #000;
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  padding: 0.6em 2em;
+}
+
+/* ============================================================
+   TOOLTIP CARTE (districts eucalyptus)
+   ============================================================ */
+#map-tooltip {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  pointer-events: none;
+  background: #000;
+  color: var(--blanc);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  padding: 0.6em 0.9em;
+  border-radius: 4px;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.tooltip-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.4em;
+  color: var(--vert-elec);
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5em;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* Contrôles MapLibre — style épuré */
+#map-eucalyptus .maplibregl-ctrl-group {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  backdrop-filter: blur(4px);
+}
+
+#map-eucalyptus .maplibregl-ctrl-group button {
+  background-color: transparent;
+  color: var(--blanc);
+}
+
+#map-eucalyptus .maplibregl-ctrl-group button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#map-eucalyptus .maplibregl-ctrl-group button + button {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#map-eucalyptus .maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon,
+#map-eucalyptus .maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+
+/* ============================================================
+   CHARTS (conteneurs D3 — génériques)
+   ============================================================ */
+#chart-fires {
+  width: 100%;
+}
+
 #chart-fires svg {
   width: 100%;
   height: auto;
