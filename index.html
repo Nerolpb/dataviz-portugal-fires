@@ -1,71 +1,111 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://use.typekit.net/vuq6kwi.css">
-    <title>dataviz-portugal-fires</title>
+    <title>Portugal — Forêts &amp; Incendies</title>
   </head>
   <body>
-    <div id="app">
-      <div id="scroll-container">
 
-        <!-- ====== ÉCRAN 1 — Hero ====== -->
-        <section class="screen" id="screen-hero">
-          <div class="screen__content screen__content--hero">
-            <h1 class="title-main reveal" data-delay="100">Le Portugal est un pays profondément forestier</h1>
+    <!-- Barre de progression -->
+    <div id="scroll-progress"><div id="scroll-progress-bar"></div></div>
 
-            <div class="hero-body">
-              <p class="hero-text reveal" data-delay="300">La superficie forestière du Portugal est d'environ 3,2 millions d'hectares</p>
+    <!-- Conteneur principal avec scroll-snap -->
+    <main id="main-scroll">
+
+      <!-- ====== SECTION LANDING ====== -->
+      <section class="hero-part" id="screen-landing">
+        <div class="section-inner section-inner--center">
+          <div class="fade-up" style="display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 800px;">
+            <p class="hero-text">
+              Nous vous invitons à explorer la réalité des forêts portugaises. 
+              À travers cette visualisation, vous découvrirez comment un pays si boisé s'est retrouvé face au défi constant des incendies.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== GROUPE HERO (Sections 0 et 1 unifiées) ====== -->
+      <div id="hero-group" class="hero-group">
+        <div class="hero-bg-sticky"></div>
+        <div class="hero-seam-blur"></div>
+        <div class="hero-content">
+          <!-- ====== SECTION 0 — Titre ====== -->
+          <section class="hero-part" id="section-title">
+            <div class="title-box fade-up">
+              <h1 class="title-standalone">Le Portugal est un pays profondément forestier</h1>
             </div>
-          </div>
+          </section>
 
-          <div class="hero-images">
-            <img class="hero-img hero-img--arbres" src="/src/assets/foret.svg" alt="">
-          </div>
-        </section>
+          <!-- ====== SECTION 1 — Hero ====== -->
+          <section class="hero-part" id="screen-hero">
+            <div class="title-box fade-up">
+              <p class="hero-text hero-text--bold">
+                La superficie forestière <br> du Portugal est d'environ
+                <br>
+                <strong>3,2 millions d'hectares</strong>
+              </p>
+            </div>
+          </section>
 
-        <!-- ====== ÉCRAN 2 — Eucalyptus ====== -->
-        <section class="screen" id="screen-eucalyptus">
-          <div class="screen__content screen__content--hero">
-            <h2 class="title-main reveal" data-delay="100">Possédant la plus forte concentration <span class="highlight-green">d'eucalyptus</span> au monde</h2>
-
-            <div class="hero-body">
-              <p class="hero-text reveal" data-delay="250">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet, dui sed consequat elementum</p>
-              <div class="hero-image-placeholder reveal" data-delay="400">
-                <span>graphique plantation<br>portugal vs monde</span>
+          <!-- ====== SECTION 2 — Graphique arbres ====== -->
+          <section class="hero-part" id="screen-trees-wrapper" style="height: 200vh; display: block; padding: 0;">
+            <div class="sticky-trees">
+              <div class="title-box trees-box">
+                <h2 class="title-standalone" style="font-size: var(--fs-lg); text-transform: none;">
+                  L'eucalyptus monopolise près d'un <span style="color: var(--blanc);">tiers</span>
+                  de la superficie de la forêt portugaise
+                </h2>
+              </div>
+              <div class="trees-chart-wrapper">
+                <div id="chart-trees" style="width: 100%; height: 100%;"></div>
               </div>
             </div>
-          </div>
-        </section>
+            <!-- Trigger at exactly 100vh down inside this section -->
+            <div id="chart-trigger" style="position: absolute; top: 100vh; left: 0; width: 100%; height: 1px;"></div>
+          </section>
+        </div>
+      </div>
 
-        <!-- ====== ÉCRAN 3 — Graphique arbres ====== -->
-        <section class="screen" id="screen-trees">
-          <div class="screen__content screen__content--trees">
-            <h2 class="title-main title-main--right reveal" data-delay="100">L'eucalyptus monopolise près d'un <span class="highlight-green">tiers</span> de la superficie de la forêt portugaise</h2>
-            <div id="chart-trees" class="reveal" data-delay="400"></div>
-          </div>
-        </section>
-
-        <!-- ====== ÉCRAN 4 — Carte plantations eucalyptus ====== -->
-        <section class="screen" id="screen-map">
-          <div class="screen__content screen__content--map">
-
-            <div class="map-body">
-              <p class="map-text reveal" data-delay="100">Voici la répartition exacte<br>des forêts d'eucalyptus<br>au Portugal.</p>
-              <div id="map-eucalyptus" class="reveal" data-delay="300"></div>
+      <!-- ====== SECTION 3 — Eucalyptus ====== -->
+      <section class="snap-section" id="screen-eucalyptus">
+        <div class="section-inner screen__content--hero">
+          <h2 class="title-main fade-up">
+            De plus, le Portugal possède la plus<br> concentration
+            <span class="highlight-green">d'eucalyptus</span> au monde
+          </h2>
+          <div class="hero-body">
+            <p class="hero-text fade-up" data-delay="200">
+              Pour produire plus de pâte à papier rapidement, le Portugal a planté
+              des millions d'eucalyptus — un arbre venu d'Australie. Sa croissance
+              ultra-rapide le rend financièrement irrésistible, mais ses conséquences
+              sont dévastatrices.
+            </p>
+            <div class="hero-image-placeholder fade-up" data-delay="400">
+              <span>graphique plantation<br>portugal vs monde</span>
             </div>
-            <div class="map-surface reveal" data-delay="500">Surface&nbsp;: 67000ha</div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
+      <!-- ====== SECTION 4 — Carte ====== -->
+      <section class="snap-section" id="screen-map">
+        <div class="screen__content screen__content--map">
+          <div class="map-body">
+            <p class="map-text fade-up" data-delay="100">
+              Voici la répartition exacte<br>
+              des forêts d'eucalyptus<br>
+              au Portugal.
+            </p>
+            <div id="map-eucalyptus" class="fade-up" data-delay="300"></div>
+          </div>
+          <div class="map-surface fade-up" data-delay="500">Surface&nbsp;: 812 000 ha</div>
+        </div>
+      </section>
 
-      <!-- Barre de progression -->
-      <div id="scroll-progress">
-        <div id="scroll-progress-bar"></div>
-      </div>
-    </div>
+    </main>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

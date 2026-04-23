@@ -1,155 +1,239 @@
 /* ============================================================
-   VARIABLES GLOBALES
+   VARIABLES
    ============================================================ */
 :root {
-  --bg-rouge:   #AF381A;
   --blanc:      #FFFFFF;
   --vert-elec:  #00E676;
   --emeraude:   #1DE9B6;
   --jaune-feu:  #FFEA00;
+  --bg-rouge:   #AF381A;
 
-  /* Typographie */
-  --font-body:  "pacaembu", sans-serif;
-  --font-ui:    "pacaembu", sans-serif;
-  --fs-xl:      clamp(2.5rem, 6vw, 5rem);
-  --fs-lg:      clamp(1.5rem, 3vw, 2.5rem);
-  --fs-md:      clamp(1rem, 1.8vw, 1.25rem);
-  --fs-sm:      0.875rem;
+  --font-display: "neue-haas-grotesk-display", sans-serif;
+  --font-body:    "neue-haas-grotesk-text", sans-serif;
+  --font-ui:      "neue-haas-grotesk-text", sans-serif;
 
-  /* Spacing */
-  --space-s:    1rem;
-  --space-m:    2rem;
-  --space-l:    4rem;
+  --fs-xl:  clamp(2.5rem, 6vw, 5rem);
+  --fs-lg:  clamp(1.5rem, 3vw, 2.5rem);
+  --fs-md:  clamp(1rem, 1.8vw, 1.25rem);
+  --fs-sm:  0.875rem;
 
-  /* Transitions */
-  --slide-duration: 700ms;
-  --slide-easing:   cubic-bezier(0.77, 0, 0.175, 1);
+  --space-s: 1rem;
+  --space-m: 2rem;
+  --space-l: 4rem;
 }
 
 /* ============================================================
-   RESET & BASE
+   RESET
    ============================================================ */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img { display: block; max-width: 100%; }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: #000;
-  color: var(--blanc);
-  font-family: var(--font-body);
-  font-size: var(--fs-md);
-  overflow-y: auto;
-  line-height: 1.6;
-}
-
-/* ============================================================
-   SCROLL LAYOUT
-   ============================================================ */
-#scroll-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.screen {
-  flex: 0 0 100vh;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+html, body {
+  height: 100%;
   overflow: hidden;
 }
 
-.screen__content {
-  max-width: 900px;
-  width: 90%;
-  padding: var(--space-m);
+body {
+  background: #FFFFFF;
+  color: #000000;
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   SCROLL PRINCIPAL — snap section par section
+   ============================================================ */
+#main-scroll {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  /* Cache la scrollbar mais garde la fonctionnalité */
+  scrollbar-width: none;
+}
+#main-scroll::-webkit-scrollbar { display: none; }
+
+/* Chaque section prend exactement 100vh et se snap en haut */
+.snap-section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ============================================================
+   ANIMATIONS AU SCROLL (fade-up fiable)
+   ============================================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   MISE EN PAGE INTÉRIEURE DES SECTIONS
+   ============================================================ */
+.section-inner {
+  width: 100%;
+  padding: var(--space-m) var(--space-l);
   z-index: 1;
 }
 
-/* Fullbleed : pour la slide carte (le contenu occupe tout l'écran) */
-.screen__content--fullbleed {
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  padding: 0;
+.section-inner--center {
+  text-align: center;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 /* ============================================================
-   TYPOGRAPHIE
+   GROUPE HERO (Sections unifiées)
    ============================================================ */
-.title-main {
+.hero-group {
+  position: relative;
+}
+
+.snap-section-group {
+  scroll-snap-align: start;
+}
+
+.hero-part {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-bg-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: url('../assets/background1.png') center/cover no-repeat;
+  z-index: 0;
+}
+
+.hero-seam-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25vh;
+  background: linear-gradient(to bottom, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+}
+
+/* ============================================================
+   SECTION 0 — TITRE
+   ============================================================ */
+#section-title {
+  padding: var(--space-m) var(--space-l);
+}
+
+.title-box {
+  background-color: var(--vert-elec);
+  padding: var(--space-l);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 900px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.title-standalone {
+  font-family: var(--font-display);
   font-size: var(--fs-xl);
-  font-family: "pacaembu", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  font-weight: 800;
   line-height: 1.1;
-  color: var(--blanc);
-  margin-bottom: var(--space-m);
+  color: #000000;
 }
 
 .subtitle {
-  font-size: var(--fs-lg);
-  color: var(--emeraude);
-  margin-bottom: var(--space-l);
-  max-width: 600px;
-}
-
-.cta-hint {
-  font-size: var(--fs-sm);
-  opacity: 0.6;
-  letter-spacing: 0.08em;
-}
-
-.cta-hint kbd {
-  display: inline-block;
-  padding: 0.1em 0.4em;
-  border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 3px;
-  font-family: var(--font-ui);
-}
-
-.section-title {
-  font-size: var(--fs-lg);
-  font-family: "pacaembu", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  color: var(--jaune-feu);
-  margin-bottom: var(--space-s);
-}
-
-.section-title--overlay {
-  position: absolute;
-  top: var(--space-m);
-  left: var(--space-m);
-  z-index: 10;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-}
-
-.section-intro {
-  font-size: var(--fs-sm);
-  opacity: 0.75;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  margin-top: var(--space-s);
   margin-bottom: var(--space-m);
-  max-width: 600px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: #000000;
+  color: var(--blanc);
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
 }
 
 /* ============================================================
-   HERO (écran 1)
+   TYPOGRAPHIE SECTIONS
    ============================================================ */
+.title-main {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #000000;
+  margin-bottom: var(--space-m);
+}
+
+.title-main--right { text-align: right; }
+
+.highlight-green { color: var(--vert-elec); }
+
+/* ============================================================
+   SECTION 1 — HERO
+   ============================================================ */
+#screen-hero {
+  padding: var(--space-m) var(--space-l);
+}
+
+.hero-text--bold {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
 .screen__content--hero {
-  max-width: 1100px;
-  width: 90%;
-  padding: var(--space-l) var(--space-m);
+  width: 100%;
+  padding: var(--space-l);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -162,7 +246,7 @@ body {
   display: flex;
   align-items: center;
   gap: var(--space-l);
-  margin-bottom: var(--space-l);
+  margin-top: var(--space-m);
 }
 
 .hero-text {
@@ -174,113 +258,68 @@ body {
 .hero-image-placeholder {
   flex: 1;
   aspect-ratio: 4 / 3;
-  border: 2px dashed rgba(0, 0, 0, 0.4);
+  border: 2px dashed rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--fs-lg);
-  color: rgba(0, 0, 0, 0.3);
+  font-size: var(--fs-md);
+  color: rgba(0, 0, 0, 0.35);
+  text-align: center;
 }
 
 /* ============================================================
-   HERO — Images
+   SECTION 2 — GRAPHIQUE ARBRES
    ============================================================ */
-@keyframes slideUp {
-  from { transform: translateY(110%); }
-  to   { transform: translateY(0); }
-}
-
-.hero-images {
-  position: absolute;
-  bottom: 0;
+.sticky-trees {
+  position: sticky;
+  top: 0;
   left: 0;
   width: 100%;
-  pointer-events: none;
-  z-index: 1;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.hero-img--arbres {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 55vh;
-  object-fit: cover;
-  object-position: top center;
-  filter: brightness(0) saturate(100%) invert(28%) sepia(40%) saturate(600%) hue-rotate(90deg) brightness(60%);
-  animation: slideUp 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s both;
-}
-
-.hero-img--arbre1 {
-  right: 180px;
-  height: 65vh;
-  z-index: 2;
-  animation: slideUp 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
-}
-
-/* ============================================================
-   HIGHLIGHT (mot surligné en vert)
-   ============================================================ */
-.highlight-green {
-  color: var(--vert-elec);
-}
-
-/* ============================================================
-   BARRE DE PROGRESSION
-   ============================================================ */
-#scroll-progress {
-  position: fixed;
-  right: 12px;
+.trees-box {
+  position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 120px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
-  z-index: 100;
-}
-
-#scroll-progress-bar {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin: 0;
+  z-index: 10;
   width: 100%;
-  height: 0%;
-  background: var(--blanc);
-  border-radius: 999px;
-  transition: height 100ms linear;
+  max-width: 900px;
 }
 
-/* ============================================================
-   RÉVÉLATION AU SCROLL
-   ============================================================ */
-.reveal {
+.sticky-trees.chart-active .trees-box {
+  top: var(--space-m);
+  left: var(--space-l);
+  transform: translate(0, 0) scale(0.7);
+}
+
+.trees-chart-wrapper {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  padding: var(--space-m) var(--space-l);
+  padding-top: 180px; /* Espace pour le titre réduit */
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 650ms ease, transform 650ms ease;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
 }
 
-.reveal.visible {
+.sticky-trees.chart-active .trees-chart-wrapper {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ============================================================
-   ÉCRAN 3 — Graphique arbres
-   ============================================================ */
-.screen__content--trees {
-  max-width: 1200px;
-  width: 95%;
-  height: 100%;
-  padding: var(--space-m);
-  display: flex;
-  flex-direction: column;
-}
-
-.title-main--right {
-  text-align: right;
-  margin-bottom: var(--space-s);
+  pointer-events: auto;
 }
 
 #chart-trees {
-  flex: 1;
-  min-height: 0;
+  background-color: var(--blanc);
+  border-radius: 12px;
+  padding: var(--space-m);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 #chart-trees svg {
@@ -289,44 +328,27 @@ body {
   display: block;
 }
 
-/* Hide D3 axis domain lines but keep ticks */
-.axis--y .domain {
-  stroke: var(--blanc);
-}
-
-.axis--y .tick line {
-  stroke: rgba(255, 255, 255, 0.2);
-}
-
-.axis--y .tick text {
-  fill: var(--blanc);
+/* Axes D3 */
+.axis--y .domain { stroke: #000000; }
+.axis--y .tick line { stroke: rgba(0, 0, 0, 0.12); }
+.axis--y .tick text,
+.axis--x .tick text {
+  fill: #000000;
   font-size: 13px;
-  font-family: "pacaembu", sans-serif;
+  font-weight: 500;
+  font-family: var(--font-body);
 }
 
 /* ============================================================
-   ÉCRAN 4 — Carte plantations eucalyptus
+   SECTION 4 — CARTE
    ============================================================ */
 .screen__content--map {
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  padding: var(--space-m);
+  padding: var(--space-m) var(--space-l);
   display: flex;
   flex-direction: column;
   position: relative;
-}
-
-.map-label {
-  display: inline-block;
-  align-self: flex-start;
-  background: #0000FF;
-  color: var(--blanc);
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: var(--fs-md);
-  padding: 0.5em 1.2em;
-  margin-bottom: var(--space-l);
 }
 
 .map-body {
@@ -355,140 +377,93 @@ body {
 }
 
 #map-eucalyptus .maplibregl-canvas-container,
-#map-eucalyptus .maplibregl-canvas {
-  background: transparent !important;
-}
+#map-eucalyptus .maplibregl-canvas { background: transparent !important; }
 
 .map-surface {
   position: absolute;
   bottom: var(--space-m);
   right: var(--space-m);
-  background: var(--blanc);
-  color: #000;
+  background: #000000;
+  color: #ffffff;
   font-family: var(--font-body);
-  font-size: var(--fs-md);
+  font-size: var(--fs-sm);
+  font-weight: 600;
   padding: 0.6em 2em;
 }
 
+/* MapLibre controls */
+#map-eucalyptus .maplibregl-ctrl-group {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  backdrop-filter: blur(4px);
+}
+#map-eucalyptus .maplibregl-ctrl-group button { background: transparent; }
+#map-eucalyptus .maplibregl-ctrl-group button:hover { background: rgba(0,0,0,0.1); }
+#map-eucalyptus .maplibregl-ctrl-group button + button { border-top: 1px solid rgba(0,0,0,0.1); }
+
 /* ============================================================
-   TOOLTIP CARTE (districts eucalyptus)
+   TOOLTIP CARTE
    ============================================================ */
 #map-tooltip {
   display: none;
   position: fixed;
   z-index: 200;
   pointer-events: none;
-  background: #000;
-  color: var(--blanc);
+  background: #fff;
+  color: #000;
+  border: 1px solid rgba(0,0,0,0.12);
   font-family: var(--font-body);
   font-size: var(--fs-sm);
+  font-weight: 500;
   padding: 0.6em 0.9em;
-  border-radius: 4px;
+  border-radius: 2px;
   min-width: 180px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .tooltip-title {
   font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 0.4em;
-  color: var(--vert-elec);
+  font-size: 0.9rem;
+  margin-bottom: 0.3em;
+  color: #000;
 }
 
 .tooltip-row {
   display: flex;
   justify-content: space-between;
   gap: 1.5em;
-  line-height: 1.7;
-  opacity: 0.9;
-}
-
-/* Contrôles MapLibre — style épuré */
-#map-eucalyptus .maplibregl-ctrl-group {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
-  backdrop-filter: blur(4px);
-}
-
-#map-eucalyptus .maplibregl-ctrl-group button {
-  background-color: transparent;
-  color: var(--blanc);
-}
-
-#map-eucalyptus .maplibregl-ctrl-group button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-#map-eucalyptus .maplibregl-ctrl-group button + button {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-#map-eucalyptus .maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon,
-#map-eucalyptus .maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon {
-  filter: invert(1);
+  line-height: 1.6;
+  opacity: 0.75;
 }
 
 /* ============================================================
-   CHARTS (conteneurs D3 — génériques)
+   BARRE DE PROGRESSION (verticale, droite)
    ============================================================ */
-#chart-fires {
-  width: 100%;
-}
-
-#chart-fires svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ============================================================
-   CARTE MAPBOX
-   ============================================================ */
-#map-portugal {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-}
-
-/* ============================================================
-   NAVIGATION (dots + compteur)
-   ============================================================ */
-#slide-nav {
+#scroll-progress {
   position: fixed;
-  bottom: var(--space-m);
-  left: 50%;
-  transform: translateX(-50%);
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 100px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 999px;
   z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-#slide-counter {
-  font-size: var(--fs-sm);
-  opacity: 0.5;
-  font-family: var(--font-ui);
-  letter-spacing: 0.1em;
+#scroll-progress-bar {
+  width: 100%;
+  height: 0%;
+  background: #000000;
+  border-radius: 999px;
+  transition: height 120ms linear;
 }
 
-#nav-dots {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  border: none;
-  cursor: pointer;
-  transition: background 300ms, transform 300ms;
-  padding: 0;
-}
-
-.dot.active {
-  background: var(--blanc);
-  transform: scale(1.4);
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 700px) {
+  .hero-body { flex-direction: column; gap: var(--space-m); }
+  .map-body  { flex-direction: column; }
+  .map-text  { flex: none; }
 }
