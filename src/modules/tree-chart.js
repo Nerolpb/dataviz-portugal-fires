@@ -5,11 +5,11 @@ export function drawTreeChart(containerSelector) {
   if (!container) return;
 
   const dataArbres = [
-    { arbre: "Eucaliptos", total: 35941 },
-    { arbre: "Pinheiro-bravo", total: 32095 },
-    { arbre: "Sobreiro", total: 30366 },
-    { arbre: "Azinheira", total: 14629 },
-    { arbre: "Pinheiro-manso", total: 8812 }
+    { arbre: "Eucalyptus", total: 35941 },
+    { arbre: "Pin maritim", total: 32095 },
+    { arbre: "Chêne-liège", total: 30366 },
+    { arbre: "Chêne vert", total: 14629 },
+    { arbre: "Pin parasol", total: 8812 }
   ];
 
   // Nettoyage au cas où la fonction est appelée plusieurs fois
@@ -87,14 +87,14 @@ export function drawTreeChart(containerSelector) {
 
   // Dessin du chemin (path)
   scaleGroups.append("path")
-    .attr("class", d => d.arbre === "Eucaliptos" ? "custom-path eucaliptos" : "custom-path")
+    .attr("class", d => d.arbre === "Eucalyptus" ? "custom-path eucaliptos" : "custom-path")
     .attr("d", myCustomSvgPath)
     .attr("transform", "translate(-140, -390)") // Centre l'arbre par rapport à son origine
-    .attr("fill", d => d.arbre === "Eucaliptos" ? "var(--vert-elec)" : "rgba(255,255,255,0.4)"); // Ajout des couleurs pour correspondre au CSS de base
+    .attr("fill", d => d.arbre === "Eucalyptus" ? "var(--vert-elec)" : "rgba(255,255,255,0.4)"); // Ajout des couleurs pour correspondre au CSS de base
 
   // Ajout du texte (total)
   trees.append("text")
-    .attr("class", d => d.arbre === "Eucaliptos" ? "tree-label label-euca" : "tree-label")
+    .attr("class", d => d.arbre === "Eucalyptus" ? "tree-label label-euca" : "tree-label")
     .attr("x", 0)
     .attr("y", 0) // Commence en bas
     .attr("text-anchor", "middle")

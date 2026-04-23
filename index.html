@@ -8,34 +8,31 @@
   </head>
   <body>
     <div id="app">
-      <div id="slider-container">
+      <div id="scroll-container">
 
         <!-- ====== ÉCRAN 1 — Hero ====== -->
         <section class="screen" id="screen-hero">
           <div class="screen__content screen__content--hero">
-            <h1 class="title-main">Le Portugal est un pays profondément forestier</h1>
+            <h1 class="title-main reveal" data-delay="100">Le Portugal est un pays profondément forestier</h1>
 
             <div class="hero-body">
-              <p class="hero-text">La superficie forestière du Portugal est d'environ 3,2 millions d'hectares</p>
-              <div class="hero-image-placeholder">
-                <span>image</span>
-              </div>
+              <p class="hero-text reveal" data-delay="300">La superficie forestière du Portugal est d'environ 3,2 millions d'hectares</p>
             </div>
+          </div>
 
-            <div class="hero-cta">
-              <button class="cta-button" id="btn-start">Appuyez sur ↓ pour découvrir</button>
-            </div>
+          <div class="hero-images">
+            <img class="hero-img hero-img--arbres" src="/src/assets/foret.svg" alt="">
           </div>
         </section>
 
         <!-- ====== ÉCRAN 2 — Eucalyptus ====== -->
         <section class="screen" id="screen-eucalyptus">
           <div class="screen__content screen__content--hero">
-            <h2 class="title-main">Possédant la plus forte concentration <span class="highlight-green">d'eucalyptus</span> au monde</h2>
+            <h2 class="title-main reveal" data-delay="100">Possédant la plus forte concentration <span class="highlight-green">d'eucalyptus</span> au monde</h2>
 
             <div class="hero-body">
-              <p class="hero-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet, dui sed consequat elementum</p>
-              <div class="hero-image-placeholder">
+              <p class="hero-text reveal" data-delay="250">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec laoreet, dui sed consequat elementum</p>
+              <div class="hero-image-placeholder reveal" data-delay="400">
                 <span>graphique plantation<br>portugal vs monde</span>
               </div>
             </div>
@@ -45,30 +42,29 @@
         <!-- ====== ÉCRAN 3 — Graphique arbres ====== -->
         <section class="screen" id="screen-trees">
           <div class="screen__content screen__content--trees">
-            <h2 class="title-main title-main--right">L'eucalyptus monopolise près d'un <span class="highlight-green">tiers</span> de la superficie de la forêt portugaise</h2>
-            <div id="chart-trees"></div>
+            <h2 class="title-main title-main--right reveal" data-delay="100">L'eucalyptus monopolise près d'un <span class="highlight-green">tiers</span> de la superficie de la forêt portugaise</h2>
+            <div id="chart-trees" class="reveal" data-delay="400"></div>
           </div>
         </section>
 
         <!-- ====== ÉCRAN 4 — Carte plantations eucalyptus ====== -->
         <section class="screen" id="screen-map">
           <div class="screen__content screen__content--map">
-        
+
             <div class="map-body">
-              <p class="map-text">Voici la répartition exacte<br>des forêts d'eucalyptus<br>au Portugal.</p>
-              <div id="map-eucalyptus"></div>
+              <p class="map-text reveal" data-delay="100">Voici la répartition exacte<br>des forêts d'eucalyptus<br>au Portugal.</p>
+              <div id="map-eucalyptus" class="reveal" data-delay="300"></div>
             </div>
-            <div class="map-surface">Surface&nbsp;: 67000ha</div>
+            <div class="map-surface reveal" data-delay="500">Surface&nbsp;: 67000ha</div>
           </div>
         </section>
 
       </div>
 
-      <!-- Navigation flèches -->
-      <nav id="slide-nav-arrows">
-        <button class="nav-arrow" id="btn-prev" aria-label="Précédent">&#x2191;</button>
-        <button class="nav-arrow" id="btn-next" aria-label="Suivant">&#x2193;</button>
-      </nav>
+      <!-- Barre de progression -->
+      <div id="scroll-progress">
+        <div id="scroll-progress-bar"></div>
+      </div>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>
