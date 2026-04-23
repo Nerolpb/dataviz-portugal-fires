@@ -231,6 +231,17 @@ body {
   line-height: 1.2;
 }
 
+.hero-link {
+  color: inherit;
+  text-decoration: underline;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.hero-link:hover {
+  color: #DDDDDD; /* Devient gris clair au survol */
+}
+
 .screen__content--hero {
   width: 100%;
   padding: var(--space-l);
@@ -306,6 +317,9 @@ body {
   transform: translateY(40px);
   transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .sticky-trees.chart-active .trees-chart-wrapper {
@@ -317,9 +331,45 @@ body {
 #chart-trees {
   background-color: var(--blanc);
   border-radius: 12px;
-  padding: var(--space-m);
+  padding: var(--space-s) var(--space-m);
   max-width: 1000px;
+  width: 100%;
+  height: 65vh;
   margin: 0 auto;
+}
+
+.tree-image-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90vw;
+  max-width: 450px;
+  height: 450px;
+  max-height: 60vh;
+  background-color: var(--blanc);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-image-overlay.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.tree-image-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 #chart-trees svg {

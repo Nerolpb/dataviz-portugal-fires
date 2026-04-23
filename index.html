@@ -34,7 +34,10 @@
           <!-- ====== SECTION 0 — Titre ====== -->
           <section class="hero-part" id="section-title">
             <div class="title-box fade-up">
-              <h1 class="title-standalone">Le Portugal est un pays profondément forestier</h1>
+              <h1 class="hero-text hero-text--bold">
+                Le Portugal est un pays<br>
+                <strong>profondément forestier</strong>
+              </h1>
             </div>
           </section>
 
@@ -42,9 +45,10 @@
           <section class="hero-part" id="screen-hero">
             <div class="title-box fade-up">
               <p class="hero-text hero-text--bold">
-                La superficie forestière <br> du Portugal est d'environ
-                <br>
-                <strong>3,2 millions d'hectares</strong>
+                Avec une superficie forestière<br>d'environ 
+                <a href="https://fr.wikipedia.org/wiki/For%C3%AAt_au_Portugal" target="_blank" rel="noopener noreferrer" class="hero-link">
+                  3,2 millions d'hectares
+                </a>
               </p>
             </div>
           </section>
@@ -59,7 +63,11 @@
                 </h2>
               </div>
               <div class="trees-chart-wrapper">
-                <div id="chart-trees" style="width: 100%; height: 100%;"></div>
+                <div id="chart-trees"></div>
+              </div>
+              <!-- Overlay pour afficher l'image en grand -->
+              <div id="tree-image-overlay" class="tree-image-overlay">
+                <img id="tree-image-large" src="" alt="Aperçu de l'arbre" />
               </div>
             </div>
             <!-- Trigger at exactly 100vh down inside this section -->
@@ -72,7 +80,7 @@
       <section class="snap-section" id="screen-eucalyptus">
         <div class="section-inner screen__content--hero">
           <h2 class="title-main fade-up">
-            De plus, le Portugal possède la plus<br> concentration
+            De plus, le Portugal possède la plus<br> forte concentration
             <span class="highlight-green">d'eucalyptus</span> au monde
           </h2>
           <div class="hero-body">
