@@ -157,13 +157,18 @@ body {
 
 .title-box {
   background-color: var(--vert-elec);
-  padding: var(--space-l);
+  padding: var(--space-m);
   border-radius: 12px;
   width: 100%;
-  max-width: 900px;
+  max-width: 650px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   text-align: center;
+}
+
+.title-box .hero-text--bold,
+.title-box .title-standalone {
+  font-size: var(--fs-lg);
 }
 
 .title-standalone {
@@ -299,7 +304,7 @@ body {
   margin: 0;
   z-index: 10;
   width: 100%;
-  max-width: 900px;
+  max-width: 650px;
 }
 
 .sticky-trees.chart-active .trees-box {
@@ -332,10 +337,12 @@ body {
   background-color: var(--blanc);
   border-radius: 12px;
   padding: var(--space-s) var(--space-m);
+  /* Le graphique fait 800x450 (ratio ~1.777). 
+     On contraint la largeur pour que la hauteur résultante ne dépasse pas 65vh. */
+  width: min(100%, calc(65vh * 800 / 450));
   max-width: 1000px;
-  width: 100%;
-  height: 65vh;
   margin: 0 auto;
+  position: relative;
 }
 
 .tree-image-overlay {
@@ -372,9 +379,34 @@ body {
   border-radius: 10px;
 }
 
+.source-credit {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  left: auto;
+  background-color: var(--vert-elec);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #000000;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.source-credit a {
+  color: #000000;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.source-credit a:hover {
+  color: #FFFFFF;
+}
 #chart-trees svg {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
 }
 
@@ -390,38 +422,169 @@ body {
 }
 
 /* ============================================================
-   SECTION 4 — CARTE
+   SECTION 3 — CONCENTRATION D'EUCALYPTUS
    ============================================================ */
-.screen__content--map {
+.sticky-concentration {
+  position: sticky;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.concentration-title-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin: 0;
+  z-index: 10;
+  width: 100%;
+  max-width: 650px;
+}
+
+.sticky-concentration.chart-active .concentration-title-box {
+  top: var(--space-m);
+  left: var(--space-l);
+  transform: translate(0, 0) scale(0.7);
+}
+
+.concentration-chart-wrapper {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
   padding: var(--space-m) var(--space-l);
+  padding-top: 180px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.sticky-concentration.chart-active .concentration-chart-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#chart-concentration {
+  background-color: var(--blanc);
+  border-radius: 12px;
+  padding: var(--space-s) var(--space-m);
+  max-width: 750px;
+  width: 100%;
+  margin: 0 auto;
   position: relative;
 }
 
-.map-body {
-  flex: 1;
-  display: flex;
-  align-items: stretch;
-  gap: var(--space-l);
-  min-height: 0;
+#chart-concentration svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-.map-text {
-  flex: 0 0 280px;
-  font-size: var(--fs-lg);
-  font-weight: 700;
-  line-height: 1.5;
+/* ============================================================
+   SECTION 3.5 — COMPARAISON PARIS
+   ============================================================ */
+.comparison-box {
+  width: 100%;
+  max-width: 700px;
+  padding: var(--space-l);
+  text-align: center;
+}
+
+#eiffel-container {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: var(--space-m);
+  padding: var(--space-s);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.eiffel-icon {
+  width: auto;
+  height: 26px;
+  fill: #000000; /* Noir sur fond vert */
+  opacity: 0;
+  transform: translateY(15px);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   SECTION 4 — CARTE
+   ============================================================ */
+.sticky-map {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.map-title-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  margin: 0;
+  z-index: 10;
+  width: 100%;
+  max-width: 650px;
+}
+
+.sticky-map.chart-active .map-title-box {
+  top: var(--space-m);
+  left: var(--space-l);
+  transform: translate(0, 0) scale(0.7);
+}
+
+.map-chart-wrapper {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  padding: var(--space-m) var(--space-l);
+  padding-top: 160px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sticky-map.chart-active .map-chart-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.map-inner-container {
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 #map-eucalyptus {
-  flex: 1;
-  min-height: 0;
-  border-radius: 4px;
+  width: 100%;
+  height: 65vh;
+  border-radius: 12px;
   overflow: hidden;
   background: transparent;
 }
@@ -431,14 +594,23 @@ body {
 
 .map-surface {
   position: absolute;
-  bottom: var(--space-m);
-  right: var(--space-m);
+  bottom: 12px;
+  right: 12px;
   background: #000000;
   color: #ffffff;
   font-family: var(--font-body);
   font-size: var(--fs-sm);
   font-weight: 600;
   padding: 0.6em 2em;
+  z-index: 20;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* On ajuste la source pour qu'elle soit au-dessus (z-index) et décalée si besoin */
+.map-inner-container .source-credit {
+  bottom: -10px;
+  right: -10px;
 }
 
 /* MapLibre controls */

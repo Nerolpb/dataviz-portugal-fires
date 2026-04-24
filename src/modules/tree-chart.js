@@ -25,7 +25,7 @@ export function drawTreeChart(containerSelector) {
 
   // Nettoyage au cas où la fonction est appelée plusieurs fois
   const svgSelection = d3.select(containerSelector);
-  svgSelection.selectAll("*").remove();
+  svgSelection.selectAll("svg").remove();
 
   // Configuration des dimensions (on utilise viewBox pour que ce soit responsive)
   const margin = { top: 100, right: 30, bottom: 40, left: 60 };

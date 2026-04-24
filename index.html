@@ -45,10 +45,7 @@
           <section class="hero-part" id="screen-hero">
             <div class="title-box fade-up">
               <p class="hero-text hero-text--bold">
-                Avec une superficie forestière<br>d'environ 
-                <a href="https://fr.wikipedia.org/wiki/For%C3%AAt_au_Portugal" target="_blank" rel="noopener noreferrer" class="hero-link">
-                  3,2 millions d'hectares
-                </a>
+                Avec une superficie forestière<br>d'environ <a href="https://fr.wikipedia.org/wiki/For%C3%AAt_au_Portugal" target="_blank" rel="noopener noreferrer" class="hero-link"> 3,2 millions d'hectares</a>
               </p>
             </div>
           </section>
@@ -57,13 +54,17 @@
           <section class="hero-part" id="screen-trees-wrapper" style="height: 200vh; display: block; padding: 0;">
             <div class="sticky-trees">
               <div class="title-box trees-box">
-                <h2 class="title-standalone" style="font-size: var(--fs-lg); text-transform: none;">
+                <h2 class="title-standalone" style="text-transform: none;">
                   L'eucalyptus monopolise près d'un <span style="color: var(--blanc);">tiers</span>
                   de la superficie de la forêt portugaise
                 </h2>
               </div>
               <div class="trees-chart-wrapper">
-                <div id="chart-trees"></div>
+                <div id="chart-trees">
+                  <div class="source-credit">
+                  <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF - Instituto da Conservação da Natureza e das Florestas</a>
+                  </div>
+                </div>
               </div>
               <!-- Overlay pour afficher l'image en grand -->
               <div id="tree-image-overlay" class="tree-image-overlay">
@@ -73,44 +74,71 @@
             <!-- Trigger at exactly 100vh down inside this section -->
             <div id="chart-trigger" style="position: absolute; top: 100vh; left: 0; width: 100%; height: 1px;"></div>
           </section>
+          <!-- ====== SECTION 3 — Concentration d'eucalyptus ====== -->
+          <section class="hero-part" id="screen-concentration-wrapper" style="height: 200vh; display: block; padding: 0;">
+            <div class="sticky-concentration">
+              <div class="title-box concentration-title-box">
+                <h2 class="title-standalone" style="text-transform: none;">
+                  De plus, le Portugal possède la plus forte
+                  <span style="color: var(--blanc);">concentration</span>
+                  d'eucalyptus au monde
+                </h2>
+              </div>
+              <div class="concentration-chart-wrapper">
+                <div id="chart-concentration">
+                  <div class="source-credit">
+                    <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF (PT)</a>,
+                    <a href="https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html" target="_blank" rel="noopener noreferrer">MITECO (ES)</a>,
+                    <a href="https://iba.org" target="_blank" rel="noopener noreferrer">IBÁ (BR)</a>,
+                    <a href="https://www.fao.org/forest-resources-assessment/en/" target="_blank" rel="noopener noreferrer">FAO</a>,
+                    <a href="https://www.agriculture.gov.au/abares/research-topics/forests" target="_blank" rel="noopener noreferrer">ABARES (AU)</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Trigger at exactly 100vh down inside this section -->
+            <div id="concentration-trigger" style="position: absolute; top: 100vh; left: 0; width: 100%; height: 1px;"></div>
+          </section>
+          
+          <!-- ====== SECTION 3.5 — Comparaison Paris ====== -->
+          <section class="hero-part" id="screen-map-transition">
+            <div class="title-box comparison-box fade-up">
+              <h2 class="title-standalone" style="text-transform: none; margin-bottom: 0.5em;">
+                Avec 812 000 ha de surface...
+              </h2>
+              <p class="hero-text" style="font-size: 1.2rem; margin-bottom: 1em;">
+                Cela est équivalent à <strong>77 fois</strong> la surface de Paris.
+              </p>
+              <div id="eiffel-container"></div>
+            </div>
+            <!-- Trigger pour lancer l'animation au scroll -->
+            <div id="paris-trigger" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px;"></div>
+          </section>
+
+          <!-- ====== SECTION 4 — Carte ====== -->
+          <section class="hero-part" id="screen-map" style="height: 200vh; display: block; padding: 0;">
+            <div class="sticky-map">
+              <div class="title-box map-title-box">
+                <h2 class="title-standalone" style="text-transform: none;">
+                  Voici la répartition exacte des forêts
+                  <span style="color: var(--blanc);">d'eucalyptus</span>
+                  au Portugal
+                </h2>
+              </div>
+              <div class="map-chart-wrapper">
+                <div class="map-inner-container">
+                  <div id="map-eucalyptus"></div>
+                  <div class="source-credit">
+                    <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF - Instituto da Conservação da Natureza e das Florestas</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Trigger at exactly 100vh down inside this section -->
+            <div id="map-trigger" style="position: absolute; top: 100vh; left: 0; width: 100%; height: 1px;"></div>
+          </section>
         </div>
       </div>
-
-      <!-- ====== SECTION 3 — Eucalyptus ====== -->
-      <section class="snap-section" id="screen-eucalyptus">
-        <div class="section-inner screen__content--hero">
-          <h2 class="title-main fade-up">
-            De plus, le Portugal possède la plus<br> forte concentration
-            <span class="highlight-green">d'eucalyptus</span> au monde
-          </h2>
-          <div class="hero-body">
-            <p class="hero-text fade-up" data-delay="200">
-              Pour produire plus de pâte à papier rapidement, le Portugal a planté
-              des millions d'eucalyptus — un arbre venu d'Australie. Sa croissance
-              ultra-rapide le rend financièrement irrésistible, mais ses conséquences
-              sont dévastatrices.
-            </p>
-            <div class="hero-image-placeholder fade-up" data-delay="400">
-              <span>graphique plantation<br>portugal vs monde</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ====== SECTION 4 — Carte ====== -->
-      <section class="snap-section" id="screen-map">
-        <div class="screen__content screen__content--map">
-          <div class="map-body">
-            <p class="map-text fade-up" data-delay="100">
-              Voici la répartition exacte<br>
-              des forêts d'eucalyptus<br>
-              au Portugal.
-            </p>
-            <div id="map-eucalyptus" class="fade-up" data-delay="300"></div>
-          </div>
-          <div class="map-surface fade-up" data-delay="500">Surface&nbsp;: 812 000 ha</div>
-        </div>
-      </section>
 
     </main>
 

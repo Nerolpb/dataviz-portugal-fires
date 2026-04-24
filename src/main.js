@@ -1,6 +1,8 @@
 import "./css/style.css";
-import { drawTreeChart }     from "./modules/tree-chart.js";
-import { initEucalyptusMap } from "./modules/eucalyptus-map.js";
+import { drawTreeChart }           from "./modules/tree-chart.js";
+import { drawConcentrationChart }  from "./modules/chart-concentration.js";
+import { initParisComparison }     from "./modules/comparison-paris.js";
+import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
 
 const mainScroll = document.getElementById("main-scroll");
 const progressBar = document.getElementById("scroll-progress-bar");
@@ -53,7 +55,7 @@ const fadeObserver = new IntersectionObserver(
 fadeEls.forEach((el) => fadeObserver.observe(el));
 
 // ─────────────────────────────────────────────────────────────
-// Graphique D3 — dessiné quand la section entre dans le snap
+// Graphique D3 (arbres) — dessiné quand la section entre dans le snap
 // ─────────────────────────────────────────────────────────────
 let chartDrawn = false;
 const chartTrigger = document.getElementById("chart-trigger");
@@ -84,20 +86,78 @@ const chartObserver = new IntersectionObserver(
 if (chartTrigger) chartObserver.observe(chartTrigger);
 
 // ─────────────────────────────────────────────────────────────
+// Graphique D3 (concentration) — dessiné quand la section entre dans le snap
+// ─────────────────────────────────────────────────────────────
+let concentrationDrawn = false;
+const concentrationTrigger = document.getElementById("concentration-trigger");
+const stickyConcentration  = document.querySelector(".sticky-concentration");
+
+const concentrationObserver = new IntersectionObserver(
+  (entries) => {
+    const entry = entries[0];
+    if (entry.isIntersecting) {
+      if (stickyConcentration) stickyConcentration.classList.add("chart-active");
+      if (!concentrationDrawn) {
+        concentrationDrawn = true;
+        drawConcentrationChart("#chart-concentration");
+      }
+    } else {
+      if (entry.boundingClientRect.top > 0) {
+        if (stickyConcentration) stickyConcentration.classList.remove("chart-active");
+      } else {
+        if (stickyConcentration) stickyConcentration.classList.add("chart-active");
+      }
+    }
+  },
+  { root: mainScroll, threshold: 0 }
+);
+
+if (concentrationTrigger) concentrationObserver.observe(concentrationTrigger);
+
+// ─────────────────────────────────────────────────────────────
+// Comparaison Paris (Section 3.5)
+// ─────────────────────────────────────────────────────────────
+const parisTrigger = document.getElementById("paris-trigger");
+let parisInited = false;
+
+const parisObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !parisInited) {
+      parisInited = true;
+      initParisComparison();
+      parisObserver.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.1 }
+);
+
+if (parisTrigger) parisObserver.observe(parisTrigger);
+
+// ─────────────────────────────────────────────────────────────
 // Carte MapLibre — initialisée quand la section entre dans le snap
 // ─────────────────────────────────────────────────────────────
 let mapInited = false;
-const screenMap = document.getElementById("screen-map");
+const mapTrigger = document.getElementById("map-trigger");
+const stickyMap  = document.querySelector(".sticky-map");
 
 const mapObserver = new IntersectionObserver(
   (entries) => {
-    if (entries[0].isIntersecting && !mapInited) {
-      mapInited = true;
-      setTimeout(() => initEucalyptusMap("map-eucalyptus"), 150);
-      mapObserver.disconnect();
+    const entry = entries[0];
+    if (entry.isIntersecting) {
+      if (stickyMap) stickyMap.classList.add("chart-active");
+      if (!mapInited) {
+        mapInited = true;
+        setTimeout(() => initEucalyptusMap("map-eucalyptus"), 150);
+      }
+    } else {
+      if (entry.boundingClientRect.top > 0) {
+        if (stickyMap) stickyMap.classList.remove("chart-active");
+      } else {
+        if (stickyMap) stickyMap.classList.add("chart-active");
+      }
     }
   },
-  { root: mainScroll, threshold: 0.2 }
+  { root: mainScroll, threshold: 0 }
 );
 
-if (screenMap) mapObserver.observe(screenMap);
+if (mapTrigger) mapObserver.observe(mapTrigger);
