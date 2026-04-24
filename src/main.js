@@ -11,7 +11,7 @@ const progressBar = document.getElementById("scroll-progress-bar");
 
 // Positions absolues de chaque section dans le conteneur de scroll
 function getSectionPositions() {
-  return Array.from(mainScroll.querySelectorAll(".hero-part"))
+  return Array.from(mainScroll.querySelectorAll(".hero-part, .snap-section"))
     .map(el => Math.round(el.getBoundingClientRect().top + mainScroll.scrollTop));
 }
 
@@ -218,7 +218,6 @@ const mapObserver = new IntersectionObserver(
 );
 
 if (mapTrigger) mapObserver.observe(mapTrigger);
-if (screenMap) mapObserver.observe(screenMap);
 
 // ─────────────────────────────────────────────────────────────
 // Graphique historique des incendies
