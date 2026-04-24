@@ -3,6 +3,9 @@ import { drawTreeChart }           from "./modules/tree-chart.js";
 import { drawConcentrationChart }  from "./modules/chart-concentration.js";
 import { initParisComparison }     from "./modules/comparison-paris.js";
 import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
+import { drawFireTimeline }  from "./modules/fire-chart.js";
+import { initFireMap, updateFireYear } from "./modules/fire-map.js";
+
 const mainScroll = document.getElementById("main-scroll");
 const progressBar = document.getElementById("scroll-progress-bar");
 
@@ -215,3 +218,42 @@ const mapObserver = new IntersectionObserver(
 );
 
 if (mapTrigger) mapObserver.observe(mapTrigger);
+if (screenMap) mapObserver.observe(screenMap);
+
+// ─────────────────────────────────────────────────────────────
+// Graphique historique des incendies
+// ─────────────────────────────────────────────────────────────
+let fireChartDrawn    = false;
+const screenFireChart = document.getElementById("screen-fire-chart");
+
+const fireChartObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !fireChartDrawn) {
+      fireChartDrawn = true;
+      drawFireTimeline("#chart-fires");
+      fireChartObserver.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.2 }
+);
+
+if (screenFireChart) fireChartObserver.observe(screenFireChart);
+
+// ─────────────────────────────────────────────────────────────
+// Carte heatmap des incendies
+// ─────────────────────────────────────────────────────────────
+let fireMapInited    = false;
+const screenFireMap  = document.getElementById("screen-fire-map");
+
+const fireMapObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !fireMapInited) {
+      fireMapInited = true;
+      setTimeout(() => initFireMap("map-fires"), 150);
+      fireMapObserver.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.05 } // Déclenchement plus tôt
+);
+
+if (screenFireMap) fireMapObserver.observe(screenFireMap);
