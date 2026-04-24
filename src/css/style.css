@@ -7,6 +7,7 @@
   --emeraude:   #1DE9B6;
   --jaune-feu:  #FFEA00;
   --bg-rouge:   #AF381A;
+  --orange-feu: #FF5500;
 
   --font-display: "neue-haas-grotesk-display", sans-serif;
   --font-body:    "neue-haas-grotesk-text", sans-serif;
@@ -128,6 +129,16 @@ body {
   width: 100%;
   height: 100vh;
   background: url('../assets/background1.png') center/cover no-repeat;
+  z-index: 0;
+}
+
+.fire-bg-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: url('../assets/feux.jpeg') center/cover no-repeat;
   z-index: 0;
 }
 
@@ -507,6 +518,224 @@ body {
   background: #000000;
   border-radius: 999px;
   transition: height 120ms linear;
+}
+
+/* ============================================================
+   SECTIONS INCENDIES — Thème unifié avec accentuation
+   ============================================================ */
+
+/* ─── Boîte thématique Feu (rouge brique) ─── */
+.title-box--fire {
+  background-color: var(--bg-rouge);
+  color: var(--blanc);
+  padding: var(--space-l);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 900px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(175, 56, 26, 0.15); /* Ombre légère teintée */
+}
+
+/* ─── Séquence Narrative ─── */
+.narrative-split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-l);
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.narrative-split--reverse {
+  flex-direction: row-reverse;
+}
+
+.narrative-media {
+  flex: 1;
+  max-width: 50%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 4 / 3;
+}
+
+.narrative-media img,
+.narrative-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.narrative-text-box {
+  flex: 1;
+  background-color: var(--blanc);
+  padding: var(--space-m);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  font-size: var(--fs-md);
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .narrative-split,
+  .narrative-split--reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+  .narrative-media {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ─── Section 6 — Chart ─── */
+.screen__content--fire {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-m) var(--space-l);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+#chart-fires {
+  width: 100%;
+  height: 62vh;
+  min-height: 0;
+  background-color: var(--blanc);
+  border-radius: 12px;
+  padding: var(--space-s) var(--space-m);
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ─── Infobulle Graphique (Tooltip) ─── */
+.chart-tooltip {
+  position: absolute;
+  text-align: left;
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  background: #FFFFFF;
+  color: #000000;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  z-index: 100;
+  min-width: 200px;
+}
+
+.chart-tooltip-year {
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--bg-rouge);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 6px;
+}
+
+.chart-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.chart-tooltip-label {
+  color: rgba(0,0,0,0.6);
+  font-weight: 500;
+}
+
+.chart-tooltip-value {
+  font-weight: 700;
+}
+
+/* ─── Section 8 — Carte ─── */
+.screen__content--map-fire {
+  width: 100%;
+  height: 100%;
+  padding: var(--space-m) var(--space-l);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+}
+
+#map-fires {
+  flex: 1;
+  min-height: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ─── Timeline Map Controls ─── */
+.map-timeline-control {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 100;
+  width: 90%;
+  max-width: 400px;
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.btn-play {
+  background: var(--bg-rouge);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-play:hover {
+  transform: scale(1.1);
+  background-color: #922b13;
+}
+
+#timeline-year-display {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: #000;
+  line-height: 1;
+}
+
+#timeline-slider {
+  width: 100%;
+  accent-color: var(--bg-rouge);
+  cursor: pointer;
 }
 
 /* ============================================================
