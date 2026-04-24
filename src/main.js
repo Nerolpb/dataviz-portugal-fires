@@ -1,21 +1,54 @@
 import "./css/style.css";
-import { drawTreeChart }     from "./modules/tree-chart.js";
-import { initEucalyptusMap } from "./modules/eucalyptus-map.js";
+import { drawTreeChart }           from "./modules/tree-chart.js";
+import { drawConcentrationChart }  from "./modules/chart-concentration.js";
+import { initParisComparison }     from "./modules/comparison-paris.js";
+import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
 import { drawFireTimeline }  from "./modules/fire-chart.js";
 import { initFireMap, updateFireYear } from "./modules/fire-map.js";
 
 const mainScroll = document.getElementById("main-scroll");
 const progressBar = document.getElementById("scroll-progress-bar");
 
-// Navigation au clavier (flèches Haut/Bas)
+// Positions absolues de chaque section dans le conteneur de scroll
+function getSectionPositions() {
+  return Array.from(mainScroll.querySelectorAll(".hero-part"))
+    .map(el => Math.round(el.getBoundingClientRect().top + mainScroll.scrollTop));
+}
+
+let scrollLocked = false;
+
+function navigateTo(direction) {
+  if (scrollLocked) return;
+
+  const cur       = mainScroll.scrollTop;
+  const positions = getSectionPositions();
+
+  const target = direction === "down"
+    ? positions.find(p => p > cur + 5)
+    : positions.filter(p => p < cur - 5).at(-1);
+
+  if (target === undefined) return;
+
+  scrollLocked = true;
+  mainScroll.scrollTo({ top: target, behavior: "smooth" });
+  setTimeout(() => { scrollLocked = false; }, 700);
+}
+
+// Molette — saute de section en section, sauf si on est sur la carte (zoom MapLibre)
+mainScroll.addEventListener("wheel", (e) => {
+  const mapEl = document.getElementById("map-eucalyptus");
+  if (mapEl && mapEl.contains(e.target)) return; // MapLibre gère le zoom lui-même
+
+  e.preventDefault();
+  navigateTo(e.deltaY > 0 ? "down" : "up");
+}, { passive: false });
+
+mainScroll.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
+
+// Flèches clavier
 window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowDown") {
-    e.preventDefault();
-    mainScroll.scrollBy({ top: window.innerHeight, behavior: "smooth" });
-  } else if (e.key === "ArrowUp") {
-    e.preventDefault();
-    mainScroll.scrollBy({ top: -window.innerHeight, behavior: "smooth" });
-  }
+  if (e.key === "ArrowDown") { e.preventDefault(); navigateTo("down"); }
+  if (e.key === "ArrowUp")   { e.preventDefault(); navigateTo("up");   }
 });
 
 // ─────────────────────────────────────────────────────────────
@@ -28,6 +61,30 @@ function updateProgress() {
 }
 
 mainScroll.addEventListener("scroll", updateProgress, { passive: true });
+
+// ─────────────────────────────────────────────────────────────
+// Comparaison Ronaldo/Stade (Section 1)
+// ─────────────────────────────────────────────────────────────
+const comparisonTrigger = document.getElementById("comparison-trigger");
+const stickyHero        = document.querySelector(".sticky-hero");
+
+const comparisonObserver = new IntersectionObserver(
+  (entries) => {
+    const entry = entries[0];
+    if (entry.isIntersecting) {
+      if (stickyHero) stickyHero.classList.add("chart-active");
+    } else {
+      if (entry.boundingClientRect.top > 0) {
+        if (stickyHero) stickyHero.classList.remove("chart-active");
+      } else {
+        if (stickyHero) stickyHero.classList.add("chart-active");
+      }
+    }
+  },
+  { root: mainScroll, threshold: 0 }
+);
+
+if (comparisonTrigger) comparisonObserver.observe(comparisonTrigger);
 
 // ─────────────────────────────────────────────────────────────
 // Animations fade-up — déclenchées à l'entrée de chaque section
@@ -55,7 +112,7 @@ const fadeObserver = new IntersectionObserver(
 fadeEls.forEach((el) => fadeObserver.observe(el));
 
 // ─────────────────────────────────────────────────────────────
-// Graphique D3 — dessiné quand la section entre dans le snap
+// Graphique D3 (arbres) — dessiné quand la section entre dans le snap
 // ─────────────────────────────────────────────────────────────
 let chartDrawn = false;
 const chartTrigger = document.getElementById("chart-trigger");
@@ -86,22 +143,81 @@ const chartObserver = new IntersectionObserver(
 if (chartTrigger) chartObserver.observe(chartTrigger);
 
 // ─────────────────────────────────────────────────────────────
+// Graphique D3 (concentration) — dessiné quand la section entre dans le snap
+// ─────────────────────────────────────────────────────────────
+let concentrationDrawn = false;
+const concentrationTrigger = document.getElementById("concentration-trigger");
+const stickyConcentration  = document.querySelector(".sticky-concentration");
+
+const concentrationObserver = new IntersectionObserver(
+  (entries) => {
+    const entry = entries[0];
+    if (entry.isIntersecting) {
+      if (stickyConcentration) stickyConcentration.classList.add("chart-active");
+      if (!concentrationDrawn) {
+        concentrationDrawn = true;
+        drawConcentrationChart("#chart-concentration");
+      }
+    } else {
+      if (entry.boundingClientRect.top > 0) {
+        if (stickyConcentration) stickyConcentration.classList.remove("chart-active");
+      } else {
+        if (stickyConcentration) stickyConcentration.classList.add("chart-active");
+      }
+    }
+  },
+  { root: mainScroll, threshold: 0 }
+);
+
+if (concentrationTrigger) concentrationObserver.observe(concentrationTrigger);
+
+// ─────────────────────────────────────────────────────────────
+// Comparaison Paris (Section 3.5)
+// ─────────────────────────────────────────────────────────────
+const parisTrigger = document.getElementById("paris-trigger");
+let parisInited = false;
+
+const parisObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !parisInited) {
+      parisInited = true;
+      initParisComparison();
+      parisObserver.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.1 }
+);
+
+if (parisTrigger) parisObserver.observe(parisTrigger);
+
+// ─────────────────────────────────────────────────────────────
 // Carte MapLibre — initialisée quand la section entre dans le snap
 // ─────────────────────────────────────────────────────────────
 let mapInited = false;
-const screenMap = document.getElementById("screen-map");
+const mapTrigger = document.getElementById("map-trigger");
+const stickyMap  = document.querySelector(".sticky-map");
 
 const mapObserver = new IntersectionObserver(
   (entries) => {
-    if (entries[0].isIntersecting && !mapInited) {
-      mapInited = true;
-      setTimeout(() => initEucalyptusMap("map-eucalyptus"), 150);
-      mapObserver.disconnect();
+    const entry = entries[0];
+    if (entry.isIntersecting) {
+      if (stickyMap) stickyMap.classList.add("chart-active");
+      if (!mapInited) {
+        mapInited = true;
+        setTimeout(() => initEucalyptusMap("map-eucalyptus"), 150);
+      }
+    } else {
+      if (entry.boundingClientRect.top > 0) {
+        if (stickyMap) stickyMap.classList.remove("chart-active");
+      } else {
+        if (stickyMap) stickyMap.classList.add("chart-active");
+      }
     }
   },
-  { root: mainScroll, threshold: 0.2 }
+  { root: mainScroll, threshold: 0 }
 );
 
+if (mapTrigger) mapObserver.observe(mapTrigger);
 if (screenMap) mapObserver.observe(screenMap);
 
 // ─────────────────────────────────────────────────────────────
