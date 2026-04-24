@@ -69,7 +69,7 @@ export function drawConcentrationChart(containerSelector) {
     .attr("x2", d => x(d))
     .attr("y1", 0)
     .attr("y2", height)
-    .attr("stroke", "rgba(0, 0, 0, 0.1)")
+    .attr("stroke", "rgba(255, 255, 255, 0.12)")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "4 4");
 
@@ -82,7 +82,7 @@ export function drawConcentrationChart(containerSelector) {
     .attr("x", d => x(d))
     .attr("y", height + 20)
     .attr("text-anchor", "middle")
-    .attr("fill", "rgba(0, 0, 0, 0.35)")
+    .attr("fill", "rgba(255, 255, 255, 0.45)")
     .attr("font-size", "11px")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif")
     .text(d => `${d}%`);
@@ -112,7 +112,7 @@ export function drawConcentrationChart(containerSelector) {
     .attr("font-size", "15px")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif")
     .attr("font-weight", "500")
-    .attr("fill", "#333333");
+    .attr("fill", "rgba(255, 255, 255, 0.9)");
 
   // Barres
   bars.append("rect")
@@ -122,7 +122,7 @@ export function drawConcentrationChart(containerSelector) {
     .attr("width", 0)
     .attr("rx", 6)
     .attr("ry", 6)
-    .attr("fill", d => d.country === "Portugal" ? "var(--vert-elec)" : "#E0E0E0")
+    .attr("fill", d => d.country === "Portugal" ? "var(--vert-elec)" : "rgba(255,255,255,0.2)")
     .transition()
     .duration(1500)
     .ease(d3.easeCubicOut)
@@ -134,7 +134,7 @@ export function drawConcentrationChart(containerSelector) {
     .attr("y", y.bandwidth() / 2)
     .attr("x", 0)
     .attr("dy", "0.35em")
-    .attr("fill", "#666666")
+    .attr("fill", "rgba(255, 255, 255, 0.75)")
     .attr("font-size", "14px")
     .attr("font-weight", "700")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif")

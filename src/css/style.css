@@ -590,11 +590,10 @@ body {
 }
 
 #chart-trees {
-  background-color: var(--blanc);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(12px);
   border-radius: 12px;
   padding: var(--space-s) var(--space-m);
-  /* Le graphique fait 800x450 (ratio ~1.777). 
-     On contraint la largeur pour que la hauteur résultante ne dépasse pas 65vh. */
   width: min(100%, calc(65vh * 800 / 450));
   max-width: 1000px;
   margin: 0 auto;
@@ -667,11 +666,11 @@ body {
 }
 
 /* Axes D3 */
-.axis--y .domain { stroke: #000000; }
-.axis--y .tick line { stroke: rgba(0, 0, 0, 0.12); }
+.axis--y .domain { stroke: rgba(255, 255, 255, 0.25); }
+.axis--y .tick line { stroke: rgba(255, 255, 255, 0.12); }
 .axis--y .tick text,
 .axis--x .tick text {
-  fill: #000000;
+  fill: rgba(255, 255, 255, 0.75);
   font-size: 13px;
   font-weight: 500;
   font-family: var(--font-body);
@@ -728,7 +727,8 @@ body {
 }
 
 #chart-concentration {
-  background-color: var(--blanc);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(12px);
   border-radius: 12px;
   padding: var(--space-s) var(--space-m);
   max-width: 900px;

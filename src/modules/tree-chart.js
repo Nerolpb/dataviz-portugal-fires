@@ -55,7 +55,7 @@ export function drawTreeChart(containerSelector) {
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(x))
     .selectAll("text")
-    .attr("fill", "#000000")
+    .attr("fill", "rgba(255,255,255,0.85)")
     .attr("font-size", "14px")
     .attr("font-weight", "600")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif");
@@ -69,7 +69,7 @@ export function drawTreeChart(containerSelector) {
         .tickFormat(d => d / 1000 + "k")
     )
     .selectAll("text")
-    .attr("fill", "#000000")
+    .attr("fill", "rgba(255,255,255,0.75)")
     .attr("font-size", "14px")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif");
 
@@ -90,7 +90,7 @@ export function drawTreeChart(containerSelector) {
     .attr("y", height)
     .attr("width", bw)
     .attr("height", 0)
-    .attr("fill", d => d.arbre === "Eucalyptus" ? "var(--vert-elec)" : "#CCCCCC")
+    .attr("fill", d => d.arbre === "Eucalyptus" ? "var(--vert-elec)" : "rgba(255,255,255,0.2)")
     .attr("rx", 6)
     .attr("ry", 6)
     .transition()
@@ -171,7 +171,7 @@ export function drawTreeChart(containerSelector) {
     .attr("x", bw / 2)
     .attr("y", height)
     .attr("text-anchor", "middle")
-    .attr("fill", "#000000")
+    .attr("fill", "#ffffff")
     .attr("font-size", "16px")
     .attr("font-weight", "700")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif")
