@@ -99,19 +99,20 @@ export function drawConcentrationChart(containerSelector) {
   bars.append("image")
     .attr("href", d => `https://flagcdn.com/w40/${d.code}.png`)
     .attr("x", -140)
-    .attr("y", y.bandwidth() / 2 - 12)
+    .attr("y", y.bandwidth() / 2 - 8)
     .attr("width", 24)
     .attr("height", 16);
 
   // Noms des pays
   bars.append("text")
     .attr("x", -108)
-    .attr("y", y.bandwidth() / 2 + 5)
+    .attr("y", y.bandwidth() / 2)
+    .attr("dy", "0.35em")
     .text(d => d.country)
     .attr("font-size", "15px")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif")
-    .attr("font-weight", d => d.country === "Portugal" ? "700" : "500")
-    .attr("fill", d => d.country === "Portugal" ? "var(--vert-elec)" : "#333333");
+    .attr("font-weight", "500")
+    .attr("fill", "#333333");
 
   // Barres
   bars.append("rect")
@@ -133,7 +134,7 @@ export function drawConcentrationChart(containerSelector) {
     .attr("y", y.bandwidth() / 2)
     .attr("x", 0)
     .attr("dy", "0.35em")
-    .attr("fill", d => d.country === "Portugal" ? "var(--vert-elec)" : "#666666")
+    .attr("fill", "#666666")
     .attr("font-size", "14px")
     .attr("font-weight", "700")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif")

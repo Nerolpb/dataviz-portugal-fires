@@ -224,6 +224,17 @@ body {
 
 .highlight-green { color: var(--vert-elec); }
 
+.stat-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.25s ease;
+}
+
+.stat-link:hover {
+  color: #ffffff;
+}
+
 /* ============================================================
    SECTION 1 — HERO
    ============================================================ */
@@ -384,6 +395,71 @@ body {
   transform: translateY(0);
   pointer-events: auto;
 }
+
+.cr7-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(110vh);
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  pointer-events: none;
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sticky-hero.chart-active .cr7-wrapper {
+  transform: translateX(-50%) translateY(0);
+}
+
+.cr7-image {
+  height: 90vh;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.cr7-height-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 93vh;
+  padding-bottom: 1vh;
+}
+
+.cr7-height-label {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #000000;
+  white-space: nowrap;
+  background: var(--vert-elec);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.cr7-height-line {
+  flex: 1;
+  width: 4px;
+  background: #ffffff;
+  border-radius: 2px;
+  position: relative;
+}
+
+.cr7-height-line::before,
+.cr7-height-line::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 4px;
+  background: #ffffff;
+}
+
+.cr7-height-line::before { top: 0; }
+.cr7-height-line::after  { bottom: 0; }
 
 /* Phase 2: Stade + Ronaldo côte à côte */
 .hero-comparison-card {
@@ -655,7 +731,7 @@ body {
   background-color: var(--blanc);
   border-radius: 12px;
   padding: var(--space-s) var(--space-m);
-  max-width: 750px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -756,14 +832,14 @@ body {
 
 .map-inner-container {
   position: relative;
-  max-width: 800px;
+  max-width: 950px;
   width: 100%;
   margin: 0 auto;
 }
 
 #map-eucalyptus {
   width: 100%;
-  height: 65vh;
+  height: 76vh;
   border-radius: 12px;
   overflow: hidden;
   background: transparent;
@@ -791,6 +867,44 @@ body {
 .map-inner-container .source-credit {
   bottom: -10px;
   right: -10px;
+}
+
+/* ============================================================
+   CARTE — HINTS DE NAVIGATION
+   ============================================================ */
+.map-controls-hint {
+  position: absolute;
+  top: var(--space-m);
+  right: var(--space-l);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.map-hint-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+}
+
+.map-hint-key {
+  color: var(--vert-elec);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.map-hint-desc {
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
 }
 
 /* MapLibre controls */

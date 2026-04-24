@@ -6,15 +6,46 @@ import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
 const mainScroll = document.getElementById("main-scroll");
 const progressBar = document.getElementById("scroll-progress-bar");
 
-// Navigation au clavier (flèches Haut/Bas)
+// Positions absolues de chaque section dans le conteneur de scroll
+function getSectionPositions() {
+  return Array.from(mainScroll.querySelectorAll(".hero-part"))
+    .map(el => Math.round(el.getBoundingClientRect().top + mainScroll.scrollTop));
+}
+
+let scrollLocked = false;
+
+function navigateTo(direction) {
+  if (scrollLocked) return;
+
+  const cur       = mainScroll.scrollTop;
+  const positions = getSectionPositions();
+
+  const target = direction === "down"
+    ? positions.find(p => p > cur + 5)
+    : positions.filter(p => p < cur - 5).at(-1);
+
+  if (target === undefined) return;
+
+  scrollLocked = true;
+  mainScroll.scrollTo({ top: target, behavior: "smooth" });
+  setTimeout(() => { scrollLocked = false; }, 700);
+}
+
+// Molette — saute de section en section, sauf si on est sur la carte (zoom MapLibre)
+mainScroll.addEventListener("wheel", (e) => {
+  const mapEl = document.getElementById("map-eucalyptus");
+  if (mapEl && mapEl.contains(e.target)) return; // MapLibre gère le zoom lui-même
+
+  e.preventDefault();
+  navigateTo(e.deltaY > 0 ? "down" : "up");
+}, { passive: false });
+
+mainScroll.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
+
+// Flèches clavier
 window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowDown") {
-    e.preventDefault();
-    mainScroll.scrollBy({ top: window.innerHeight, behavior: "smooth" });
-  } else if (e.key === "ArrowUp") {
-    e.preventDefault();
-    mainScroll.scrollBy({ top: -window.innerHeight, behavior: "smooth" });
-  }
+  if (e.key === "ArrowDown") { e.preventDefault(); navigateTo("down"); }
+  if (e.key === "ArrowUp")   { e.preventDefault(); navigateTo("up");   }
 });
 
 // ─────────────────────────────────────────────────────────────

@@ -31,6 +31,7 @@
         <div class="hero-bg-sticky"></div>
         <div class="hero-seam-blur"></div>
         <div class="hero-content">
+
           <!-- ====== SECTION 0 — Titre ====== -->
           <section class="hero-part" id="section-title">
             <div class="title-box fade-up">
@@ -40,38 +41,55 @@
               </h1>
             </div>
           </section>
-          <!-- ====== SECTION 0.5 — Accroche Superficie ====== -->
+
+          <!-- ====== SECTION 0.5 — Superficie ====== -->
           <section class="hero-part" id="section-area">
             <div class="title-box fade-up">
               <p class="hero-text hero-text--bold">
-                Avec une superficie forestière<br>d'environ 3,2 millions d'hectares...
+                Avec une superficie forestière<br>de <a href="https://fr.wikipedia.org/wiki/For%C3%AAt_au_Portugal" target="_blank" rel="noopener noreferrer" class="stat-link">3,3 millions d'hectares</a>
               </p>
             </div>
           </section>
 
-          <!-- ====== SECTION 1 — Hero Storytelling (Comparaison) ====== -->
+          <!-- ====== SECTION 1A — Comparaison texte ====== -->
+          <section class="hero-part" id="section-hero-text">
+            <div class="title-box fade-up">
+              <p class="hero-text hero-text--bold">
+                Cela équivaut à<br><strong>4,5 millions</strong> de terrains de football.
+              </p>
+            </div>
+          </section>
+
+          <!-- ====== SECTION 1B — Comparaison carte ====== -->
           <section id="screen-hero" class="hero-part">
             <div class="sticky-hero" id="comparison-sticky">
               <div class="title-box comparison-title-box">
                 <p class="hero-text hero-text--bold">
-                  Cela équivaut à<br><strong>4,5 millions</strong> de terrains de football.
+                  Ou à 34,2 milliards<br>de fois Cristiano Ronaldo
                 </p>
               </div>
-              <div class="hero-comparison-card-wrapper">
-                <div class="hero-comparison-card">
-                  <div class="comparison-grid">
-                    <div class="grid-item-media"><img src="/src/assets/ronaldo.svg" alt="Ronaldo" class="ronaldo-svg-small"></div>
-                    <div class="grid-item-media"><img src="/src/assets/Football_field.svg" alt="Terrain de foot" class="stadium-svg-small"></div>
-                    <div class="grid-item-label"><div class="comparison-label">Cristiano Ronaldo — 1m87</div></div>
-                    <div class="grid-item-label"><div class="comparison-label">Terrain FIFA — 105m x 68m</div></div>
-                  </div>
+              <div class="cr7-wrapper">
+                <img src="/src/assets/cr7.png" alt="Cristiano Ronaldo" class="cr7-image" />
+                <div class="cr7-height-indicator">
+                  <span class="cr7-height-label">1m87</span>
+                  <div class="cr7-height-line"></div>
                 </div>
               </div>
             </div>
             <div id="comparison-trigger" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px;"></div>
           </section>
 
-          <!-- ====== SECTION 2 — Graphique arbres ====== -->
+          <!-- ====== SECTION 2A — Graphique arbres texte ====== -->
+          <section class="hero-part" id="section-trees-text">
+            <div class="title-box fade-up">
+              <h2 class="title-standalone" style="text-transform: none;">
+                L'eucalyptus monopolise près d'un <span style="color: var(--blanc);">tiers</span>
+                de la superficie de la forêt portugaise
+              </h2>
+            </div>
+          </section>
+
+          <!-- ====== SECTION 2B — Graphique arbres ====== -->
           <section class="hero-part" id="screen-trees-wrapper">
             <div class="sticky-trees">
               <div class="title-box trees-box">
@@ -83,7 +101,7 @@
               <div class="trees-chart-wrapper">
                 <div id="chart-trees">
                   <div class="source-credit">
-                  <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF - Instituto da Conservação da Natureza et des Florestas</a>
+                    <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF - Instituto da Conservação da Natureza et des Florestas</a>
                   </div>
                 </div>
               </div>
@@ -93,14 +111,26 @@
             </div>
             <div id="chart-trigger" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px;"></div>
           </section>
-          <!-- ====== SECTION 3 — Concentration d'eucalyptus ====== -->
+
+          <!-- ====== SECTION 3A — Concentration texte ====== -->
+          <section class="hero-part" id="section-concentration-text">
+            <div class="title-box fade-up">
+              <h2 class="title-standalone" style="text-transform: none;">
+                De plus, le Portugal possède la plus forte
+                <span style="color: var(--blanc);">concentration</span>
+                d'eucalyptus au Monde
+              </h2>
+            </div>
+          </section>
+
+          <!-- ====== SECTION 3B — Concentration graphique ====== -->
           <section class="hero-part" id="screen-concentration-wrapper">
             <div class="sticky-concentration">
               <div class="title-box concentration-title-box">
                 <h2 class="title-standalone" style="text-transform: none;">
                   De plus, le Portugal possède la plus forte
                   <span style="color: var(--blanc);">concentration</span>
-                  d'eucalyptus en Europe
+                  d'eucalyptus au Monde
                 </h2>
               </div>
               <div class="concentration-chart-wrapper">
@@ -117,7 +147,7 @@
             </div>
             <div id="concentration-trigger" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px;"></div>
           </section>
-          
+
           <!-- ====== SECTION 3.5 — Comparaison Paris ====== -->
           <section class="hero-part" id="screen-map-transition">
             <div class="title-box comparison-box fade-up">
@@ -129,11 +159,20 @@
               </p>
               <div id="eiffel-container"></div>
             </div>
-            <!-- Trigger pour lancer l'animation au scroll -->
             <div id="paris-trigger" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px;"></div>
           </section>
 
-          <!-- ====== SECTION 4 — Carte ====== -->
+          <!-- ====== SECTION 4A — Carte texte ====== -->
+          <section class="hero-part" id="section-map-text">
+            <div class="title-box fade-up">
+              <h2 class="title-standalone" style="text-transform: none;">
+                Les fôrets d'eucalyptus s'étendent sur quasiment tout le
+                <span style="color: var(--blanc);">territoire portugais</span>
+              </h2>
+            </div>
+          </section>
+
+          <!-- ====== SECTION 4B — Carte interactive ====== -->
           <section class="hero-part" id="screen-map-wrapper">
             <div class="sticky-map">
               <div class="title-box map-title-box">
@@ -144,6 +183,20 @@
                 </h2>
               </div>
               <div class="map-chart-wrapper">
+                <div class="map-controls-hint">
+                  <div class="map-hint-item">
+                    <span class="map-hint-key">Molette</span>
+                    <span class="map-hint-desc">Zoomer / Dézoomer</span>
+                  </div>
+                  <div class="map-hint-item">
+                    <span class="map-hint-key">Clic + Drag</span>
+                    <span class="map-hint-desc">Déplacer</span>
+                  </div>
+                  <div class="map-hint-item">
+                    <span class="map-hint-key">Ctrl + Drag</span>
+                    <span class="map-hint-desc">Incliner la perspective</span>
+                  </div>
+                </div>
                 <div class="map-inner-container">
                   <div id="map-eucalyptus"></div>
                   <div class="source-credit">
@@ -154,6 +207,7 @@
             </div>
             <div id="map-trigger" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px;"></div>
           </section>
+
         </div>
       </div>
 
