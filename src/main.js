@@ -3,7 +3,6 @@ import { drawTreeChart }           from "./modules/tree-chart.js";
 import { drawConcentrationChart }  from "./modules/chart-concentration.js";
 import { initParisComparison }     from "./modules/comparison-paris.js";
 import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
-
 const mainScroll = document.getElementById("main-scroll");
 const progressBar = document.getElementById("scroll-progress-bar");
 
@@ -28,6 +27,30 @@ function updateProgress() {
 }
 
 mainScroll.addEventListener("scroll", updateProgress, { passive: true });
+
+// ─────────────────────────────────────────────────────────────
+// Comparaison Ronaldo/Stade (Section 1)
+// ─────────────────────────────────────────────────────────────
+const comparisonTrigger = document.getElementById("comparison-trigger");
+const stickyHero        = document.querySelector(".sticky-hero");
+
+const comparisonObserver = new IntersectionObserver(
+  (entries) => {
+    const entry = entries[0];
+    if (entry.isIntersecting) {
+      if (stickyHero) stickyHero.classList.add("chart-active");
+    } else {
+      if (entry.boundingClientRect.top > 0) {
+        if (stickyHero) stickyHero.classList.remove("chart-active");
+      } else {
+        if (stickyHero) stickyHero.classList.add("chart-active");
+      }
+    }
+  },
+  { root: mainScroll, threshold: 0 }
+);
+
+if (comparisonTrigger) comparisonObserver.observe(comparisonTrigger);
 
 // ─────────────────────────────────────────────────────────────
 // Animations fade-up — déclenchées à l'entrée de chaque section
