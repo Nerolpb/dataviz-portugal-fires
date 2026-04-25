@@ -133,16 +133,6 @@ body {
   z-index: 0;
 }
 
-.fire-bg-sticky {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: url('../assets/feux.jpeg') center/cover no-repeat;
-  z-index: 0;
-}
-
 .hero-seam-blur {
   position: absolute;
   top: 0;
@@ -152,6 +142,31 @@ body {
   background: linear-gradient(to bottom, #FFFFFF 0%, rgba(255,255,255,0) 100%);
   z-index: 1;
   pointer-events: none;
+}
+
+/* Fade-out bas du groupe eucalyptus → noir (couvre la section bridge) */
+.hero-seam-exit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, transparent 20%, rgba(0, 0, 0, 0.97) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Fond sombre du groupe feu (visible au niveau de la couture et sous le masque) */
+#fire-hero-group {
+  background: #0c0c0a;
+}
+
+
+
+/* Seam-blur du groupe feu : fond sombre au lieu de blanc */
+#fire-hero-group .hero-seam-blur {
+  background: linear-gradient(to bottom, #0c0c0a 0%, transparent 100%);
+  height: 35vh;
 }
 
 .hero-content {
@@ -987,21 +1002,161 @@ body {
 }
 
 /* ============================================================
+   SECTION NOIR — Révélation progressive d'images incendie
+   ============================================================ */
+#black-hero-group {
+  position: relative;
+  background: #000;
+}
+
+.black-bg-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.black-scroll-content {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+}
+
+.fire-reveal {
+  position: absolute;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+}
+.fire-reveal.visible { opacity: 1; }
+
+/* ── Groupe 1 : coins supérieurs (2 images) ── */
+.fire-reveal--1  { top:2%;  left:1%;   width:26vw; height:auto; transform:rotate(-3.5deg) scale(0.88); transition-delay:0ms; }
+.fire-reveal--2  { top:3%;  right:2%;  width:22vw; height:auto; transform:rotate(4deg) scale(0.88);    transition-delay:150ms; }
+.fire-reveal--1.visible  { transform:rotate(-3.5deg) scale(1); }
+.fire-reveal--2.visible  { transform:rotate(4deg) scale(1); }
+
+/* ── Groupe 2 : haut-centre + flancs supérieurs (3 images) ── */
+.fire-reveal--3  { top:1%;  left:36%;  width:19vw; height:auto; transform:rotate(-1deg) scale(0.88);   transition-delay:0ms; }
+.fire-reveal--4  { top:25%; left:1%;   width:28vw; height:auto; transform:rotate(-4.5deg) scale(0.88); transition-delay:150ms; }
+.fire-reveal--5  { top:23%; right:2%;  width:24vw; height:auto; transform:rotate(2.5deg) scale(0.88);  transition-delay:300ms; }
+.fire-reveal--3.visible  { transform:rotate(-1deg) scale(1); }
+.fire-reveal--4.visible  { transform:rotate(-4.5deg) scale(1); }
+.fire-reveal--5.visible  { transform:rotate(2.5deg) scale(1); }
+
+/* ── Groupe 3 : grande image centre-haut + flancs médians (3 images) ── */
+.fire-reveal--6  { top:19%; left:30%;  width:36vw; height:auto; transform:rotate(3deg) scale(0.88);   transition-delay:0ms; }
+.fire-reveal--7  { top:43%; left:1%;   width:22vw; height:auto; transform:rotate(-2deg) scale(0.88);  transition-delay:150ms; }
+.fire-reveal--8  { top:41%; right:2%;  width:26vw; height:auto; transform:rotate(5deg) scale(0.88);   transition-delay:300ms; }
+.fire-reveal--6.visible  { transform:rotate(3deg) scale(1); }
+.fire-reveal--7.visible  { transform:rotate(-2deg) scale(1); }
+.fire-reveal--8.visible  { transform:rotate(5deg) scale(1); }
+
+/* ── Groupe 4 : grande image centre + remplissage (3 images) ── */
+.fire-reveal--9  { top:39%; left:27%;  width:34vw; height:auto; transform:rotate(-1.5deg) scale(0.88); transition-delay:0ms; }
+.fire-reveal--10 { top:14%; left:61%;  width:22vw; height:auto; transform:rotate(-3deg) scale(0.88);   transition-delay:150ms; }
+.fire-reveal--11 { top:61%; left:1%;   width:24vw; height:auto; transform:rotate(3.5deg) scale(0.88);  transition-delay:300ms; }
+.fire-reveal--9.visible  { transform:rotate(-1.5deg) scale(1); }
+.fire-reveal--10.visible { transform:rotate(-3deg) scale(1); }
+.fire-reveal--11.visible { transform:rotate(3.5deg) scale(1); }
+
+/* ── Groupe 5 : zone basse + centre-bas (3 images) ── */
+.fire-reveal--12 { top:60%; right:2%;  width:22vw; height:auto; transform:rotate(-4deg) scale(0.88);  transition-delay:0ms; }
+.fire-reveal--13 { top:57%; left:33%;  width:30vw; height:auto; transform:rotate(2deg) scale(0.88);   transition-delay:150ms; }
+.fire-reveal--14 { top:76%; left:2%;   width:18vw; height:auto; transform:rotate(-5deg) scale(0.88);  transition-delay:300ms; }
+.fire-reveal--12.visible { transform:rotate(-4deg) scale(1); }
+.fire-reveal--13.visible { transform:rotate(2deg) scale(1); }
+.fire-reveal--14.visible { transform:rotate(-5deg) scale(1); }
+
+/* ── Groupe 6 : bas de page (3 images) ── */
+.fire-reveal--15 { top:74%; right:3%;  width:24vw; height:auto; transform:rotate(4deg) scale(0.88);   transition-delay:0ms; }
+.fire-reveal--16 { top:71%; left:21%;  width:28vw; height:auto; transform:rotate(-2deg) scale(0.88);  transition-delay:150ms; }
+.fire-reveal--17 { top:78%; left:51%;  width:20vw; height:auto; transform:rotate(3deg) scale(0.88);   transition-delay:300ms; }
+.fire-reveal--15.visible { transform:rotate(4deg) scale(1); }
+.fire-reveal--16.visible { transform:rotate(-2deg) scale(1); }
+.fire-reveal--17.visible { transform:rotate(3deg) scale(1); }
+
+/* ── Groupe 7 : interstices restants (3 images) ── */
+.fire-reveal--18 { top:48%; left:62%;  width:20vw; height:auto; transform:rotate(2.5deg) scale(0.88); transition-delay:0ms; }
+.fire-reveal--19 { top:30%; left:9%;   width:18vw; height:auto; transform:rotate(5deg) scale(0.88);   transition-delay:150ms; }
+.fire-reveal--20 { top:65%; left:42%;  width:26vw; height:auto; transform:rotate(-2.5deg) scale(0.88);transition-delay:300ms; }
+.fire-reveal--18.visible { transform:rotate(2.5deg) scale(1); }
+.fire-reveal--19.visible { transform:rotate(5deg) scale(1); }
+.fire-reveal--20.visible { transform:rotate(-2.5deg) scale(1); }
+
+/* ============================================================
    SECTIONS INCENDIES — Thème unifié avec accentuation
    ============================================================ */
+
+/* ─── Fond sticky du groupe feu ─── */
+.fire-bg-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: url('../assets/feux2.jpg') center/cover no-repeat;
+  z-index: 0;
+}
+
+/* ─── Section eucalyptus-feu : fond rouge plein ─── */
+#screen-eucy-fire {
+  background: var(--bg-rouge);
+}
+
+.eucy-fire-box {
+  max-width: 720px;
+  width: 90%;
+  padding: var(--space-l) var(--space-m);
+  color: var(--blanc);
+}
+
+.eucy-fire-box .title-standalone {
+  color: var(--blanc);
+  margin-bottom: 1.4em;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.eucy-fire-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+.eucy-fire-list li {
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  padding-left: 1.2em;
+  border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.eucy-fire-label {
+  display: block;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+  margin-bottom: 0.2em;
+}
 
 /* ─── Boîte thématique Feu (rouge brique) ─── */
 .title-box--fire {
   background-color: var(--bg-rouge);
   color: var(--blanc);
-  padding: var(--space-l);
+  padding: var(--space-m);
   border-radius: 12px;
   width: 100%;
-  max-width: 900px;
+  max-width: 650px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(175, 56, 26, 0.15); /* Ombre légère teintée */
 }
 
 /* ─── Séquence Narrative ─── */
@@ -1022,9 +1177,9 @@ body {
 .narrative-media {
   flex: 1;
   max-width: 50%;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
   aspect-ratio: 4 / 3;
 }
 
@@ -1038,12 +1193,15 @@ body {
 
 .narrative-text-box {
   flex: 1;
-  background-color: var(--blanc);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: var(--space-m);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   font-size: var(--fs-md);
   line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 @media (max-width: 800px) {
@@ -1074,7 +1232,9 @@ body {
   width: 100%;
   height: 62vh;
   min-height: 0;
-  background-color: var(--blanc);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 12px;
   padding: var(--space-s) var(--space-m);
   max-width: 1000px;
@@ -1089,13 +1249,14 @@ body {
   padding: 12px 16px;
   font-family: var(--font-body);
   font-size: 13px;
-  background: #FFFFFF;
-  color: #000000;
-  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   pointer-events: none;
   opacity: 0;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
   transition: opacity 0.2s ease, transform 0.1s ease;
   z-index: 100;
   min-width: 200px;
@@ -1106,7 +1267,7 @@ body {
   font-size: 16px;
   margin-bottom: 8px;
   color: var(--bg-rouge);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   padding-bottom: 6px;
 }
 
@@ -1117,7 +1278,7 @@ body {
 }
 
 .chart-tooltip-label {
-  color: rgba(0,0,0,0.6);
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
 }
 
@@ -1158,11 +1319,13 @@ body {
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 15px 25px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1203,7 +1366,7 @@ body {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 800;
-  color: #000;
+  color: var(--bg-rouge);
   line-height: 1;
 }
 

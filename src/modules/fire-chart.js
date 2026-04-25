@@ -64,7 +64,7 @@ export async function drawFireTimeline(containerSelector) {
     .enter().append("line")
     .attr("x1", 0).attr("x2", W)
     .attr("y1", d => y(d)).attr("y2", d => y(d))
-    .attr("stroke", "rgba(0,0,0,0.05)")
+    .attr("stroke", "rgba(255,255,255,0.08)")
     .attr("stroke-dasharray", "4,6");
 
   // Ligne moyenne
@@ -78,9 +78,9 @@ export async function drawFireTimeline(containerSelector) {
   g.append("text")
     .attr("x", W + 6)
     .attr("y", y(avg) + 4)
-    .attr("fill", "rgba(255,140,0,0.5)")
+    .attr("fill", "rgba(255,140,0,0.7)")
     .attr("font-size", "11px")
-    .attr("font-family", "pacaembu, sans-serif")
+    .attr("font-family", "neue-haas-grotesk-text, sans-serif")
     .text("moy.");
 
   // Échelle couleur : brun sombre → orange vif
@@ -153,12 +153,12 @@ export async function drawFireTimeline(containerSelector) {
         .tickValues(data.filter(d => d.year % 5 === 0).map(d => d.year))
         .tickSize(5)
     )
-    .call(ax => ax.select(".domain").attr("stroke", "rgba(0,0,0,0.15)"))
-    .call(ax => ax.selectAll("line").attr("stroke", "rgba(0,0,0,0.15)"))
+    .call(ax => ax.select(".domain").attr("stroke", "rgba(255,255,255,0.2)"))
+    .call(ax => ax.selectAll("line").attr("stroke", "rgba(255,255,255,0.2)"))
     .selectAll("text")
-    .attr("fill", "rgba(0,0,0,0.55)")
+    .attr("fill", "rgba(255,255,255,0.6)")
     .attr("font-size", "12px")
-    .attr("font-family", "pacaembu, sans-serif")
+    .attr("font-family", "neue-haas-grotesk-text, sans-serif")
     .attr("dy", "1.1em");
 
   // Axe Y
@@ -169,12 +169,12 @@ export async function drawFireTimeline(containerSelector) {
         .tickFormat(d => Math.round(d / 1000) + "k ha")
         .tickSize(5)
     )
-    .call(ax => ax.select(".domain").attr("stroke", "rgba(0,0,0,0.15)"))
-    .call(ax => ax.selectAll("line").attr("stroke", "rgba(0,0,0,0.15)"))
+    .call(ax => ax.select(".domain").attr("stroke", "rgba(255,255,255,0.2)"))
+    .call(ax => ax.selectAll("line").attr("stroke", "rgba(255,255,255,0.2)"))
     .selectAll("text")
-    .attr("fill", "rgba(0,0,0,0.55)")
+    .attr("fill", "rgba(255,255,255,0.6)")
     .attr("font-size", "12px")
-    .attr("font-family", "pacaembu, sans-serif");
+    .attr("font-family", "neue-haas-grotesk-text, sans-serif");
 
   // Annotation 2017
   const d2017 = data.find(d => d.year === 2017);
@@ -193,7 +193,7 @@ export async function drawFireTimeline(containerSelector) {
       .attr("fill", "#FFD060")
       .attr("font-size", "13px")
       .attr("font-weight", "700")
-      .attr("font-family", "pacaembu, sans-serif")
+      .attr("font-family", "neue-haas-grotesk-text, sans-serif")
       .text("▲ 2017 — " + Math.round(d2017.area / 1000) + "k ha");
   }
 

@@ -37,7 +37,7 @@ function navigateTo(direction) {
 // Molette — saute de section en section, sauf si on est sur la carte (zoom MapLibre)
 mainScroll.addEventListener("wheel", (e) => {
   const mapEl = document.getElementById("map-eucalyptus");
-  if (mapEl && mapEl.contains(e.target)) return; // MapLibre gère le zoom lui-même
+  if (mapEl && mapEl.contains(e.target)) return;
 
   e.preventDefault();
   navigateTo(e.deltaY > 0 ? "down" : "up");
@@ -219,6 +219,7 @@ const mapObserver = new IntersectionObserver(
 
 if (mapTrigger) mapObserver.observe(mapTrigger);
 
+
 // ─────────────────────────────────────────────────────────────
 // Graphique historique des incendies
 // ─────────────────────────────────────────────────────────────
@@ -256,3 +257,20 @@ const fireMapObserver = new IntersectionObserver(
 );
 
 if (screenFireMap) fireMapObserver.observe(screenFireMap);
+
+// ─────────────────────────────────────────────────────────────
+// Section noire — révélation par groupe via IntersectionObserver
+// ─────────────────────────────────────────────────────────────
+document.querySelectorAll(".black-trigger").forEach(trigger => {
+  const obs = new IntersectionObserver(
+    (entries) => {
+      if (!entries[0].isIntersecting) return;
+      const group = trigger.dataset.group;
+      document.querySelectorAll(`.fire-reveal[data-group="${group}"]`)
+        .forEach(img => img.classList.add("visible"));
+      obs.unobserve(trigger);
+    },
+    { root: mainScroll, threshold: 0.1 }
+  );
+  obs.observe(trigger);
+});
