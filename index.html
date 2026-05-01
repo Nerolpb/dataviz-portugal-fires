@@ -16,13 +16,25 @@
 
       <!-- ====== SECTION LANDING ====== -->
       <section class="hero-part" id="screen-landing">
-        <div class="section-inner section-inner--center">
-          <div class="fade-up" style="display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 800px;">
-            <p class="hero-text">
-              Nous vous invitons à explorer la réalité des forêts portugaises. 
-              À travers cette visualisation, vous découvrirez comment un pays si boisé s'est retrouvé face au défi constant des incendies.
-            </p>
-          </div>
+        <div class="landing-bg"></div>
+        <div class="landing-overlay"></div>
+        <div class="landing-content">
+          <p class="landing-eyebrow fade-up">Portugal · Visualisation de données</p>
+          <h1 class="landing-title">
+            <span class="landing-title__main fade-up" data-delay="120">Forêts</span>
+            <span class="landing-title__amp fade-up" data-delay="240">&amp;</span>
+            <span class="landing-title__main fade-up" data-delay="360">Incendies</span>
+          </h1>
+          <div class="landing-divider fade-up" data-delay="460"></div>
+          <p class="landing-desc fade-up" data-delay="540">
+            Comment le pays le plus boisé d'Europe<br>est devenu le plus brûlé.
+          </p>
+          <button class="landing-scroll-cta fade-up" data-delay="680" onclick="document.getElementById('main-scroll').scrollBy({top:window.innerHeight,behavior:'smooth'})">
+            <span>Explorer</span>
+            <svg class="landing-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+          </button>
         </div>
       </section>
 
@@ -211,16 +223,35 @@
           <!-- ====== SECTION 4C — Bridge eucalyptus / incendies ====== -->
           <section class="hero-part" id="section-bridge">
             <div class="bridge-blocks">
+
               <div class="title-box bridge-block--1 fade-up">
-                <h2 class="title-standalone" style="text-transform: none; font-size: var(--fs-lg);">
-                  L'eucalyptus est un intérêt économique pour l'industrie du papier
-                </h2>
+                <p class="bridge-eyebrow">Industrie de la pâte à papier</p>
+                <div class="bridge-hero">
+                  <span class="bridge-hero__num">2</span>
+                  <div class="bridge-hero__right">
+                    <span class="bridge-hero__unit">Milliards €</span>
+                    <span class="bridge-hero__sub">d'exportations annuelles</span>
+                  </div>
+                </div>
               </div>
+
               <div class="title-box bridge-block--2 fade-up" data-delay="200">
-                <p style="font-size: 1.05rem; line-height: 1.7; font-weight: 500;">
-                  Premier producteur européen de pâte à papier, le Portugal génère plus de <strong>2 milliards d'euros</strong> d'exportations annuelles. L'importance de ce secteur justifie la progression de l'eucalyptus, qui couvre aujourd'hui 26&nbsp;% du territoire forestier.
-                </p>
+                <ul class="bridge-list">
+                  <li class="bridge-list__item">
+                    <span class="bridge-list__val">#1</span>
+                    <span class="bridge-list__label">filière forêt-bois d'Europe occidentale</span>
+                  </li>
+                  <li class="bridge-list__item">
+                    <span class="bridge-list__val">~2%</span>
+                    <span class="bridge-list__label">du PIB national</span>
+                  </li>
+                  <li class="bridge-list__item">
+                    <span class="bridge-list__val">36%</span>
+                    <span class="bridge-list__label">du territoire couvert par la forêt</span>
+                  </li>
+                </ul>
               </div>
+
             </div>
           </section>
 
@@ -298,93 +329,43 @@
             </div>
           </section>
 
-          <!-- ====== PIRE INCENDIE ====== -->
-          <section class="hero-part" id="screen-fire-intro-1">
-            <div class="title-box title-box--fire fade-up" data-delay="100">
-              <h2 class="title-standalone" style="color: var(--blanc);">
-                Le pire incendie<br>de l'histoire du Portugal
-              </h2>
-              <div style="font-family: var(--font-display); font-size: clamp(3rem, 9vw, 6rem); font-weight: 900; line-height: 1; margin-top: 20px; color: var(--blanc);">450 000 ha</div>
-              <p style="font-size: var(--fs-sm); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8; margin-bottom: 0; color: var(--blanc);">brûlés en 2017</p>
-            </div>
-          </section>
+          <!-- ====== PIRE INCENDIE — Scroll storytelling ====== -->
+          <div id="fire-worst-group">
+            <div class="fire-worst-sticky" data-step="0">
 
-          <!-- ====== EUCALYPTUS DANGER ====== -->
-          <section class="hero-part" id="screen-fire-intro-2">
-            <div class="title-box title-box--fire fade-up" data-delay="100">
-              <p style="font-size: var(--fs-md); line-height: 1.6; max-width: 600px; margin: 0 auto; color: var(--blanc);">
-                L'eucalyptus concentre des huiles essentielles hautement inflammables.
-                Planté en masse sur les collines portugaises, il a transformé les forêts
-                en immenses réservoirs de combustible alimentant des incendies qui ont
-                tué plus de <strong>100 personnes</strong> en une seule nuit.
-              </p>
+              <!-- Titre (centré step 1, glisse haut-gauche steps 2-4) -->
+              <p class="fw-title">Le pire incendie<br>de l'histoire du Portugal</p>
+
+              <!-- Étape 2 : "2017" remplace le titre -->
+              <div class="fw-year">2017</div>
+
+              <!-- Étape 3 : 450 000 ha -->
+              <div class="fw-number">
+                <span class="fire-stat-big">450 000</span>
+                <span class="fire-stat-unit">ha</span>
+              </div>
+
+              <!-- Étape 4 : 106 victimes -->
+              <div class="fw-victims">
+                <span class="fire-stat-victims-num">106</span>
+                <span class="fire-stat-victims-label">victimes</span>
+              </div>
+
             </div>
-          </section>
+            <div class="fire-worst-scroll">
+              <section class="hero-part fire-worst-trigger" data-step="1"></section>
+              <section class="hero-part fire-worst-trigger" data-step="2"></section>
+              <section class="hero-part fire-worst-trigger" data-step="3"></section>
+              <section class="hero-part fire-worst-trigger" data-step="4"></section>
+            </div>
+          </div>
+
+         
 
         </div>
       </div>
 
-      <!-- ====== SÉQUENCE NARRATIVE ====== -->
-      <!-- Écran 1 : Média à gauche -->
-      <section class="snap-section" id="screen-narrative-1">
-        <div class="section-inner">
-          <div class="narrative-split">
-            <div class="narrative-media narrative-media--left fade-up">
-              <!-- Remplacez 'feux.jpeg' par votre image ou vidéo (ex: drame1.mp4) -->
-              <img src="/src/assets/feux.jpeg" alt="Incendie forêt" />
-            </div>
-            <div class="narrative-text-box fade-up" data-delay="200">
-              <h3 style="color: var(--bg-rouge); font-family: var(--font-display); font-size: var(--fs-lg); margin-bottom: 15px;">Une propagation foudroyante</h3>
-              <p>
-                Dans ces forêts denses d'eucalyptus, le feu ne se contente pas d'avancer : il explose. 
-                Les feuilles riches en huiles essentielles s'enflamment presque instantanément, propulsant 
-                le brasier à une vitesse vertigineuse que les pompiers ne peuvent anticiper.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Écran 2 : Média à droite -->
-      <section class="snap-section" id="screen-narrative-2">
-        <div class="section-inner">
-          <div class="narrative-split narrative-split--reverse">
-            <div class="narrative-text-box fade-up">
-              <h3 style="color: var(--bg-rouge); font-family: var(--font-display); font-size: var(--fs-lg); margin-bottom: 15px;">Le piège se referme</h3>
-              <p>
-                En quelques minutes, les flammes encerclent des villages entiers et coupent 
-                les principales voies de communication. Les habitants, surpris par la violence 
-                inouïe de l'incendie, se retrouvent piégés sur les routes, sans échappatoire.
-              </p>
-            </div>
-            <div class="narrative-media narrative-media--right fade-up" data-delay="200">
-               <!-- Remplacez 'feux.jpeg' par votre image ou vidéo (ex: drame2.mp4) -->
-               <img src="/src/assets/feux.jpeg" alt="Voitures dans les flammes" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Écran 3 : Média à gauche -->
-      <section class="snap-section" id="screen-narrative-3">
-        <div class="section-inner">
-          <div class="narrative-split">
-            <div class="narrative-media narrative-media--left fade-up">
-               <!-- Remplacez 'feux.jpeg' par votre image ou vidéo (ex: drame3.jpg) -->
-               <img src="/src/assets/feux.jpeg" alt="Paysage calciné" />
-            </div>
-            <div class="narrative-text-box fade-up" data-delay="200">
-              <h3 style="color: var(--bg-rouge); font-family: var(--font-display); font-size: var(--fs-lg); margin-bottom: 15px;">Un paysage de cendres</h3>
-              <p>
-                Après le passage du feu, il ne reste qu'un immense désert noir. 
-                L'ironie tragique est que l'eucalyptus est l'une des premières plantes 
-                à repousser sur ces cendres, préparant le terrain pour le prochain 
-                cycle destructeur.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       <!-- ====== SECTION 6 — Historique des incendies ====== -->
       <section class="snap-section" id="screen-fire-chart">
@@ -398,26 +379,48 @@
 
       <!-- ====== SECTION 8 — Carte des incendies ====== -->
       <section class="snap-section" id="screen-fire-map">
-        <div class="screen__content--map-fire">
-          <div class="map-body">
-            <div class="title-box title-box--fire fade-up" data-delay="100" style="flex: 0 0 300px; text-align: left; align-self: center;">
-              <p style="font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; line-height: 1.55; color: var(--blanc); margin: 0;">
-                Chaque point de chaleur
-                est une cicatrice laissée
-                par les flammes
-                depuis 1975.
-              </p>
-            </div>
-            <div id="map-fires" class="fade-up" data-delay="300" style="position: relative;">
-              <!-- Contrôle Timeline -->
-              <div class="map-timeline-control">
-                <div class="timeline-header" style="justify-content: center;">
-                  <div id="timeline-year-display">1975</div>
+        <div class="fire-map-layout">
+
+          <!-- Header : titre + légende -->
+          <div class="fire-map-header fade-up" data-delay="100">
+            <p class="fire-map-header__title">
+              Chaque point de chaleur est une cicatrice<br>laissée par les flammes depuis 1975.
+            </p>
+            <div class="fire-map-legend">
+              <div class="fire-map-legend__item">
+                <span class="fire-map-legend__dot"></span>
+                <span class="fire-map-legend__label">Foyer d'incendie</span>
+              </div>
+              <div class="fire-map-legend__item">
+                <span class="fire-map-legend__gradient"></span>
+                <div class="fire-map-legend__gradient-labels">
+                  <span>Faible</span>
+                  <span>Intensité</span>
+                  <span>Élevée</span>
                 </div>
-                <input type="range" id="timeline-slider" min="1975" max="2024" value="1975" step="1">
+              </div>
+              <div class="fire-map-legend__sep"></div>
+              <div class="fire-map-legend__item fire-map-legend__item--hint">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="10" cy="7" r="3"/><path d="M10 10v7"/><path d="M7 14l3 3 3-3"/></svg>
+                <span>Molette · zoom</span>
+              </div>
+              <div class="fire-map-legend__item fire-map-legend__item--hint">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 8l4-4 4 4M8 4v12M12 12l4 4-4 4"/></svg>
+                <span>Glisser · déplacer</span>
               </div>
             </div>
           </div>
+
+          <!-- Carte -->
+          <div id="map-fires" class="fade-up fire-map-canvas" data-delay="250" style="position: relative;">
+            <div class="map-timeline-control">
+              <div class="timeline-header" style="justify-content: center;">
+                <div id="timeline-year-display">1975</div>
+              </div>
+              <input type="range" id="timeline-slider" min="1975" max="2024" value="1975" step="1">
+            </div>
+          </div>
+
         </div>
       </section>
 

@@ -129,7 +129,9 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: url('../assets/background1.png') center/cover no-repeat;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.45) 100%),
+    url('../assets/background1.png') center/cover no-repeat;
   z-index: 0;
 }
 
@@ -139,7 +141,7 @@ body {
   left: 0;
   width: 100%;
   height: 25vh;
-  background: linear-gradient(to bottom, #FFFFFF 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -704,6 +706,77 @@ body {
 }
 
 /* ============================================================
+   SECTION 3A — INTRO CONCENTRATION (stat dramatique)
+   ============================================================ */
+.conc-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 700px;
+  padding: var(--space-l);
+  width: 100%;
+}
+
+.conc-intro__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--vert-elec);
+  margin-bottom: 1.2rem;
+}
+
+.conc-intro__hero {
+  display: flex;
+  align-items: baseline;
+  gap: 0.05em;
+  line-height: 0.85;
+}
+
+.conc-intro__big {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 18vw, 14rem);
+  font-weight: 900;
+  color: var(--blanc);
+  letter-spacing: -0.03em;
+}
+
+.conc-intro__pct {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  color: var(--vert-elec);
+}
+
+.conc-intro__divider {
+  width: 48px;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+  margin: 1.6rem 0 1.2rem;
+  border-radius: 999px;
+}
+
+.conc-intro__desc {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 1.2rem;
+}
+
+.conc-intro__compare {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.02em;
+}
+
+.conc-intro__compare strong {
+  color: rgba(255,255,255,0.7);
+}
+
+/* ============================================================
    SECTION 3 — CONCENTRATION D'EUCALYPTUS
    ============================================================ */
 .sticky-concentration {
@@ -771,7 +844,7 @@ body {
 }
 
 /* ============================================================
-   SECTION BRIDGE — DEUX BLOCS DÉCALÉS
+   SECTION BRIDGE — Stats dans encadrés
    ============================================================ */
 .bridge-blocks {
   display: flex;
@@ -782,14 +855,98 @@ body {
 }
 
 .bridge-block--1 {
-  max-width: 560px;
+  max-width: 520px;
   align-self: flex-start;
+  text-align: left;
 }
 
 .bridge-block--2 {
-  max-width: 560px;
+  max-width: 520px;
   align-self: flex-end;
   text-align: left;
+}
+
+.bridge-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(0,0,0,0.5);
+  margin-bottom: 0.8rem;
+}
+
+.bridge-hero {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2em;
+}
+
+.bridge-hero__num {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 900;
+  color: #000;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.bridge-hero__right {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-bottom: 0.3rem;
+}
+
+.bridge-hero__unit {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #000;
+  line-height: 1;
+}
+
+.bridge-hero__sub {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(0,0,0,0.45);
+}
+
+.bridge-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bridge-list__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7em;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.bridge-list__item:first-child {
+  border-top: 1px solid rgba(0,0,0,0.12);
+}
+
+.bridge-list__val {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 900;
+  color: #000;
+  line-height: 1;
+  min-width: 3rem;
+  flex-shrink: 0;
+}
+
+.bridge-list__label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(0,0,0,0.65);
+  line-height: 1.3;
 }
 
 /* ============================================================
@@ -1002,6 +1159,186 @@ body {
 }
 
 /* ============================================================
+   SECTION LANDING — Écran d'accueil cinématique
+   ============================================================ */
+#screen-landing {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.landing-bg {
+  position: absolute;
+  inset: 0;
+  background: url('/src/assets/background1.png') center/cover no-repeat;
+  animation: landing-drift 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes landing-drift {
+  from { transform: scale(1.06) translate(0, 0); }
+  to   { transform: scale(1.13) translate(-1.5%, 1%); }
+}
+
+.landing-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.82) 100%),
+    linear-gradient(140deg, rgba(0,40,12,0.55) 0%, transparent 55%);
+}
+
+.landing-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  padding: var(--space-l) var(--space-m) 120px;
+  max-width: 860px;
+  width: 100%;
+}
+
+.landing-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: var(--vert-elec);
+  margin-bottom: 1.6rem;
+}
+
+.landing-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 0.82;
+  color: var(--blanc);
+  margin: 0;
+}
+
+.landing-title__main {
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  display: block;
+}
+
+.landing-title__amp {
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  color: var(--orange-feu);
+  display: block;
+  margin: 0.25em 0;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+.landing-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--vert-elec), var(--orange-feu));
+  margin: 1.8rem 0 1.4rem;
+  border-radius: 999px;
+}
+
+.landing-desc {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.6);
+  max-width: 440px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.landing-scroll-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2.4rem;
+  color: rgba(255,255,255,0.45);
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.landing-scroll-cta:hover {
+  color: var(--vert-elec);
+}
+
+.landing-arrow-icon {
+  width: 26px;
+  height: 26px;
+  animation: cta-bounce 2.8s ease-in-out infinite;
+}
+
+@keyframes cta-bounce {
+  0%, 100% { transform: translateY(0);   opacity: 0.45; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+
+/* ─── Bande de stats en bas ─── */
+.landing-stats {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 1.4rem var(--space-l);
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.landing-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  max-width: 200px;
+}
+
+.landing-stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: var(--blanc);
+  line-height: 1;
+}
+
+.landing-stat__label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.45);
+}
+
+.landing-stat-sep {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.12);
+  flex-shrink: 0;
+}
+
+/* ============================================================
    BARRE DE PROGRESSION (verticale, droite)
    ============================================================ */
 #scroll-progress {
@@ -1109,6 +1446,165 @@ body {
 .fire-reveal--18.visible { transform:rotate(2.5deg) scale(1); }
 .fire-reveal--19.visible { transform:rotate(5deg) scale(1); }
 .fire-reveal--20.visible { transform:rotate(-2.5deg) scale(1); }
+
+/* ============================================================
+   SECTION PIRE INCENDIE — Scroll storytelling (4 étapes)
+   ============================================================ */
+#fire-worst-group {
+  position: relative;
+}
+
+.fire-worst-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.fire-worst-scroll {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+}
+
+/* ── Base commune : tout caché, positionné absolument ── */
+.fw-title, .fw-year, .fw-number, .fw-victims {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── TITRE — glisse du centre vers haut-gauche ── */
+.fw-title {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(14px);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--blanc);
+  line-height: 1.2;
+  text-align: center;
+  width: 90%;
+  max-width: 640px;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              top 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              left 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              font-size 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.5s ease,
+              text-align 0s;
+}
+
+/* Step 1 : titre centré, visible */
+.fire-worst-sticky[data-step="1"] .fw-title {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+/* Steps 2-4 : titre glissé en haut-gauche, petit */
+.fire-worst-sticky[data-step="2"] .fw-title,
+.fire-worst-sticky[data-step="3"] .fw-title,
+.fire-worst-sticky[data-step="4"] .fw-title {
+  opacity: 0.45;
+  top: var(--space-l);
+  left: var(--space-l);
+  transform: translate(0, 0);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: left;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* ── "2017" — centré, grand, step 2 uniquement ── */
+.fw-year {
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) translateY(14px);
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 20vw, 16rem);
+  font-weight: 900;
+  color: var(--blanc);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fire-worst-sticky[data-step="2"] .fw-year {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+/* ── "450 000 ha" — centré, step 3 ── */
+.fw-number {
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) translateY(14px);
+  display: flex;
+  align-items: baseline;
+  gap: 0.15em;
+  white-space: nowrap;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fire-worst-sticky[data-step="3"] .fw-number {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+.fire-stat-big {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 12vw, 9.5rem);
+  font-weight: 900;
+  color: var(--orange-feu);
+  line-height: 0.85;
+}
+
+.fire-stat-unit {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── "106 victimes" — centré, step 4 ── */
+.fw-victims {
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) translateY(14px);
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  white-space: nowrap;
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fire-worst-sticky[data-step="4"] .fw-victims {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+.fire-stat-victims-num {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 12vw, 9.5rem);
+  font-weight: 900;
+  color: var(--blanc);
+  line-height: 0.85;
+}
+
+.fire-stat-victims-label {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: rgba(255,255,255,0.35);
+  text-transform: lowercase;
+  letter-spacing: 0;
+}
 
 /* ============================================================
    SECTIONS INCENDIES — Thème unifié avec accentuation
@@ -1240,6 +1736,13 @@ body {
 }
 
 /* ─── Section 6 — Chart ─── */
+#screen-fire-chart,
+#screen-fire-map {
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.62) 100%),
+    url('/src/assets/feux2.jpg') center/cover no-repeat;
+}
+
 .screen__content--fire {
   width: 100%;
   height: 100%;
@@ -1309,30 +1812,132 @@ body {
   font-weight: 700;
 }
 
-/* ─── Section 8 — Carte ─── */
-.screen__content--map-fire {
+/* ─── Section 8 — Carte (nouveau layout) ─── */
+.fire-map-layout {
   width: 100%;
   height: 100%;
-  padding: var(--space-m) var(--space-l);
   display: flex;
   flex-direction: column;
+  padding: var(--space-m) var(--space-l) var(--space-s);
+  gap: var(--space-s);
   position: relative;
   z-index: 10;
 }
 
-.screen__content--map-fire .map-body {
+/* Header : titre + légende sur une ligne */
+.fire-map-header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  flex-shrink: 0;
+}
+
+.fire-map-header__title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--blanc);
+}
+
+/* Légende */
+.fire-map-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-shrink: 0;
+}
+
+.fire-map-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fire-map-legend__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.fire-map-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffea00 0%, #ff5500 60%, #af381a 100%);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(255,85,0,0.6);
+}
+
+.fire-map-legend__gradient {
+  width: 64px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #ffea00, #ff5500, #af381a);
+  flex-shrink: 0;
+}
+
+.fire-map-legend__gradient-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.fire-map-legend__gradient-labels span {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+
+.fire-map-legend__gradient-labels span:nth-child(2) {
+  color: rgba(255,255,255,0.65);
+}
+
+.fire-map-legend__sep {
+  width: 1px;
+  height: 24px;
+  background: rgba(255,255,255,0.12);
+  flex-shrink: 0;
+}
+
+.fire-map-legend__item--hint {
+  color: rgba(255,255,255,0.4);
+  gap: 5px;
+}
+
+.fire-map-legend__item--hint svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.fire-map-legend__item--hint span {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Carte */
+.fire-map-canvas {
   flex: 1;
   min-height: 0;
-  gap: var(--space-m);
-  align-items: stretch;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 #map-fires {
-  flex: 1;
-  min-height: 0;
-  height: 65vh;
-  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
   overflow: hidden;
 }
 
