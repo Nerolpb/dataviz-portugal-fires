@@ -36,8 +36,10 @@ function navigateTo(direction) {
 
 // Molette — saute de section en section, sauf si on est sur la carte (zoom MapLibre)
 mainScroll.addEventListener("wheel", (e) => {
-  const mapEl = document.getElementById("map-eucalyptus");
-  if (mapEl && mapEl.contains(e.target)) return;
+  const mapEucy  = document.getElementById("map-eucalyptus");
+  const mapFires = document.getElementById("map-fires");
+  if (mapEucy  && mapEucy.contains(e.target))  return;
+  if (mapFires && mapFires.contains(e.target)) return;
 
   e.preventDefault();
   navigateTo(e.deltaY > 0 ? "down" : "up");
@@ -268,6 +270,33 @@ const fireMapObserver = new IntersectionObserver(
 );
 
 if (screenFireMap) fireMapObserver.observe(screenFireMap);
+
+// ─────────────────────────────────────────────────────────────
+// Pire incendie — scroll storytelling (4 étapes, position-based)
+// ─────────────────────────────────────────────────────────────
+const worstGroup  = document.getElementById("fire-worst-group");
+const worstSticky = document.querySelector(".fire-worst-sticky");
+
+if (worstGroup && worstSticky) {
+  function updateWorstStep() {
+    const top = worstGroup.getBoundingClientRect().top;
+    const vh  = mainScroll.clientHeight;
+    const scrolledInto = -top; // positif quand on est entré dans le groupe
+
+    let step = 0;
+    if (scrolledInto >= 0)      step = 1;
+    if (scrolledInto >= vh)     step = 2;
+    if (scrolledInto >= vh * 2) step = 3;
+    if (scrolledInto >= vh * 3) step = 4;
+
+    if (worstSticky.dataset.step !== String(step)) {
+      worstSticky.dataset.step = step;
+    }
+  }
+
+  mainScroll.addEventListener("scroll", updateWorstStep, { passive: true });
+  updateWorstStep(); // init
+}
 
 // ─────────────────────────────────────────────────────────────
 // Section noire — révélation par groupe via IntersectionObserver

@@ -54,13 +54,13 @@ export async function drawFireTimeline(containerSelector) {
     .range([0, W])
     .padding(0.12);
 
-  const y = d3.scaleLinear()
-    .domain([0, maxArea * 1.18])
+  const y = d3.scaleSqrt()
+    .domain([0, maxArea * 1.12])
     .range([H, 0]);
 
   // Grille horizontale
   g.selectAll(".grid")
-    .data(y.ticks(5))
+    .data([25000, 75000, 150000, 250000, 350000, 450000])
     .enter().append("line")
     .attr("x1", 0).attr("x2", W)
     .attr("y1", d => y(d)).attr("y2", d => y(d))
@@ -165,8 +165,8 @@ export async function drawFireTimeline(containerSelector) {
   g.append("g")
     .call(
       d3.axisLeft(y)
-        .ticks(5)
-        .tickFormat(d => Math.round(d / 1000) + "k ha")
+        .tickValues([0, 25000, 75000, 150000, 250000, 350000, 450000])
+        .tickFormat(d => d === 0 ? "0" : Math.round(d / 1000) + "k ha")
         .tickSize(5)
     )
     .call(ax => ax.select(".domain").attr("stroke", "rgba(255,255,255,0.2)"))
