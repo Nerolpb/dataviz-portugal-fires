@@ -4,7 +4,6 @@ export function drawConcentrationChart(containerSelector) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
-  // Données triées du plus grand au plus petit
   const data = [
     { country: "Portugal",  code: "pt", percent: 26   },
     { country: "Espagne",   code: "es", percent: 4    },
@@ -16,131 +15,107 @@ export function drawConcentrationChart(containerSelector) {
   const sel = d3.select(containerSelector);
   sel.selectAll("svg").remove();
 
-  // Dimensions
-  const margin = { top: 30, right: 80, bottom: 50, left: 150 };
-  const width  = 750 - margin.left - margin.right;
-  const height = 300 - margin.top  - margin.bottom;
+  const W = 900, H = 290;
+  const maxR    = 90;
+  const bottomY = 205; // toutes les bulles s'alignent par le bas
+  const xPos    = [105, 285, 455, 625, 790];
+
+  const rScale = d3.scaleSqrt()
+    .domain([0, d3.max(data, d => d.percent)])
+    .range([0, maxR]);
 
   const svg = sel
     .append("svg")
-    .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+    .attr("viewBox", `0 0 ${W} ${H}`)
     .attr("preserveAspectRatio", "xMidYMid meet");
 
-  const g = svg.append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+  const defs = svg.append("defs");
 
-  // Échelles
-  const y = d3.scaleBand()
-    .domain(data.map(d => d.country))
-    .range([0, height])
-    .padding(0.35);
+  data.forEach((d, i) => {
+    const r  = rScale(d.percent);
+    const cx = xPos[i];
+    const cy = bottomY - r;
+    const isPortugal = d.country === "Portugal";
 
-  const x = d3.scaleLinear()
-    .domain([0, 30])
-    .range([0, width]);
+    // Pattern avec centrage manuel pour drapeaux 3:2
+    const patternId = `flag-${d.code}`;
+    const flagW = r * 3;          // largeur naturelle (ratio 3:2)
+    const flagH = r * 2;          // hauteur = diamètre du cercle
+    const flagOffsetX = -r * 0.5; // décalage pour centrer horizontalement
 
-  // Axe Y — on le crée mais on cache le texte par défaut
-  const yAxis = g.append("g")
-    .attr("class", "axis axis--y")
-    .call(d3.axisLeft(y).tickSize(0));
+    defs.append("pattern")
+      .attr("id", patternId)
+      .attr("patternUnits", "userSpaceOnUse")
+      .attr("x", cx - r)
+      .attr("y", cy - r)
+      .attr("width",  r * 2)
+      .attr("height", r * 2)
+      .append("image")
+      .attr("href", `/src/assets/flags/${d.code}.png`)
+      .attr("x", flagOffsetX)
+      .attr("y", 0)
+      .attr("width",  flagW)
+      .attr("height", flagH)
+      .attr("preserveAspectRatio", "none");
 
-  yAxis.select(".domain").style("display", "none");
-  yAxis.selectAll(".tick line").style("display", "none");
-  yAxis.selectAll("text").style("display", "none"); // On cache le texte auto
+    const group = svg.append("g").attr("class", "bubble-group");
 
-  // Axe X — masqué
-  const xAxis = g.append("g")
-    .attr("class", "axis axis--x")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(0).tickSize(0));
+    // Cercle rempli avec le pattern drapeau (animé via rayon)
+    group.append("circle")
+      .attr("cx", cx)
+      .attr("cy", cy)
+      .attr("r", 0)
+      .attr("fill", `url(#${patternId})`)
+      .transition()
+      .duration(900)
+      .delay(i * 120)
+      .ease(d3.easeCubicOut)
+      .attr("r", r);
 
-  xAxis.select(".domain").style("display", "none");
-  xAxis.selectAll(".tick line").style("display", "none");
-  xAxis.selectAll("text").style("display", "none");
+    // Bordure du cercle (animée)
+    group.append("circle")
+      .attr("cx", cx)
+      .attr("cy", cy)
+      .attr("r", 0)
+      .attr("fill", "none")
+      .attr("stroke", isPortugal ? "var(--vert-elec)" : "rgba(255,255,255,0.35)")
+      .attr("stroke-width", isPortugal ? 3 : 2)
+      .transition()
+      .duration(900)
+      .delay(i * 120)
+      .ease(d3.easeCubicOut)
+      .attr("r", r);
 
-  // Lignes de repère verticales (grille)
-  const gridTicks = [5, 10, 15, 20, 25];
-  g.selectAll(".grid-line")
-    .data(gridTicks)
-    .enter()
-    .append("line")
-    .attr("class", "grid-line")
-    .attr("x1", d => x(d))
-    .attr("x2", d => x(d))
-    .attr("y1", 0)
-    .attr("y2", height)
-    .attr("stroke", "rgba(255, 255, 255, 0.12)")
-    .attr("stroke-width", 1)
-    .attr("stroke-dasharray", "4 4");
+    // Pourcentage
+    group.append("text")
+      .attr("x", cx)
+      .attr("y", bottomY + 22)
+      .attr("text-anchor", "middle")
+      .attr("fill", isPortugal ? "var(--vert-elec)" : "rgba(255,255,255,0.9)")
+      .attr("font-size", isPortugal ? "17px" : "13px")
+      .attr("font-weight", "700")
+      .attr("font-family", "neue-haas-grotesk-text, sans-serif")
+      .style("opacity", 0)
+      .text(`${d.percent} %`)
+      .transition()
+      .duration(600)
+      .delay(i * 120 + 400)
+      .style("opacity", 1);
 
-  // Labels de repère en bas
-  g.selectAll(".grid-label")
-    .data(gridTicks)
-    .enter()
-    .append("text")
-    .attr("class", "grid-label")
-    .attr("x", d => x(d))
-    .attr("y", height + 20)
-    .attr("text-anchor", "middle")
-    .attr("fill", "rgba(255, 255, 255, 0.45)")
-    .attr("font-size", "11px")
-    .attr("font-family", "neue-haas-grotesk-text, sans-serif")
-    .text(d => `${d}%`);
-
-  // Groupes personnalisés pour chaque barre (drapeau + texte + barre)
-  const bars = g.selectAll(".bar-group")
-    .data(data)
-    .enter()
-    .append("g")
-    .attr("class", "bar-group")
-    .attr("transform", d => `translate(0, ${y(d.country)})`);
-
-  // Drapeaux (via FlagCDN)
-  bars.append("image")
-    .attr("href", d => `https://flagcdn.com/w40/${d.code}.png`)
-    .attr("x", -140)
-    .attr("y", y.bandwidth() / 2 - 8)
-    .attr("width", 24)
-    .attr("height", 16);
-
-  // Noms des pays
-  bars.append("text")
-    .attr("x", -108)
-    .attr("y", y.bandwidth() / 2)
-    .attr("dy", "0.35em")
-    .text(d => d.country)
-    .attr("font-size", "15px")
-    .attr("font-family", "neue-haas-grotesk-text, sans-serif")
-    .attr("font-weight", "500")
-    .attr("fill", "rgba(255, 255, 255, 0.9)");
-
-  // Barres
-  bars.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("height", y.bandwidth())
-    .attr("width", 0)
-    .attr("rx", 6)
-    .attr("ry", 6)
-    .attr("fill", d => d.country === "Portugal" ? "var(--vert-elec)" : "rgba(255,255,255,0.2)")
-    .transition()
-    .duration(1500)
-    .ease(d3.easeCubicOut)
-    .attr("width", d => x(d.percent));
-
-  // Labels de pourcentage (suivent le bout de la barre)
-  bars.append("text")
-    .attr("class", "bar-label")
-    .attr("y", y.bandwidth() / 2)
-    .attr("x", 0)
-    .attr("dy", "0.35em")
-    .attr("fill", "rgba(255, 255, 255, 0.75)")
-    .attr("font-size", "14px")
-    .attr("font-weight", "700")
-    .attr("font-family", "neue-haas-grotesk-text, sans-serif")
-    .text(d => `${d.percent} %`)
-    .transition()
-    .duration(1500)
-    .ease(d3.easeCubicOut)
-    .attr("x", d => x(d.percent) + 10);
+    // Nom du pays
+    group.append("text")
+      .attr("x", cx)
+      .attr("y", bottomY + 42)
+      .attr("text-anchor", "middle")
+      .attr("fill", "rgba(255,255,255,0.5)")
+      .attr("font-size", "12px")
+      .attr("font-weight", "500")
+      .attr("font-family", "neue-haas-grotesk-text, sans-serif")
+      .style("opacity", 0)
+      .text(d.country)
+      .transition()
+      .duration(600)
+      .delay(i * 120 + 400)
+      .style("opacity", 1);
+  });
 }
