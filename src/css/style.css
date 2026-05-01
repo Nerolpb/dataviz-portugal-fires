@@ -694,6 +694,7 @@ body {
 /* Axes D3 */
 .axis--y .domain { stroke: rgba(255, 255, 255, 0.25); }
 .axis--y .tick line { stroke: rgba(255, 255, 255, 0.12); }
+.axis--x .domain { stroke: rgba(255, 255, 255, 0.25); }
 .axis--y .tick text,
 .axis--x .tick text {
   fill: rgba(255, 255, 255, 0.75);
@@ -767,6 +768,28 @@ body {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* ============================================================
+   SECTION BRIDGE — DEUX BLOCS DÉCALÉS
+   ============================================================ */
+.bridge-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  width: 100%;
+  padding: var(--space-l);
+}
+
+.bridge-block--1 {
+  max-width: 560px;
+  align-self: flex-start;
+}
+
+.bridge-block--2 {
+  max-width: 560px;
+  align-self: flex-end;
+  text-align: left;
 }
 
 /* ============================================================
@@ -1104,7 +1127,7 @@ body {
 
 /* ─── Section eucalyptus-feu : fond rouge plein ─── */
 #screen-eucy-fire {
-  background: var(--bg-rouge);
+  background: #0c0c0a;
 }
 
 .eucy-fire-box {
@@ -1374,6 +1397,49 @@ body {
   width: 100%;
   accent-color: var(--bg-rouge);
   cursor: pointer;
+}
+
+/* ============================================================
+   BOUTONS DE NAVIGATION (bas à droite)
+   ============================================================ */
+#dev-nav {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#dev-nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7em;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#btn-restart:hover {
+  background-color: var(--vert-elec);
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+#btn-end:hover {
+  background-color: var(--vert-elec);
+  color: #000000;
+  transform: translateY(2px);
+}
+
+#dev-nav svg {
+  flex-shrink: 0;
 }
 
 /* ============================================================

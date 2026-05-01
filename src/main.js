@@ -63,6 +63,17 @@ function updateProgress() {
 mainScroll.addEventListener("scroll", updateProgress, { passive: true });
 
 // ─────────────────────────────────────────────────────────────
+// Bouton retour au début
+// ─────────────────────────────────────────────────────────────
+document.getElementById("btn-restart").addEventListener("click", () => {
+  mainScroll.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+document.getElementById("btn-end").addEventListener("click", () => {
+  mainScroll.scrollTo({ top: mainScroll.scrollHeight, behavior: "smooth" });
+});
+
+// ─────────────────────────────────────────────────────────────
 // Comparaison Ronaldo/Stade (Section 1)
 // ─────────────────────────────────────────────────────────────
 const comparisonTrigger = document.getElementById("comparison-trigger");
@@ -264,13 +275,24 @@ if (screenFireMap) fireMapObserver.observe(screenFireMap);
 document.querySelectorAll(".black-trigger").forEach(trigger => {
   const obs = new IntersectionObserver(
     (entries) => {
-      if (!entries[0].isIntersecting) return;
-      const group = trigger.dataset.group;
-      document.querySelectorAll(`.fire-reveal[data-group="${group}"]`)
-        .forEach(img => img.classList.add("visible"));
-      obs.unobserve(trigger);
+      const entry  = entries[0];
+      const group  = parseInt(trigger.dataset.group);
+
+      if (entry.isIntersecting) {
+        // Scroll vers le bas : affiche les images du groupe
+        document.querySelectorAll(`.fire-reveal[data-group="${group}"]`)
+          .forEach(img => img.classList.add("visible"));
+      } else if (entry.boundingClientRect.top > 0) {
+        // Trigger repassé en dessous du viewport : l'utilisateur est remonté
+        // On retire les images de ce groupe et de tous les groupes suivants
+        document.querySelectorAll(".fire-reveal[data-group]").forEach(img => {
+          if (parseInt(img.dataset.group) >= group) {
+            img.classList.remove("visible");
+          }
+        });
+      }
     },
-    { root: mainScroll, threshold: 0.1 }
+    { root: mainScroll, threshold: 0 }
   );
   obs.observe(trigger);
 });
