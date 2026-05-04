@@ -1476,7 +1476,7 @@ body {
 .fw-title {
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateY(14px);
+  transform: translate(-50%, calc(-50% + 14px));
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 800;
