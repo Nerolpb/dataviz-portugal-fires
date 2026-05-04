@@ -23,8 +23,8 @@ Pour prouver ce lien, nous utilisons des données publiques qui proviennent d'in
   * 🇵🇹 Portugal : [ICNF](https://geocatalogo.icnf.pt/catalogo_tema3.html)
   * 🇪🇸 Espagne : [MITECO — Inventario Forestal Nacional](https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html)
   * 🇧🇷 Brésil : [IBÁ — Indústria Brasileira de Árvores](https://iba.org)
-  * 🌍 Données comparatives générales : [FAO — Forest Resources Assessment](https://www.fao.org/forest-resources-assessment/en/)
   * 🇦🇺 Australie : [ABARES — Australian Bureau of Agricultural and Resource Economics](https://www.agriculture.gov.au/abares/research-topics/forests)
+  * Données comparatives générales : [FAO — Forest Resources Assessment](https://www.fao.org/forest-resources-assessment/en/)
 * **Maplibre :** Pour les cartes interactives.
 
 **Quels sont les biais ou les problèmes rencontrés ?**
