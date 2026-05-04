@@ -1170,7 +1170,7 @@ body {
 .landing-bg {
   position: absolute;
   inset: 0;
-  background: url('/src/assets/background1.png') center/cover no-repeat;
+  background: #00E676;
   animation: landing-drift 30s ease-in-out infinite alternate;
   will-change: transform;
 }
@@ -1181,11 +1181,7 @@ body {
 }
 
 .landing-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.82) 100%),
-    linear-gradient(140deg, rgba(0,40,12,0.55) 0%, transparent 55%);
+  display: none;
 }
 
 .landing-content {
@@ -1202,13 +1198,15 @@ body {
 }
 
 .landing-eyebrow {
+  position: absolute;
+  top: var(--space-m);
+  left: var(--space-m);
+  z-index: 3;
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
-  color: var(--vert-elec);
-  margin-bottom: 1.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #000;
+  margin: 0;
 }
 
 .landing-title {
@@ -1220,7 +1218,7 @@ body {
   font-weight: 900;
   letter-spacing: -0.025em;
   line-height: 0.82;
-  color: var(--blanc);
+  color: #000;
   margin: 0;
 }
 
@@ -1249,10 +1247,11 @@ body {
 .landing-desc {
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   line-height: 1.75;
-  color: rgba(255,255,255,0.6);
+  color: rgba(0,0,0,0.6);
   max-width: 440px;
   font-weight: 400;
   margin: 0;
+  margin-top: 2rem;
 }
 
 .landing-scroll-cta {
@@ -1261,12 +1260,10 @@ body {
   align-items: center;
   gap: 10px;
   margin-top: 2.4rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(0,0,0,0.45);
   font-family: var(--font-ui);
   font-size: 0.65rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
   background: none;
   border: none;
   cursor: pointer;
@@ -1275,7 +1272,7 @@ body {
 }
 
 .landing-scroll-cta:hover {
-  color: var(--vert-elec);
+  color: #000;
 }
 
 .landing-arrow-icon {
