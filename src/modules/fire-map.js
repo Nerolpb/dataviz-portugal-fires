@@ -228,7 +228,7 @@ export async function initFireMap(containerId) {
     // ── Logique du Slider (Manuel uniquement) ──
     const slider = document.getElementById("timeline-slider");
     const yearDisplay = document.getElementById("timeline-year-display");
-    
+
     if (slider && yearDisplay) {
       slider.addEventListener("input", (e) => {
         const year = parseInt(e.target.value);

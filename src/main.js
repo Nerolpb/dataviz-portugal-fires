@@ -232,6 +232,12 @@ const mapObserver = new IntersectionObserver(
 
 if (mapTrigger) mapObserver.observe(mapTrigger);
 
+document.getElementById("btn-map-next")?.addEventListener("click", () => {
+  const next = document.getElementById("section-bridge");
+  if (!next) return;
+  const top = next.getBoundingClientRect().top + mainScroll.scrollTop;
+  mainScroll.scrollTo({ top, behavior: "smooth" });
+});
 
 // ─────────────────────────────────────────────────────────────
 // Graphique historique des incendies
@@ -251,6 +257,23 @@ const fireChartObserver = new IntersectionObserver(
 );
 
 if (screenFireChart) fireChartObserver.observe(screenFireChart);
+
+// Copie du graphique (screen-fire-chart-2)
+let fireChartDrawn2    = false;
+const screenFireChart2 = document.getElementById("screen-fire-chart-2");
+
+const fireChartObserver2 = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !fireChartDrawn2) {
+      fireChartDrawn2 = true;
+      drawFireTimeline("#chart-fires-2");
+      fireChartObserver2.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.2 }
+);
+
+if (screenFireChart2) fireChartObserver2.observe(screenFireChart2);
 
 // ─────────────────────────────────────────────────────────────
 // Carte heatmap des incendies

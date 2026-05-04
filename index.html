@@ -255,28 +255,30 @@
                   au Portugal
                 </h2>
               </div>
-              <div class="map-chart-wrapper">
-                <div class="map-controls-hint">
-                  <div class="map-hint-item">
-                    <span class="map-hint-key">Molette</span>
-                    <span class="map-hint-desc">Zoomer / Dézoomer</span>
-                  </div>
-                  <div class="map-hint-item">
-                    <span class="map-hint-key">Clic + Drag</span>
-                    <span class="map-hint-desc">Déplacer</span>
-                  </div>
-                  <div class="map-hint-item">
-                    <span class="map-hint-key">Ctrl + Drag</span>
-                    <span class="map-hint-desc">Incliner la perspective</span>
-                  </div>
+              <div class="map-controls-hint">
+                <div class="map-hint-item">
+                  <span class="map-hint-key">Molette</span>
+                  <span class="map-hint-desc">Zoomer / Dézoomer</span>
                 </div>
-                <div class="map-inner-container">
-                  <div id="map-eucalyptus"></div>
-                  <div class="source-credit">
-                    <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF - Instituto da Conservação da Natureza et des Florestas</a>
-                  </div>
+                <div class="map-hint-item">
+                  <span class="map-hint-key">Clic + Drag</span>
+                  <span class="map-hint-desc">Déplacer</span>
+                </div>
+                <div class="map-hint-item">
+                  <span class="map-hint-key">Ctrl + Drag</span>
+                  <span class="map-hint-desc">Incliner la perspective</span>
                 </div>
               </div>
+              <div class="map-fullscreen">
+                <div id="map-eucalyptus"></div>
+                <div class="source-credit">
+                  <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF - Instituto da Conservação da Natureza et des Florestas</a>
+                </div>
+              </div>
+              <button class="map-next-btn" id="btn-map-next">
+                La suite
+                <svg class="map-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
             </div>
             <div id="map-trigger" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px;"></div>
           </section>
@@ -380,8 +382,18 @@
             </div>
           </section>
 
+          <!-- ====== COPIE SECTION 6 — Historique des incendies ====== -->
+          <section class="hero-part" id="screen-fire-chart-2" style="background: #0c0c0a;">
+            <div class="screen__content--fire">
+              <div class="title-box title-box--fire fade-up" data-delay="100" style="padding: var(--space-s) var(--space-m); max-width: fit-content; margin-bottom: var(--space-m); text-align: left;">
+                <h2 style="font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 800; color: var(--blanc); margin: 0;">50 ans d'incendies au Portugal</h2>
+              </div>
+              <div id="chart-fires-2" class="fade-up" data-delay="300"></div>
+            </div>
+          </section>
+
           <!-- ====== EUCALYPTUS & FEU — Pourquoi tant d'incendies ====== -->
-          <section class="hero-part" id="screen-eucy-fire">
+          <section class="hero-part" id="screen-eucy-fire" style="background: #0c0c0a;">
             <div style="display: flex; flex-direction: column; gap: var(--space-m); max-width: 600px; text-align: left;">
               <h2 class="title-standalone fade-up" style="color: var(--blanc); font-size: clamp(2rem, 4vw, 3.5rem);" data-delay="100">Le probléme est l'eucalyptus</h2>
               <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="250">
@@ -471,62 +483,85 @@
         </div>
       </section>
 
-      <!-- ====== SECTION 6 — Historique des incendies ====== -->
-      <section class="snap-section" id="screen-fire-chart">
-        <div class="screen__content--fire">
-          <div class="title-box title-box--fire fade-up" data-delay="100" style="padding: var(--space-s) var(--space-m); max-width: fit-content; margin-bottom: var(--space-m); text-align: left;">
-            <h2 style="font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 800; color: var(--blanc); margin: 0;">50 ans d'incendies au Portugal</h2>
-          </div>
-          <div id="chart-fires" class="fade-up" data-delay="300"></div>
-        </div>
-      </section>
+      <!-- ====== GROUPE HERO — Sections feu (5B, 6, 8) ====== -->
+      <div id="fire-hero-group" class="hero-group">
+        <div id="fire-hero-bg" class="hero-bg-sticky"></div>
+        <div class="hero-seam-blur"></div>
+        <div class="hero-content">
 
-      <!-- ====== SECTION 8 — Carte des incendies ====== -->
-      <section class="snap-section" id="screen-fire-map">
-        <div class="fire-map-layout">
+          <!-- ====== SECTION 5A — Transition eucalyptus → feu ====== -->
+          <section class="snap-section" id="screen-fire-transition">
+            <div class="title-box title-box--fire fade-up" style="max-width: 680px;">
+              <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800; color: var(--blanc); margin: 0; line-height: 1.2;">Depuis les plantations massives d'Eucalyptus</h2>
+            </div>
+          </section>
 
-          <!-- Header : titre + légende -->
-          <div class="fire-map-header fade-up" data-delay="100">
-            <p class="fire-map-header__title">
-              Chaque point de chaleur est une cicatrice<br>laissée par les flammes depuis 1975.
-            </p>
-            <div class="fire-map-legend">
-              <div class="fire-map-legend__item">
-                <span class="fire-map-legend__dot"></span>
-                <span class="fire-map-legend__label">Foyer d'incendie</span>
+          <!-- ====== SECTION 5B — Accroche incendies ====== -->
+          <section class="snap-section" id="screen-fire-intro">
+            <div class="title-box title-box--fire fade-up" style="max-width: 680px;">
+              <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800; color: var(--blanc); margin: 0; line-height: 1.2;">Le Portugal connaît les incendies les plus dévastateurs de son histoire.</h2>
+            </div>
+          </section>
+
+          <!-- ====== SECTION 6 — Historique des incendies ====== -->
+          <section class="snap-section" id="screen-fire-chart">
+            <div class="screen__content--fire">
+              <div class="title-box title-box--fire fade-up" data-delay="100" style="padding: var(--space-s) var(--space-m); max-width: fit-content; margin-bottom: var(--space-m); text-align: left;">
+                <h2 style="font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 800; color: var(--blanc); margin: 0;">50 ans d'incendies au Portugal</h2>
               </div>
-              <div class="fire-map-legend__item">
-                <span class="fire-map-legend__gradient"></span>
-                <div class="fire-map-legend__gradient-labels">
-                  <span>Faible</span>
-                  <span>Intensité</span>
-                  <span>Élevée</span>
+              <div id="chart-fires" class="fade-up" data-delay="300"></div>
+            </div>
+          </section>
+
+          <!-- ====== SECTION 8 — Carte des incendies ====== -->
+          <section class="snap-section" id="screen-fire-map">
+            <div class="fire-map-layout">
+
+              <!-- Header : titre + légende -->
+              <div class="fire-map-header fade-up" data-delay="100">
+                <p class="fire-map-header__title">
+                  Chaque point de chaleur est une cicatrice<br>laissée par les flammes depuis 1975.
+                </p>
+                <div class="fire-map-legend">
+                  <div class="fire-map-legend__item">
+                    <span class="fire-map-legend__dot"></span>
+                    <span class="fire-map-legend__label">Foyer d'incendie</span>
+                  </div>
+                  <div class="fire-map-legend__item">
+                    <span class="fire-map-legend__gradient"></span>
+                    <div class="fire-map-legend__gradient-labels">
+                      <span>Faible</span>
+                      <span>Intensité</span>
+                      <span>Élevée</span>
+                    </div>
+                  </div>
+                  <div class="fire-map-legend__sep"></div>
+                  <div class="fire-map-legend__item fire-map-legend__item--hint">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="10" cy="7" r="3"/><path d="M10 10v7"/><path d="M7 14l3 3 3-3"/></svg>
+                    <span>Molette · zoom</span>
+                  </div>
+                  <div class="fire-map-legend__item fire-map-legend__item--hint">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 8l4-4 4 4M8 4v12M12 12l4 4-4 4"/></svg>
+                    <span>Glisser · déplacer</span>
+                  </div>
                 </div>
               </div>
-              <div class="fire-map-legend__sep"></div>
-              <div class="fire-map-legend__item fire-map-legend__item--hint">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="10" cy="7" r="3"/><path d="M10 10v7"/><path d="M7 14l3 3 3-3"/></svg>
-                <span>Molette · zoom</span>
-              </div>
-              <div class="fire-map-legend__item fire-map-legend__item--hint">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 8l4-4 4 4M8 4v12M12 12l4 4-4 4"/></svg>
-                <span>Glisser · déplacer</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- Carte -->
-          <div id="map-fires" class="fade-up fire-map-canvas" data-delay="250" style="position: relative;">
-            <div class="map-timeline-control">
-              <div class="timeline-header" style="justify-content: center;">
-                <div id="timeline-year-display">1975</div>
+              <!-- Carte -->
+              <div id="map-fires" class="fade-up fire-map-canvas" data-delay="250" style="position: relative;">
+                <div class="map-timeline-control">
+                  <div class="timeline-header" style="justify-content: center;">
+                    <div id="timeline-year-display">1975</div>
+                  </div>
+                  <input type="range" id="timeline-slider" min="1975" max="2024" value="1975" step="1">
+                </div>
               </div>
-              <input type="range" id="timeline-slider" min="1975" max="2024" value="1975" step="1">
+
             </div>
-          </div>
+          </section>
 
         </div>
-      </section>
+      </div>
 
     </main>
 
