@@ -2045,6 +2045,224 @@ body {
 }
 
 /* ============================================================
+   HISTOIRE 2017 — Scroll storytelling (5 étapes)
+   ============================================================ */
+
+#story-2017-group {
+  position: relative;
+  background: #0c0c0a;
+}
+
+.s17-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.s17-scroll {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+}
+
+/* ── Panneaux : tous cachés par défaut ── */
+.s17-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-l);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ── Panneau actif selon data-step ── */
+.s17-sticky[data-step="1"] .s17-panel--1,
+.s17-sticky[data-step="2"] .s17-panel--2,
+.s17-sticky[data-step="3"] .s17-panel--3,
+.s17-sticky[data-step="4"] .s17-panel--4 {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ── Eyebrow ── */
+.s17-eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--orange-feu);
+  margin-bottom: var(--space-m);
+}
+
+/* ── Titre date (étapes 1 & 4) ── */
+.s17-date-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 9vw, 7.5rem);
+  font-weight: 900;
+  color: var(--blanc);
+  line-height: 1.05;
+  margin-bottom: var(--space-m);
+}
+
+/* ── Corps narratif ── */
+.s17-body {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+/* ── Rangée de stats (étape 3) ── */
+.s17-stats-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+
+.s17-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.s17-stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 11vw, 8.5rem);
+  font-weight: 900;
+  color: var(--orange-feu);
+  line-height: 0.85;
+}
+
+.s17-stat-unit {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.s17-stat-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.4;
+}
+
+.s17-stat-sep {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.15);
+  font-weight: 300;
+  line-height: 1;
+  align-self: center;
+}
+
+/* ── Grand chiffre 500 (étape 5) ── */
+.s17-big-num {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  margin-bottom: var(--space-m);
+}
+
+.s17-big-num__value {
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 20vw, 16rem);
+  font-weight: 900;
+  color: var(--blanc);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+
+.s17-big-num__label {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.25;
+  text-align: left;
+}
+
+/* ── Section résumé 2017 (statique) ── */
+#screen-resume-2017 {
+  background: #0c0c0a;
+}
+
+.resume-2017-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-l);
+  height: 100%;
+  padding: var(--space-l);
+  text-align: center;
+}
+
+.resume-2017-eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.resume-2017-stats {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--space-m), 6vw, var(--space-l));
+}
+
+.resume-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.resume-stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 900;
+  color: var(--blanc);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.resume-stat__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.resume-stat-sep {
+  width: 1px;
+  height: clamp(3rem, 8vw, 5rem);
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 700px) {

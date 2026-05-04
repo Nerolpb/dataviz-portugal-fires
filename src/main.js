@@ -272,30 +272,30 @@ const fireMapObserver = new IntersectionObserver(
 if (screenFireMap) fireMapObserver.observe(screenFireMap);
 
 // ─────────────────────────────────────────────────────────────
-// Pire incendie — scroll storytelling (4 étapes, position-based)
+// Histoire 2017 — scroll storytelling (4 étapes, position-based)
 // ─────────────────────────────────────────────────────────────
-const worstGroup  = document.getElementById("fire-worst-group");
-const worstSticky = document.querySelector(".fire-worst-sticky");
+const story2017Group  = document.getElementById("story-2017-group");
+const story2017Sticky = document.querySelector(".s17-sticky");
 
-if (worstGroup && worstSticky) {
-  function updateWorstStep() {
-    const top = worstGroup.getBoundingClientRect().top;
+if (story2017Group && story2017Sticky) {
+  function updateStory2017Step() {
+    const top = story2017Group.getBoundingClientRect().top;
     const vh  = mainScroll.clientHeight;
-    const scrolledInto = -top; // positif quand on est entré dans le groupe
+    const scrolledInto = -top;
 
     let step = 0;
-    if (scrolledInto >= 0)      step = 1;
-    if (scrolledInto >= vh)     step = 2;
-    if (scrolledInto >= vh * 2) step = 3;
-    if (scrolledInto >= vh * 3) step = 4;
+    if (scrolledInto >= 0)        step = 1;
+    if (scrolledInto >= vh)       step = 2;
+    if (scrolledInto >= vh * 2)   step = 3;
+    if (scrolledInto >= vh * 3)   step = 4;
 
-    if (worstSticky.dataset.step !== String(step)) {
-      worstSticky.dataset.step = step;
+    if (story2017Sticky.dataset.step !== String(step)) {
+      story2017Sticky.dataset.step = step;
     }
   }
 
-  mainScroll.addEventListener("scroll", updateWorstStep, { passive: true });
-  updateWorstStep(); // init
+  mainScroll.addEventListener("scroll", updateStory2017Step, { passive: true });
+  updateStory2017Step();
 }
 
 // ─────────────────────────────────────────────────────────────
