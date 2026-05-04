@@ -18,8 +18,14 @@ Nous voulons raconter l'histoire d'un désastre créé par l'homme. Notre object
 **D'où viennent les données ?** 
 Pour prouver ce lien, nous utilisons des données publiques qui proviennent d'institutions officielles :
 
-* **Incendies (Historique) et Eucalyptus :** Les données viennent de l'ICNF (Institut pour la Conservation de la Nature et des Forêts).
-* **Maplibre :** Pour les cartes intéractive.
+* **Incendies (Historique) et Eucalyptus :** Les données viennent de l'[ICNF (Institut pour la Conservation de la Nature et des Forêts)](https://geocatalogo.icnf.pt/catalogo_tema3.html).
+* **Concentration mondiale d'eucalyptus (graphique top 5 pays) :** Les pourcentages de surface d'eucalyptus par rapport à la superficie forestière totale ont été collectés manuellement depuis plusieurs sources officielles :
+  * 🇵🇹 Portugal : [ICNF](https://geocatalogo.icnf.pt/catalogo_tema3.html)
+  * 🇪🇸 Espagne : [MITECO — Inventario Forestal Nacional](https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html)
+  * 🇧🇷 Brésil : [IBÁ — Indústria Brasileira de Árvores](https://iba.org)
+  * 🌍 Données comparatives générales : [FAO — Forest Resources Assessment](https://www.fao.org/forest-resources-assessment/en/)
+  * 🇦🇺 Australie : [ABARES — Australian Bureau of Agricultural and Resource Economics](https://www.agriculture.gov.au/abares/research-topics/forests)
+* **Maplibre :** Pour les cartes interactives.
 
 **Quels sont les biais ou les problèmes rencontrés ?**
 Nous avons eu des problèmes de dates : les données sur les feux sont complètes et vont de 1975 à 2024, mais les recensements sur les eucalyptus n'ont été faits que pour certaines années (1995, 2005, 2010, 2015). À cause de cela, nous ne pouvons pas proposer un curseur "année par année" totalement libre à l'utilisateur.

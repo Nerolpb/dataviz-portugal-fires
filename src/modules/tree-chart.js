@@ -23,14 +23,13 @@ export function drawTreeChart(containerSelector) {
     }
   };
 
-  // Nettoyage au cas où la fonction est appelée plusieurs fois
   const svgSelection = d3.select(containerSelector);
   svgSelection.selectAll("svg").remove();
 
-  // Configuration des dimensions (on utilise viewBox pour que ce soit responsive)
-  const margin = { top: 100, right: 30, bottom: 40, left: 60 };
-  const width = 800 - margin.left - margin.right;
-  const height = 450 - margin.top - margin.bottom;
+  const depth3d = 18;
+  const margin = { top: 100, right: 30 + depth3d, bottom: 40, left: 60 };
+  const width  = 800 - margin.left - margin.right;
+  const height = 450 - margin.top  - margin.bottom;
 
   const svg = svgSelection
     .append("svg")
@@ -39,7 +38,6 @@ export function drawTreeChart(containerSelector) {
 
   const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-  // Échelles
   const x = d3.scaleBand()
     .domain(dataArbres.map(d => d.arbre))
     .range([0, width])
@@ -63,17 +61,12 @@ export function drawTreeChart(containerSelector) {
   // Axe Y
   g.append("g")
     .attr("class", "axis axis--y")
-    .call(
-      d3.axisLeft(y)
-        .ticks(6)
-        .tickFormat(d => d / 1000 + "k")
-    )
+    .call(d3.axisLeft(y).ticks(6).tickFormat(d => d / 1000 + "k"))
     .selectAll("text")
     .attr("fill", "rgba(255,255,255,0.75)")
     .attr("font-size", "14px")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif");
 
-  // Groupes pour chaque arbre
   const trees = g.selectAll(".tree-group")
     .data(dataArbres)
     .enter()
@@ -81,27 +74,53 @@ export function drawTreeChart(containerSelector) {
     .attr("class", "tree-group")
     .attr("transform", d => `translate(${x(d.arbre)}, 0)`);
 
-  const bw = x.bandwidth();
+  const bw      = x.bandwidth();
   const imgSize = Math.min(bw * 1.2, 70);
 
-  // Dessin de la barre
+  const getFrontColor = d => d.arbre === "Eucalyptus" ? "var(--vert-elec)"  : "rgba(255,255,255,0.22)";
+  const getTopColor   = d => d.arbre === "Eucalyptus" ? "#7fffc4"           : "rgba(255,255,255,0.38)";
+  const getSideColor  = d => d.arbre === "Eucalyptus" ? "#00a152"           : "rgba(255,255,255,0.10)";
+
+  // Face latérale droite (dessinée en premier, reste derrière la face avant)
+  trees.append("polygon")
+    .attr("points", `${bw},${height} ${bw+depth3d},${height-depth3d} ${bw+depth3d},${height-depth3d} ${bw},${height}`)
+    .attr("fill", getSideColor)
+    .transition().duration(1200).ease(d3.easeCubicOut)
+    .attrTween("points", d => {
+      const endY = y(d.total);
+      return t => {
+        const cy = height + (endY - height) * t;
+        return `${bw},${cy} ${bw+depth3d},${cy-depth3d} ${bw+depth3d},${height-depth3d} ${bw},${height}`;
+      };
+    });
+
+  // Face avant
   trees.append("rect")
     .attr("x", 0)
     .attr("y", height)
     .attr("width", bw)
     .attr("height", 0)
-    .attr("fill", d => d.arbre === "Eucalyptus" ? "var(--vert-elec)" : "rgba(255,255,255,0.2)")
-    .attr("rx", 6)
-    .attr("ry", 6)
-    .transition()
-    .duration(1200)
-    .ease(d3.easeCubicOut)
+    .attr("fill", getFrontColor)
+    .transition().duration(1200).ease(d3.easeCubicOut)
     .attr("y", d => y(d.total))
     .attr("height", d => height - y(d.total));
 
-  // Ajout de l'image via foreignObject pour permettre un contrôle CSS précis (object-fit, transform)
+  // Face du dessus
+  trees.append("polygon")
+    .attr("points", `0,${height} ${depth3d},${height-depth3d} ${bw+depth3d},${height-depth3d} ${bw},${height}`)
+    .attr("fill", getTopColor)
+    .transition().duration(1200).ease(d3.easeCubicOut)
+    .attrTween("points", d => {
+      const endY = y(d.total);
+      return t => {
+        const cy = height + (endY - height) * t;
+        return `0,${cy} ${depth3d},${cy-depth3d} ${bw+depth3d},${cy-depth3d} ${bw},${cy}`;
+      };
+    });
+
+  // Image au-dessus de la barre
   const fo = trees.append("foreignObject")
-    .attr("x", (bw - imgSize) / 2)
+    .attr("x", (bw + depth3d - imgSize) / 2)
     .attr("y", height)
     .attr("width", imgSize)
     .attr("height", imgSize)
@@ -112,7 +131,7 @@ export function drawTreeChart(containerSelector) {
     .style("height", "100%")
     .style("border-radius", "50%")
     .style("overflow", "hidden")
-    .style("-webkit-transform", "translateZ(0)"); // Hack Safari pour le border-radius
+    .style("-webkit-transform", "translateZ(0)");
 
   imgContainer.append("xhtml:img")
     .attr("src", d => `src/assets/${getImageFile(d.arbre)}`)
@@ -120,55 +139,43 @@ export function drawTreeChart(containerSelector) {
     .style("height", "100%")
     .style("object-fit", "cover")
     .style("object-position", d => {
-        // Le chêne-liège est centré par défaut, on le décale seulement au survol
-        if (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") return "center 10%"; // Descend l'image
-        return "center center";
+      if (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") return "center 10%";
+      return "center center";
     })
     .style("transform", d => (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") ? "scale(1.4)" : "scale(1)")
     .style("transition", "transform 0.4s ease, opacity 0.3s ease, object-position 0.4s ease")
     .style("cursor", "crosshair")
     .on("mouseover", function(event, d) {
-      const overlay = document.getElementById("tree-image-overlay");
+      const overlay  = document.getElementById("tree-image-overlay");
       const largeImg = document.getElementById("tree-image-large");
       if (overlay && largeImg) {
         largeImg.src = `src/assets/${getImageFile(d.arbre)}`;
         overlay.classList.add("is-visible");
       }
-      
       const el = d3.select(this);
       el.style("opacity", 0.7)
-        .style("transform", (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") ? "scale(1)" : "scale(1.1)"); // Dezoom pour Euca/Pin
-        
-      if (d.arbre === "Chêne-liège") {
-        el.style("object-position", "100% center"); // Décale l'image vers la gauche au survol
-      }
+        .style("transform", (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") ? "scale(1)" : "scale(1.1)");
+      if (d.arbre === "Chêne-liège") el.style("object-position", "100% center");
     })
     .on("mouseout", function(event, d) {
       const overlay = document.getElementById("tree-image-overlay");
-      if (overlay) {
-        overlay.classList.remove("is-visible");
-      }
-      
+      if (overlay) overlay.classList.remove("is-visible");
       const el = d3.select(this);
       el.style("opacity", 1)
-        .style("transform", (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") ? "scale(1.4)" : "scale(1)"); // Retour au zoom initial
-        
-      if (d.arbre === "Chêne-liège") {
-        el.style("object-position", "center center"); // Retour au centre
-      }
+        .style("transform", (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") ? "scale(1.4)" : "scale(1)");
+      if (d.arbre === "Chêne-liège") el.style("object-position", "center center");
     });
 
-  // Animation d'apparition
   fo.transition()
     .duration(1200)
     .ease(d3.easeCubicOut)
     .style("opacity", 1)
     .attr("y", d => y(d.total) - imgSize - 10);
 
-  // Ajout du texte (total)
+  // Valeur numérique
   trees.append("text")
     .attr("class", d => d.arbre === "Eucalyptus" ? "tree-label label-euca" : "tree-label")
-    .attr("x", bw / 2)
+    .attr("x", (bw + depth3d) / 2)
     .attr("y", height)
     .attr("text-anchor", "middle")
     .attr("fill", "#ffffff")
