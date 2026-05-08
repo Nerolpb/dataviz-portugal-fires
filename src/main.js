@@ -4,6 +4,7 @@ import { drawConcentrationChart }  from "./modules/chart-concentration.js";
 import { initParisComparison }     from "./modules/comparison-paris.js";
 import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
 import { drawFireTimeline }  from "./modules/fire-chart.js";
+import { drawPeriodComparison } from "./modules/comparison-periods.js";
 import { initFireMap, updateFireYear } from "./modules/fire-map.js";
 
 const mainScroll = document.getElementById("main-scroll");
@@ -274,6 +275,23 @@ const fireChartObserver2 = new IntersectionObserver(
 );
 
 if (screenFireChart2) fireChartObserver2.observe(screenFireChart2);
+
+// Graphique comparaison périodes
+let periodsDrawn = false;
+const screenObservation = document.getElementById("screen-fire-observation");
+
+const periodsObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !periodsDrawn) {
+      periodsDrawn = true;
+      drawPeriodComparison("#chart-periods");
+      periodsObserver.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.2 }
+);
+
+if (screenObservation) periodsObserver.observe(screenObservation);
 
 // ─────────────────────────────────────────────────────────────
 // Carte heatmap des incendies
