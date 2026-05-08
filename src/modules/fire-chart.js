@@ -1,9 +1,9 @@
 import * as d3 from "d3";
 
-let drawn = false;
+const drawnContainers = new Set();
 
 export async function drawFireTimeline(containerSelector) {
-  if (drawn) return;
+  if (drawnContainers.has(containerSelector)) return;
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
@@ -166,7 +166,7 @@ export async function drawFireTimeline(containerSelector) {
     .call(
       d3.axisLeft(y)
         .tickValues([0, 25000, 75000, 150000, 250000, 350000, 450000])
-        .tickFormat(d => d === 0 ? "0" : Math.round(d / 1000) + "k ha")
+        .tickFormat(d => d === 0 ? "0" : Math.round(d / 1000) + "k")
         .tickSize(5)
     )
     .call(ax => ax.select(".domain").attr("stroke", "rgba(255,255,255,0.2)"))
@@ -175,6 +175,17 @@ export async function drawFireTimeline(containerSelector) {
     .attr("fill", "rgba(255,255,255,0.6)")
     .attr("font-size", "12px")
     .attr("font-family", "neue-haas-grotesk-text, sans-serif");
+
+  // Label axe Y
+  g.append("text")
+    .attr("x", -8)
+    .attr("y", -10)
+    .attr("text-anchor", "end")
+    .attr("fill", "rgba(255,255,255,0.45)")
+    .attr("font-size", "11px")
+    .attr("font-family", "neue-haas-grotesk-text, sans-serif")
+    .attr("letter-spacing", "0.08em")
+    .text("hectares");
 
   // Annotation 2017
   const d2017 = data.find(d => d.year === 2017);
@@ -197,5 +208,5 @@ export async function drawFireTimeline(containerSelector) {
       .text("▲ 2017 — " + Math.round(d2017.area / 1000) + "k ha");
   }
 
-  drawn = true;
+  drawnContainers.add(containerSelector);
 }

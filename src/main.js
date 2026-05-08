@@ -4,6 +4,7 @@ import { drawConcentrationChart }  from "./modules/chart-concentration.js";
 import { initParisComparison }     from "./modules/comparison-paris.js";
 import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
 import { drawFireTimeline }  from "./modules/fire-chart.js";
+import { drawPeriodComparison } from "./modules/comparison-periods.js";
 import { initFireMap, updateFireYear } from "./modules/fire-map.js";
 
 const mainScroll = document.getElementById("main-scroll");
@@ -232,6 +233,12 @@ const mapObserver = new IntersectionObserver(
 
 if (mapTrigger) mapObserver.observe(mapTrigger);
 
+document.getElementById("btn-map-next")?.addEventListener("click", () => {
+  const next = document.getElementById("section-bridge");
+  if (!next) return;
+  const top = next.getBoundingClientRect().top + mainScroll.scrollTop;
+  mainScroll.scrollTo({ top, behavior: "smooth" });
+});
 
 // ─────────────────────────────────────────────────────────────
 // Graphique historique des incendies
@@ -251,6 +258,40 @@ const fireChartObserver = new IntersectionObserver(
 );
 
 if (screenFireChart) fireChartObserver.observe(screenFireChart);
+
+// Copie du graphique (screen-fire-chart-2)
+let fireChartDrawn2    = false;
+const screenFireChart2 = document.getElementById("screen-fire-chart-2");
+
+const fireChartObserver2 = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !fireChartDrawn2) {
+      fireChartDrawn2 = true;
+      drawFireTimeline("#chart-fires-2");
+      fireChartObserver2.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.2 }
+);
+
+if (screenFireChart2) fireChartObserver2.observe(screenFireChart2);
+
+// Graphique comparaison périodes
+let periodsDrawn = false;
+const screenObservation = document.getElementById("screen-fire-observation");
+
+const periodsObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !periodsDrawn) {
+      periodsDrawn = true;
+      drawPeriodComparison("#chart-periods");
+      periodsObserver.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.2 }
+);
+
+if (screenObservation) periodsObserver.observe(screenObservation);
 
 // ─────────────────────────────────────────────────────────────
 // Carte heatmap des incendies
