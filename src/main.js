@@ -240,6 +240,10 @@ document.getElementById("btn-map-next")?.addEventListener("click", () => {
   mainScroll.scrollTo({ top, behavior: "smooth" });
 });
 
+document.getElementById("btn-fire-map-next")?.addEventListener("click", () => {
+  mainScroll.scrollTo({ top: 0, behavior: "smooth" });
+});
+
 // ─────────────────────────────────────────────────────────────
 // Graphique historique des incendies
 // ─────────────────────────────────────────────────────────────

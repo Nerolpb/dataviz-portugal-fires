@@ -67,29 +67,32 @@ export async function initFireMap(containerId) {
       const coords = point.geometry.coordinates;
       const year = point.properties.Ano;
       const area = point.properties.AreaHaSIG || 0;
-      
+
       const gx = Math.floor(coords[0] / cellSize);
       const gy = Math.floor(coords[1] / cellSize);
       const key = `${year}-${gx}-${gy}`;
-      
+
       if (!yearGrid.has(key)) {
-        yearGrid.set(key, { year, area: 0, gx, gy });
+        yearGrid.set(key, { year, area: 0, count: 0, gx, gy });
       }
       const cell = yearGrid.get(key);
       cell.area += area;
+      cell.count++;
       if (cell.area > maxArea) maxArea = cell.area;
     }
 
+    const maxLogArea = Math.log10(maxArea + 1);
+
     const gridFeatures = [];
     yearGrid.forEach(cell => {
-      if (cell.area <= 0) return; // Ne pas afficher les statistiques de 0 ha
-      
+      if (cell.area <= 0) return;
+
       const minLng = cell.gx * cellSize;
       const minLat = cell.gy * cellSize;
       const pad = cellSize * 0.1;
       const maxLng = minLng + cellSize - pad;
       const maxLat = minLat + cellSize - pad;
-      
+
       gridFeatures.push({
         type: "Feature",
         id: Math.abs(cell.year * 1000000 + cell.gx * 1000 + cell.gy),
@@ -97,6 +100,7 @@ export async function initFireMap(containerId) {
           id: Math.abs(cell.year * 1000000 + cell.gx * 1000 + cell.gy),
           year: cell.year,
           area: Math.round(cell.area),
+          logArea: Math.log10(cell.area + 1),
           centerLng: minLng + (cellSize / 2),
           centerLat: minLat + (cellSize / 2)
         },
@@ -161,24 +165,24 @@ export async function initFireMap(containerId) {
       id: "fire-3d-bars",
       type: "fill-extrusion",
       source: "fire-grid",
-      filter: ["==", ["get", "year"], 1975], // Filtre initial
+      filter: ["==", ["get", "year"], 1975],
       paint: {
         "fill-extrusion-color": [
           "case",
           ["boolean", ["feature-state", "hover"], false],
-          "#FFFFFF", // Éclaircissement au survol
+          "#FFFFFF",
           [
             "interpolate", ["linear"], ["get", "area"],
-            1, "#FFD54F",      // Jaune chaud (petits feux)
-            Math.max(100, maxArea * 0.1), "#FF8F00", // Orange (moyens)
-            Math.max(1000, maxArea * 0.4), "#E53935", // Rouge vif (grands)
-            Math.max(5000, maxArea * 0.8), "#8B0000"  // Rouge profond (catastrophes)
+            1, "#FFD54F",
+            Math.max(100, maxArea * 0.1), "#FF8F00",
+            Math.max(1000, maxArea * 0.4), "#E53935",
+            Math.max(5000, maxArea * 0.8), "#8B0000"
           ]
         ],
         "fill-extrusion-height": [
-          "interpolate", ["linear"], ["get", "area"],
-          1, 500,
-          Math.max(2, maxArea), 80000
+          "interpolate", ["linear"], ["get", "logArea"],
+          0, 200,
+          Math.max(1, maxLogArea), 80000
         ],
         "fill-extrusion-base": 0,
         "fill-extrusion-opacity": 0.95
@@ -187,11 +191,13 @@ export async function initFireMap(containerId) {
 
     // ── Hover tooltip sur les barres 3D ──
     let hoveredId = null;
+    const regionCache = new Map();
+    let hoverTimeout = null;
 
     map.on("mousemove", "fire-3d-bars", (e) => {
       if (!e.features.length) return;
       const feat = e.features[0];
-      const { id: cellId, area } = feat.properties;
+      const { id: cellId, area, centerLng, centerLat } = feat.properties;
 
       if (hoveredId !== null && hoveredId !== cellId) {
         map.setFeatureState({ source: "fire-grid", id: hoveredId }, { hover: false });
@@ -202,14 +208,33 @@ export async function initFireMap(containerId) {
       tooltip.style.display = "block";
       tooltip.style.left = (e.originalEvent.clientX + 14) + "px";
       tooltip.style.top  = (e.originalEvent.clientY + 14) + "px";
-      
+
+      const regionName = regionCache.get(cellId) || "Recherche de la région...";
+
       tooltip.innerHTML = `
-        <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3em; color: #000;">Surface Brûlée</div>
-        <div style="display: flex; justify-content: space-between; gap: 1.5em; line-height: 1.6; opacity: 0.75;">
-          <span>Total :</span>
-          <span style="font-weight:bold;">~${area.toLocaleString("fr-CH")} ha</span>
+        <div class="tooltip-title" id="fire-tooltip-region">${regionName}</div>
+        <div class="tooltip-row">
+          <span>Surface brûlée</span>
+          <span>~${area.toLocaleString("fr-CH")} ha</span>
         </div>
       `;
+
+      clearTimeout(hoverTimeout);
+      if (!regionCache.has(cellId)) {
+        hoverTimeout = setTimeout(() => {
+          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${centerLat}&lon=${centerLng}&accept-language=fr`)
+            .then(r => r.json())
+            .then(data => {
+              if (data && data.address) {
+                const region = data.address.state || data.address.county || data.address.region || data.address.city || "Portugal";
+                regionCache.set(cellId, region);
+                const titleEl = document.getElementById("fire-tooltip-region");
+                if (titleEl && hoveredId === cellId) titleEl.innerText = region;
+              }
+            })
+            .catch(() => {});
+        }, 400);
+      }
     });
 
     map.on("mouseleave", "fire-3d-bars", () => {
@@ -217,6 +242,7 @@ export async function initFireMap(containerId) {
         map.setFeatureState({ source: "fire-grid", id: hoveredId }, { hover: false });
       }
       hoveredId = null;
+      clearTimeout(hoverTimeout);
       tooltip.style.display = "none";
       map.getCanvas().style.cursor = "";
     });

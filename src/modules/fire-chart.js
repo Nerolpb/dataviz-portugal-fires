@@ -97,7 +97,7 @@ export async function drawFireTimeline(containerSelector) {
     .attr("width", x.bandwidth())
     .attr("y", H)
     .attr("height", 0)
-    .attr("fill", d => d.year === 2017 ? "#FFD060" : colorScale(d.area))
+    .attr("fill", d => colorScale(d.area))
     .attr("rx", 1)
     .on("mouseover", function(event, d) {
       d3.select(this).attr("opacity", 0.7);
@@ -187,26 +187,15 @@ export async function drawFireTimeline(containerSelector) {
     .attr("letter-spacing", "0.08em")
     .text("hectares");
 
-  // Annotation 2017
-  const d2017 = data.find(d => d.year === 2017);
-  if (d2017) {
-    const cx = x(2017) + x.bandwidth() / 2;
-    const cy = y(d2017.area);
-    g.append("line")
-      .attr("x1", cx).attr("x2", cx)
-      .attr("y1", cy - 6).attr("y2", cy - 22)
-      .attr("stroke", "#FFD060")
-      .attr("stroke-width", 1);
-    g.append("text")
-      .attr("x", cx)
-      .attr("y", cy - 28)
-      .attr("text-anchor", "middle")
-      .attr("fill", "#FFD060")
-      .attr("font-size", "13px")
-      .attr("font-weight", "700")
-      .attr("font-family", "neue-haas-grotesk-text, sans-serif")
-      .text("▲ 2017 — " + Math.round(d2017.area / 1000) + "k ha");
-  }
+  // Label "2025" à la fin de l'axe X
+  g.append("text")
+    .attr("x", W)
+    .attr("y", H + 20)
+    .attr("text-anchor", "middle")
+    .attr("fill", "rgba(255,255,255,0.6)")
+    .attr("font-size", "12px")
+    .attr("font-family", "neue-haas-grotesk-text, sans-serif")
+    .text("2025");
 
   drawnContainers.add(containerSelector);
 }
