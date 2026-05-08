@@ -51,7 +51,7 @@ export function drawConcentrationChart(containerSelector) {
       .attr("width",  r * 2)
       .attr("height", r * 2)
       .append("image")
-      .attr("href", `/src/assets/flags/${d.code}.png`)
+      .attr("href", `./assets/flags/${d.code}.png`)
       .attr("x", flagOffsetX)
       .attr("y", 0)
       .attr("width",  flagW)

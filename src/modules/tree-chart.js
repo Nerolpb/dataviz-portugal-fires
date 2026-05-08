@@ -134,7 +134,7 @@ export function drawTreeChart(containerSelector) {
     .style("-webkit-transform", "translateZ(0)");
 
   imgContainer.append("xhtml:img")
-    .attr("src", d => `src/assets/${getImageFile(d.arbre)}`)
+    .attr("src", d => `./assets/${getImageFile(d.arbre)}`)
     .style("width", "100%")
     .style("height", "100%")
     .style("object-fit", "cover")
@@ -149,7 +149,7 @@ export function drawTreeChart(containerSelector) {
       const overlay  = document.getElementById("tree-image-overlay");
       const largeImg = document.getElementById("tree-image-large");
       if (overlay && largeImg) {
-        largeImg.src = `src/assets/${getImageFile(d.arbre)}`;
+        largeImg.src = `./assets/${getImageFile(d.arbre)}`;
         overlay.classList.add("is-visible");
       }
       const el = d3.select(this);
