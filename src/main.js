@@ -36,12 +36,16 @@ function navigateTo(direction) {
   setTimeout(() => { scrollLocked = false; }, 700);
 }
 
-// Molette — saute de section en section, sauf si on est sur la carte (zoom MapLibre)
+// Molette — saute de section en section, sauf si on est sur une carte (zoom MapLibre)
 mainScroll.addEventListener("wheel", (e) => {
-  const mapEucy  = document.getElementById("map-eucalyptus");
-  const mapFires = document.getElementById("map-fires");
+  const mapEucy    = document.getElementById("map-eucalyptus");
+  const mapFires   = document.getElementById("map-fires");
+  const mapCorrE   = document.getElementById("map-correlation-euca");
+  const mapCorrF   = document.getElementById("map-correlation-fire");
   if (mapEucy  && mapEucy.contains(e.target))  return;
   if (mapFires && mapFires.contains(e.target)) return;
+  if (mapCorrE && mapCorrE.contains(e.target)) return;
+  if (mapCorrF && mapCorrF.contains(e.target)) return;
 
   e.preventDefault();
   navigateTo(e.deltaY > 0 ? "down" : "up");
@@ -350,32 +354,6 @@ document.getElementById("btn-corr-restart")?.addEventListener("click", () => {
   mainScroll.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// ─────────────────────────────────────────────────────────────
-// Histoire 2017 — scroll storytelling (4 étapes, position-based)
-// ─────────────────────────────────────────────────────────────
-const story2017Group  = document.getElementById("story-2017-group");
-const story2017Sticky = document.querySelector(".s17-sticky");
-
-if (story2017Group && story2017Sticky) {
-  function updateStory2017Step() {
-    const top = story2017Group.getBoundingClientRect().top;
-    const vh  = mainScroll.clientHeight;
-    const scrolledInto = -top;
-
-    let step = 0;
-    if (scrolledInto >= 0)        step = 1;
-    if (scrolledInto >= vh)       step = 2;
-    if (scrolledInto >= vh * 2)   step = 3;
-    if (scrolledInto >= vh * 3)   step = 4;
-
-    if (story2017Sticky.dataset.step !== String(step)) {
-      story2017Sticky.dataset.step = step;
-    }
-  }
-
-  mainScroll.addEventListener("scroll", updateStory2017Step, { passive: true });
-  updateStory2017Step();
-}
 
 // ─────────────────────────────────────────────────────────────
 // Section noire — révélation par groupe via IntersectionObserver

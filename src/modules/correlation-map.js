@@ -74,6 +74,8 @@ function makeMapOptions(containerId) {
     minZoom: 5,
     maxZoom: 12,
     interactive: true,
+    dragRotate: false,
+    pitchWithRotate: false,
     attributionControl: false,
   };
 }
@@ -160,7 +162,6 @@ export async function initCorrelationMap() {
 
   addMask(mapEuca, ring, "euca");
   addBorder(mapEuca, ptData, "euca");
-  mapEuca.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
   // ═══════════════════════════════════════════════
   // CARTE DROITE — Incendies 2015-2024

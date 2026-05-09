@@ -19,6 +19,12 @@
         <div class="landing-bg"></div>
         <div class="landing-overlay"></div>
         <p class="landing-eyebrow fade-up">Portugal · Visualisation de données</p>
+        <p class="landing-eyebrow fade-up" style="bottom: var(--space-m); top: auto; left: var(--space-m);">Réalisé par Cunha Christophe et Ferrini Valentin</p>
+        <a href="https://github.com/Nerolpb/dataviz-portugal-fires" target="_blank" rel="noopener noreferrer" id="github-link" aria-label="Voir le code source sur GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
         <div class="landing-content">
           <h1 class="landing-title">
             <span class="landing-title__main fade-up" data-delay="120">L'ombre de</span>
@@ -424,7 +430,7 @@
           <section class="hero-part" id="screen-fire-observation" style="background: #0c0c0a; align-items: flex-start; justify-content: flex-start; padding: var(--space-l); position: relative;">
             <div style="max-width: 520px; text-align: left;">
               <p class="fade-up" style="font-size: 1.25rem; line-height: 1.8; font-weight: 500; color: var(--blanc);">
-                Sur les 25 dernières années, les chiffres sont sans appel. Entre 2000 et 2024, le Portugal a traversé une période d'incendies d'une <strong>ampleur inédite</strong> — des années record qui ont consumé des centaines de milliers d'hectares et redéfini la notion même de catastrophe forestière.
+                Sur les 25 dernières années, les chiffres sont sans appel. Entre 2000 et 2024, le Portugal a traversé une période d'incendies d'une <strong>ampleur inédite</strong>, des années record qui ont consumé des centaines de milliers d'hectares et redéfini la notion même de catastrophe forestière.
               </p>
             </div>
             <div id="chart-periods" class="fade-up" data-delay="200" style="position: absolute; bottom: var(--space-l); right: var(--space-l); width: 620px;"></div>
@@ -437,53 +443,61 @@
 
       
 
-      <!-- ====== HISTOIRE 2017 — Scroll storytelling (7 étapes) ====== -->
-      <div id="story-2017-group">
-        <div class="s17-sticky" data-step="0">
+      <!-- ====== HISTOIRE 2017 ====== -->
+      <div id="story-2017-group" class="hero-group">
+        <div class="fire-bg-sticky" style="background: #0c0c0a; background-image: none;"></div>
+        <div class="hero-seam-blur"></div>
+        <div class="hero-content">
 
-          <!-- Étape 1 : 17 juin 2017 — Pedrógão Grande -->
-          <div class="s17-panel s17-panel--1">
-            <p class="s17-eyebrow">17 juin 2017<br>Pedrógão Grande</p>
-            <p class="s17-body">À 18h, la foudre frappe une forêt d'eucalyptus desséchée au cœur du pays. En quelques minutes, le feu dévore les collines. La route nationale N236 se transforme en couloir de flammes — des familles tentent de fuir, certaines n'en réchapperont pas.</p>
-          </div>
-
-          <!-- Étape 2 : Bilan de la nuit de juin -->
-          <div class="s17-panel s17-panel--2">
-            <div class="s17-stats-row">
-              <div class="s17-stat">
-                <span class="s17-stat-num">66</span>
-                <span class="s17-stat-label">victimes<br>en une nuit</span>
-              </div>
-              <div class="s17-stat-sep">·</div>
-              <div class="s17-stat">
-                <span class="s17-stat-num">45<span class="s17-stat-unit">km</span></span>
-                <span class="s17-stat-label">parcourus<br>par le feu</span>
-              </div>
+          <section class="hero-part" id="s17-step-1" style="background: #0c0c0a;">
+            <div style="display: flex; flex-direction: column; gap: var(--space-m); max-width: 600px; text-align: left;">
+              <p class="s17-eyebrow fade-up" data-delay="0">17 juin 2017<br>Pedrógão Grande</p>
+              <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="150">
+                À 18h, la foudre frappe une forêt d'eucalyptus desséchée au cœur du pays. En quelques minutes, le feu dévore les collines. La route nationale N236 se transforme en couloir de flammes. Des familles tentent de fuir, certaines n'en réchapperont pas.
+              </p>
             </div>
-            <p class="s17-body">La monoculture d'eucalyptus, ses huiles hautement volatiles et l'absence de coupe-feux transforment un simple éclair en catastrophe nationale.</p>
-          </div>
+          </section>
 
-          <!-- Étape 3 : 15 octobre 2017 — Ouragan Ophélia -->
-          <div class="s17-panel s17-panel--3">
-            <p class="s17-eyebrow">15 octobre 2017<br>Ouragan Ophélia</p>
-            <p class="s17-body">Quatre mois plus tard, l'ouragan Ophélia frappe le Portugal. Des vents à plus de 100&nbsp;km/h soufflent sur des forêts asséchées par un été de sécheresse. En quelques heures, les braises deviennent brasiers.</p>
-          </div>
-
-          <!-- Étape 4 : 500 incendies simultanés -->
-          <div class="s17-panel s17-panel--4">
-            <div class="s17-big-num">
-              <span class="s17-big-num__value">500</span>
-              <span class="s17-big-num__label">incendies<br>simultanés</span>
+          <section class="hero-part" id="s17-step-2" style="background: #0c0c0a;">
+            <div style="display: flex; flex-direction: column; gap: var(--space-l); max-width: 600px; text-align: left;">
+              <div class="s17-stats-row fade-up" data-delay="0">
+                <div class="s17-stat">
+                  <span class="s17-stat-num">66</span>
+                  <span class="s17-stat-label">victimes<br>en une nuit</span>
+                </div>
+                <div class="s17-stat-sep">·</div>
+                <div class="s17-stat">
+                  <span class="s17-stat-num">45<span class="s17-stat-unit">km</span></span>
+                  <span class="s17-stat-label">parcourus<br>par le feu</span>
+                </div>
+              </div>
+              <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="200">
+                La monoculture d'eucalyptus, ses huiles hautement volatiles et l'absence de coupe-feux transforment un simple éclair en catastrophe nationale.
+              </p>
             </div>
-            <p class="s17-body">Cinq cents foyers s'embrasent en une seule journée. Les secours sont débordés. Quarante-cinq personnes meurent le 15 octobre.</p>
-          </div>
+          </section>
 
-        </div>
-        <div class="s17-scroll">
-          <section class="hero-part s17-trigger" data-step="1"></section>
-          <section class="hero-part s17-trigger" data-step="2"></section>
-          <section class="hero-part s17-trigger" data-step="3"></section>
-          <section class="hero-part s17-trigger" data-step="4"></section>
+          <section class="hero-part" id="s17-step-3" style="background: #0c0c0a;">
+            <div style="display: flex; flex-direction: column; gap: var(--space-m); max-width: 600px; text-align: left;">
+              <p class="s17-eyebrow fade-up" data-delay="0">15 octobre 2017<br>Ouragan Ophélia</p>
+              <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="150">
+                Quatre mois plus tard, l'ouragan Ophélia frappe le Portugal. Des vents à plus de 100&nbsp;km/h soufflent sur des forêts asséchées par un été de sécheresse. En quelques heures, les braises deviennent brasiers.
+              </p>
+            </div>
+          </section>
+
+          <section class="hero-part" id="s17-step-4" style="background: #0c0c0a;">
+            <div style="display: flex; flex-direction: column; gap: var(--space-l); max-width: 600px; text-align: left;">
+              <div class="s17-big-num fade-up" data-delay="0">
+                <span class="s17-big-num__value">500</span>
+                <span class="s17-big-num__label">incendies<br>simultanés</span>
+              </div>
+              <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="200">
+                Cinq cents foyers s'embrasent en une seule journée. Les secours sont débordés. Quarante-cinq personnes meurent le 15 octobre.
+              </p>
+            </div>
+          </section>
+
         </div>
       </div>
 
@@ -534,13 +548,11 @@
 
       <!-- ====== TRANSITION — Corrélation ====== -->
       <section class="snap-section" id="screen-correlation-intro" style="background: #0c0c0a;">
-        <div style="max-width: 640px; text-align: center; padding: var(--space-l);">
-          <h2 class="title-standalone fade-up" style="color: var(--blanc); font-size: clamp(2rem, 4vw, 3.5rem);" data-delay="0">
-            La preuve géographique
-          </h2>
-          <p class="fade-up" style="font-size: 1.1rem; line-height: 1.8; font-weight: 500; color: rgba(255,255,255,0.6); margin-top: 1.6em;" data-delay="220">
+        <div style="display: flex; flex-direction: column; gap: var(--space-m); max-width: 600px; text-align: left;">
+          <h2 class="title-standalone fade-up" style="color: var(--blanc); font-size: clamp(2rem, 4vw, 3.5rem);" data-delay="100">La preuve géographique</h2>
+          <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="250">
             À gauche, en <span style="color: var(--vert-elec); font-weight: 700;">vert</span>, les zones de plantation d'eucalyptus.
-            À droite, en <span style="color: #ff7043; font-weight: 700;">rouge</span>, les foyers d'incendies.
+            À droite, en <span style="color: var(--bg-rouge); font-weight: 700;">rouge</span>, les foyers d'incendies.
             Comparez les deux cartes : c'est exactement le même territoire.
           </p>
         </div>
@@ -554,26 +566,32 @@
           <div class="corr-panel corr-panel--left">
             <div id="map-correlation-euca"></div>
             <div class="corr-panel-label corr-panel-label--euca fade-up" data-delay="200">Forêts d'eucalyptus</div>
-            <div class="source-credit" style="bottom: 12px; left: 12px; right: auto;">
-              <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF</a>
-            </div>
           </div>
 
-          <div class="corr-sep"><span class="corr-sep-vs">VS</span></div>
+          <div class="corr-sep"><span class="corr-sep-vs">vs</span></div>
 
           <div class="corr-panel corr-panel--right">
             <div id="map-correlation-fire"></div>
             <div class="corr-panel-label corr-panel-label--fire fade-up" data-delay="200">Incendies</div>
-            <div class="source-credit" style="bottom: 12px; right: 12px;">
-              <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF — Feux</a>
-            </div>
+
           </div>
 
         </div>
 
-        <div class="corr-overlay-title fade-up" data-delay="100">Eucalyptus &amp; incendies : même territoire</div>
+        <div class="title-box title-box--fire corr-overlay-title fade-up" data-delay="100">
+          <h2 class="title-standalone" style="text-transform: none; font-size: clamp(1.1rem, 1.8vw, 1.4rem);">La preuve géographique</h2>
+        </div>
 
-        <div class="corr-sync-hint fade-up" data-delay="400">Les deux cartes sont synchronisées — naviguez sur l'une pour comparer</div>
+        <div class="fire-map-info fade-up" data-delay="200">
+          <div class="map-hint-item">
+            <span class="map-hint-key">Molette</span>
+            <span class="map-hint-desc">Zoomer / Dézoomer</span>
+          </div>
+          <div class="map-hint-item">
+            <span class="map-hint-key">Clic + Drag</span>
+            <span class="map-hint-desc">Déplacer</span>
+          </div>
+        </div>
 
         <button class="map-next-btn corr-restart-btn" id="btn-corr-next">
           La suite
@@ -582,38 +600,36 @@
 
       </section>
 
-      <!-- ====== CONCLUSION ====== -->
+      <!-- ====== CONCLUSION 1 ====== -->
       <section class="snap-section" id="screen-conclusion" style="background: #0c0c0a;">
-        <div class="conclusion-layout">
+        <div style="display: flex; flex-direction: column; gap: var(--space-m); max-width: 600px; text-align: left;">
 
-          <p class="conclusion-eyebrow fade-up" data-delay="0">Ce que les données nous disent</p>
-
-          <h2 class="conclusion-title fade-up" data-delay="120">
-            Un territoire<br>à la croisée des chemins
+          <h2 class="title-standalone fade-up" style="color: var(--blanc); font-size: clamp(2rem, 4vw, 3.5rem);" data-delay="100">
+            Une vérité plus complexe
           </h2>
 
-          <p class="conclusion-body fade-up" data-delay="260">
-            L'eucalyptus n'est pas seulement une menace : c'est aussi un pilier économique. L'industrie de la pâte à papier génère <strong style="color: rgba(255,255,255,0.85);">2 milliards d'euros</strong> d'exportations chaque année et représente près de 2&nbsp;% du PIB portugais. Des dizaines de milliers de familles en vivent.
+          <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="200">
+            Les incendies au Portugal ne s'expliquent pas par une seule cause. La chaleur estivale, les épisodes de sécheresse, le réchauffement climatique et les actes criminels d'arson, qui représentent une part significative des départs de feu, créent ensemble les conditions du désastre. Ces facteurs sont réels et documentés.
           </p>
 
-          <p class="conclusion-body fade-up" data-delay="360">
-            Mais les données sont sans équivoque : les zones de plantation d'eucalyptus et les zones d'incendies se superposent presque parfaitement. Ce n'est pas une coïncidence — c'est une conséquence directe de la biologie de l'arbre, de ses huiles volatiles et d'une monoculture qui ne laisse aucun pare-feu naturel.
+          <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="300">
+            Mais ils n'expliquent pas à eux seuls pourquoi les feux portugais figurent parmi les plus dévastateurs d'Europe. <strong>L'eucalyptus est l'aggravateur.</strong> Ses huiles volatiles, ses monocultures sans pare-feu naturel, ses débris secs accumulés au sol transforment une simple étincelle en catastrophe incontrôlable.
           </p>
 
-          <p class="conclusion-body fade-up" data-delay="440">
-            Depuis les incendies de 2017, la loi portugaise a évolué. Les nouvelles plantations sont interdites dans les zones récemment brûlées, des couloirs de protection imposés autour des villages. Mais l'arbre existant reste. Et le risque avec lui.
+        </div>
+      </section>
+
+      <!-- ====== CONCLUSION 2 ====== -->
+      <section class="snap-section" id="screen-conclusion-2" style="background: #0c0c0a;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-m); max-width: 600px; text-align: left;">
+
+          <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: var(--blanc);" data-delay="100">
+            L'eucalyptus est aussi un pilier économique : <strong>2 milliards d'euros</strong> d'exportations par an, près de 2&nbsp;% du PIB, des dizaines de milliers d'emplois. Depuis 2017, la loi a évolué. Les nouvelles plantations sont interdites dans les zones brûlées et des couloirs de protection ont été imposés autour des villages. Mais l'arbre existant reste. Et avec lui, le risque.
           </p>
 
-          <p class="conclusion-italic fade-up" data-delay="540">
-            La question n'est pas tranchée. Elle continue d'alimenter un débat difficile — entre économie, environnement et mémoire des victimes.
+          <p class="fade-up" style="font-size: 1.05rem; line-height: 1.8; font-weight: 500; color: rgba(255,255,255,0.55); font-style: italic;" data-delay="200">
+            La question n'est pas tranchée. Entre économie, environnement et mémoire des victimes, le Portugal cherche encore son équilibre.
           </p>
-
-          <div class="conclusion-restart fade-up" data-delay="660">
-            <button class="map-next-btn" id="btn-corr-restart" style="position: static; transform: none; opacity: 1; pointer-events: auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6);">
-              Recommencer depuis le début
-              <svg class="map-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-            </button>
-          </div>
 
         </div>
       </section>

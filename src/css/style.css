@@ -1164,7 +1164,6 @@ body {
 .map-next-arrow {
   width: 18px;
   height: 18px;
-  animation: map-btn-bob 1.4s ease-in-out infinite;
 }
 
 /* MapLibre controls */
@@ -2056,6 +2055,25 @@ body {
   flex-shrink: 0;
 }
 
+#github-link {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 3;
+  color: #000000;
+  transition: color 0.2s;
+  line-height: 0;
+}
+
+#github-link svg {
+  width: 32px;
+  height: 32px;
+}
+
+#github-link:hover {
+  color: #333333;
+}
+
 /* ============================================================
    HISTOIRE 2017 — Scroll storytelling (5 étapes)
    ============================================================ */
@@ -2311,25 +2329,20 @@ body {
   z-index: 20;
   font-family: var(--font-body);
   font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-weight: 700;
   padding: 7px 20px;
-  border-radius: 20px;
+  border-radius: 6px;
   white-space: nowrap;
-  backdrop-filter: blur(10px);
 }
 
 .corr-panel-label--euca {
-  background: rgba(0, 230, 118, 0.12);
-  color: var(--vert-elec);
-  border: 1px solid rgba(0, 230, 118, 0.28);
+  background: var(--vert-elec);
+  color: #000;
 }
 
 .corr-panel-label--fire {
-  background: rgba(229, 57, 53, 0.12);
-  color: #ff7043;
-  border: 1px solid rgba(229, 57, 53, 0.28);
+  background: var(--bg-rouge);
+  color: #fff;
 }
 
 /* Séparateur vertical */
@@ -2362,23 +2375,17 @@ body {
   z-index: 31;
 }
 
-/* Titre overlay haut centre */
+/* Titre overlay haut gauche */
 .corr-overlay-title {
   position: absolute;
   top: var(--space-m);
-  left: 50%;
-  transform: translateX(-50%);
+  left: var(--space-l);
   z-index: 40;
-  white-space: nowrap;
-  font-family: var(--font-display);
-  font-size: clamp(0.85rem, 1.4vw, 1.2rem);
-  font-weight: 800;
-  color: rgba(255,255,255,0.9);
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 9px 22px;
-  border-radius: 30px;
+  width: fit-content !important;
+  max-width: 420px;
+  margin: 0;
+  text-align: left;
+  transform: none;
 }
 
 /* Hint synchronisation bas centre */
