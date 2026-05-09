@@ -6,6 +6,7 @@ import { initEucalyptusMap }       from "./modules/eucalyptus-map.js";
 import { drawFireTimeline }  from "./modules/fire-chart.js";
 import { drawPeriodComparison } from "./modules/comparison-periods.js";
 import { initFireMap, updateFireYear } from "./modules/fire-map.js";
+import { initCorrelationMap }          from "./modules/correlation-map.js";
 
 const mainScroll = document.getElementById("main-scroll");
 const progressBar = document.getElementById("scroll-progress-bar");
@@ -241,7 +242,10 @@ document.getElementById("btn-map-next")?.addEventListener("click", () => {
 });
 
 document.getElementById("btn-fire-map-next")?.addEventListener("click", () => {
-  mainScroll.scrollTo({ top: 0, behavior: "smooth" });
+  const next = document.getElementById("screen-fire-observation");
+  if (!next) return;
+  const top = next.getBoundingClientRect().top + mainScroll.scrollTop;
+  mainScroll.scrollTo({ top, behavior: "smooth" });
 });
 
 // ─────────────────────────────────────────────────────────────
@@ -315,6 +319,36 @@ const fireMapObserver = new IntersectionObserver(
 );
 
 if (screenFireMap) fireMapObserver.observe(screenFireMap);
+
+// ─────────────────────────────────────────────────────────────
+// Carte de corrélation (Section 9)
+// ─────────────────────────────────────────────────────────────
+let corrMapInited    = false;
+const screenCorrMap  = document.getElementById("screen-correlation-map");
+
+const corrMapObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting && !corrMapInited) {
+      corrMapInited = true;
+      setTimeout(() => initCorrelationMap(), 150);
+      corrMapObserver.disconnect();
+    }
+  },
+  { root: mainScroll, threshold: 0.05 }
+);
+
+if (screenCorrMap) corrMapObserver.observe(screenCorrMap);
+
+document.getElementById("btn-corr-next")?.addEventListener("click", () => {
+  const next = document.getElementById("screen-conclusion");
+  if (!next) return;
+  const top = next.getBoundingClientRect().top + mainScroll.scrollTop;
+  mainScroll.scrollTo({ top, behavior: "smooth" });
+});
+
+document.getElementById("btn-corr-restart")?.addEventListener("click", () => {
+  mainScroll.scrollTo({ top: 0, behavior: "smooth" });
+});
 
 // ─────────────────────────────────────────────────────────────
 // Histoire 2017 — scroll storytelling (4 étapes, position-based)

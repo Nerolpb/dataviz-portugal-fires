@@ -378,6 +378,48 @@
             </div>
           </section>
 
+          <!-- ====== SECTION 8 — Carte des incendies ====== -->
+          <section class="snap-section" id="screen-fire-map">
+            <div class="fire-map-sticky">
+
+              <div class="title-box title-box--fire fire-map-title-box fade-up" data-delay="100">
+                <h2 class="title-standalone" style="text-transform: none; font-size: clamp(1.2rem, 2vw, 1.6rem);">
+                  Chaque point de chaleur<br>est une cicatrice
+                </h2>
+              </div>
+
+              <div class="fire-map-info fade-up" data-delay="200">
+                <div class="map-hint-item">
+                  <span class="map-hint-key">Molette</span>
+                  <span class="map-hint-desc">Zoomer / Dézoomer</span>
+                </div>
+                <div class="map-hint-item">
+                  <span class="map-hint-key">Clic + Drag</span>
+                  <span class="map-hint-desc">Déplacer</span>
+                </div>
+                <div class="map-hint-item">
+                  <span class="map-hint-key">Ctrl + Drag</span>
+                  <span class="map-hint-desc">Incliner la perspective</span>
+                </div>
+              </div>
+
+              <div id="map-fires">
+                <div class="map-timeline-control">
+                  <div class="timeline-header" style="justify-content: center;">
+                    <div id="timeline-year-display">1975</div>
+                  </div>
+                  <input type="range" id="timeline-slider" min="1975" max="2024" value="1975" step="1">
+                </div>
+              </div>
+
+              <button class="map-next-btn fire-map-next-btn" id="btn-fire-map-next">
+                La suite
+                <svg class="map-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+
+            </div>
+          </section>
+
           <!-- ====== OBSERVATION 25 ANS ====== -->
           <section class="hero-part" id="screen-fire-observation" style="background: #0c0c0a; align-items: flex-start; justify-content: flex-start; padding: var(--space-l); position: relative;">
             <div style="max-width: 520px; text-align: left;">
@@ -486,54 +528,95 @@
             </div>
           </section>
 
-          <!-- ====== SECTION 8 — Carte des incendies ====== -->
-          <section class="snap-section" id="screen-fire-map">
-            <div class="fire-map-sticky">
-
-              <!-- Titre en haut à gauche -->
-              <div class="title-box title-box--fire fire-map-title-box fade-up" data-delay="100">
-                <h2 class="title-standalone" style="text-transform: none; font-size: clamp(1.2rem, 2vw, 1.6rem);">
-                  Chaque point de chaleur<br>est une cicatrice
-                </h2>
-              </div>
-
-              <!-- Hints navigation en haut à droite -->
-              <div class="fire-map-info fade-up" data-delay="200">
-                <div class="map-hint-item">
-                  <span class="map-hint-key">Molette</span>
-                  <span class="map-hint-desc">Zoomer / Dézoomer</span>
-                </div>
-                <div class="map-hint-item">
-                  <span class="map-hint-key">Clic + Drag</span>
-                  <span class="map-hint-desc">Déplacer</span>
-                </div>
-                <div class="map-hint-item">
-                  <span class="map-hint-key">Ctrl + Drag</span>
-                  <span class="map-hint-desc">Incliner la perspective</span>
-                </div>
-              </div>
-
-              <!-- Carte plein écran -->
-              <div id="map-fires">
-                <div class="map-timeline-control">
-                  <div class="timeline-header" style="justify-content: center;">
-                    <div id="timeline-year-display">1975</div>
-                  </div>
-                  <input type="range" id="timeline-slider" min="1975" max="2024" value="1975" step="1">
-                </div>
-              </div>
-
-              <!-- Bouton La suite -->
-              <button class="map-next-btn fire-map-next-btn" id="btn-fire-map-next">
-                La suite
-                <svg class="map-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-
-            </div>
-          </section>
 
         </div>
       </div>
+
+      <!-- ====== TRANSITION — Corrélation ====== -->
+      <section class="snap-section" id="screen-correlation-intro" style="background: #0c0c0a;">
+        <div style="max-width: 640px; text-align: center; padding: var(--space-l);">
+          <h2 class="title-standalone fade-up" style="color: var(--blanc); font-size: clamp(2rem, 4vw, 3.5rem);" data-delay="0">
+            La preuve géographique
+          </h2>
+          <p class="fade-up" style="font-size: 1.1rem; line-height: 1.8; font-weight: 500; color: rgba(255,255,255,0.6); margin-top: 1.6em;" data-delay="220">
+            À gauche, en <span style="color: var(--vert-elec); font-weight: 700;">vert</span>, les zones de plantation d'eucalyptus.
+            À droite, en <span style="color: #ff7043; font-weight: 700;">rouge</span>, les foyers d'incendies.
+            Comparez les deux cartes : c'est exactement le même territoire.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====== SECTION 9 — Carte de corrélation (deux cartes) ====== -->
+      <section class="snap-section" id="screen-correlation-map">
+
+        <div class="corr-split">
+
+          <div class="corr-panel corr-panel--left">
+            <div id="map-correlation-euca"></div>
+            <div class="corr-panel-label corr-panel-label--euca fade-up" data-delay="200">Forêts d'eucalyptus</div>
+            <div class="source-credit" style="bottom: 12px; left: 12px; right: auto;">
+              <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF</a>
+            </div>
+          </div>
+
+          <div class="corr-sep"><span class="corr-sep-vs">VS</span></div>
+
+          <div class="corr-panel corr-panel--right">
+            <div id="map-correlation-fire"></div>
+            <div class="corr-panel-label corr-panel-label--fire fade-up" data-delay="200">Incendies</div>
+            <div class="source-credit" style="bottom: 12px; right: 12px;">
+              <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" target="_blank" rel="noopener noreferrer">ICNF — Feux</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="corr-overlay-title fade-up" data-delay="100">Eucalyptus &amp; incendies : même territoire</div>
+
+        <div class="corr-sync-hint fade-up" data-delay="400">Les deux cartes sont synchronisées — naviguez sur l'une pour comparer</div>
+
+        <button class="map-next-btn corr-restart-btn" id="btn-corr-next">
+          La suite
+          <svg class="map-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+
+      </section>
+
+      <!-- ====== CONCLUSION ====== -->
+      <section class="snap-section" id="screen-conclusion" style="background: #0c0c0a;">
+        <div class="conclusion-layout">
+
+          <p class="conclusion-eyebrow fade-up" data-delay="0">Ce que les données nous disent</p>
+
+          <h2 class="conclusion-title fade-up" data-delay="120">
+            Un territoire<br>à la croisée des chemins
+          </h2>
+
+          <p class="conclusion-body fade-up" data-delay="260">
+            L'eucalyptus n'est pas seulement une menace : c'est aussi un pilier économique. L'industrie de la pâte à papier génère <strong style="color: rgba(255,255,255,0.85);">2 milliards d'euros</strong> d'exportations chaque année et représente près de 2&nbsp;% du PIB portugais. Des dizaines de milliers de familles en vivent.
+          </p>
+
+          <p class="conclusion-body fade-up" data-delay="360">
+            Mais les données sont sans équivoque : les zones de plantation d'eucalyptus et les zones d'incendies se superposent presque parfaitement. Ce n'est pas une coïncidence — c'est une conséquence directe de la biologie de l'arbre, de ses huiles volatiles et d'une monoculture qui ne laisse aucun pare-feu naturel.
+          </p>
+
+          <p class="conclusion-body fade-up" data-delay="440">
+            Depuis les incendies de 2017, la loi portugaise a évolué. Les nouvelles plantations sont interdites dans les zones récemment brûlées, des couloirs de protection imposés autour des villages. Mais l'arbre existant reste. Et le risque avec lui.
+          </p>
+
+          <p class="conclusion-italic fade-up" data-delay="540">
+            La question n'est pas tranchée. Elle continue d'alimenter un débat difficile — entre économie, environnement et mémoire des victimes.
+          </p>
+
+          <div class="conclusion-restart fade-up" data-delay="660">
+            <button class="map-next-btn" id="btn-corr-restart" style="position: static; transform: none; opacity: 1; pointer-events: auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6);">
+              Recommencer depuis le début
+              <svg class="map-next-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+            </button>
+          </div>
+
+        </div>
+      </section>
 
     </main>
 
