@@ -66,7 +66,7 @@ function addBorder(map, ptData, suffix) {
 function makeMapOptions(containerId) {
   return {
     container: containerId,
-    style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    style: "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json",
     center: [-8.0, 39.6],
     zoom: 6.0,
     pitch: 0,

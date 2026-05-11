@@ -32,7 +32,7 @@ export function initEucalyptusMap(containerId) {
 
   const map = new maplibregl.Map({
     container: containerId,
-    style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    style: "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json",
     center: [-8.2, 39.5],
     zoom: 6.5,
     pitch: 50, // Inclinaison de la caméra pour l'effet 3D
@@ -46,6 +46,34 @@ export function initEucalyptusMap(containerId) {
 
   map.touchZoomRotate?.disableRotation?.();
   mapInstance = map;
+
+  // ── Toggle 2D / 3D ──
+  let heightExpr = null;
+  const toggleWrap = document.createElement("div");
+  toggleWrap.className = "map-view-toggle";
+  toggleWrap.innerHTML = `
+    <button class="map-view-toggle__btn active" data-view="3d">3D</button>
+    <button class="map-view-toggle__btn" data-view="2d">2D</button>
+  `;
+  container.appendChild(toggleWrap);
+
+  toggleWrap.addEventListener("click", (e) => {
+    const btn = e.target.closest(".map-view-toggle__btn");
+    if (!btn || !map.isStyleLoaded() || !heightExpr) return;
+    const view = btn.dataset.view;
+    toggleWrap.querySelectorAll(".map-view-toggle__btn").forEach(b =>
+      b.classList.toggle("active", b === btn)
+    );
+    if (view === "2d") {
+      map.easeTo({ pitch: 0, bearing: 0, duration: 700 });
+      map.setPaintProperty("euca-3d-bars", "fill-extrusion-height", 0);
+      map.dragRotate.disable();
+    } else {
+      map.easeTo({ pitch: 50, bearing: -10, duration: 700 });
+      map.setPaintProperty("euca-3d-bars", "fill-extrusion-height", heightExpr);
+      map.dragRotate.enable();
+    }
+  });
 
   map.on("load", async () => {
     const [eucaData, portugalData] = await Promise.all([
@@ -175,11 +203,11 @@ export function initEucalyptusMap(containerId) {
           ]
         ],
         // Hauteur : Extrusion
-        "fill-extrusion-height": [
+        "fill-extrusion-height": (heightExpr = [
           "interpolate", ["linear"], ["get", "count"],
           1, 500,
-          Math.max(2, maxCount), 80000 // 80 km de hauteur virtuelle
-        ],
+          Math.max(2, maxCount), 80000
+        ]),
         "fill-extrusion-base": 0,
         "fill-extrusion-opacity": 0.95
       }

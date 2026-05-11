@@ -1166,6 +1166,45 @@ body {
   height: 18px;
 }
 
+/* ── Toggle 2D / 3D ─────────────────────────────────────────── */
+.map-view-toggle {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.map-view-toggle__btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 7px 18px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.map-view-toggle__btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.map-view-toggle__btn:first-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* MapLibre controls */
 #map-eucalyptus .maplibregl-ctrl-group {
   background: rgba(255,255,255,0.15);
@@ -2411,15 +2450,15 @@ body {
   z-index: 40;
   opacity: 1 !important;
   pointer-events: auto !important;
-  background: rgba(0,0,0,0.72) !important;
+  background: #c0392b !important;
   backdrop-filter: blur(10px);
-  color: rgba(255,255,255,0.7) !important;
+  color: #fff !important;
   border: 1px solid rgba(255,255,255,0.12) !important;
 }
 
 .corr-restart-btn:hover {
+  background: #e74c3c !important;
   color: #fff !important;
-  background: rgba(255,255,255,0.12) !important;
 }
 
 /* ============================================================
