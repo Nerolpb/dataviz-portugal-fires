@@ -26,8 +26,7 @@ export function drawTreeChart(containerSelector) {
   const svgSelection = d3.select(containerSelector);
   svgSelection.selectAll("svg").remove();
 
-  const depth3d = 18;
-  const margin = { top: 100, right: 30 + depth3d, bottom: 40, left: 60 };
+  const margin = { top: 100, right: 30, bottom: 40, left: 60 };
   const width  = 800 - margin.left - margin.right;
   const height = 450 - margin.top  - margin.bottom;
 
@@ -77,24 +76,9 @@ export function drawTreeChart(containerSelector) {
   const bw      = x.bandwidth();
   const imgSize = Math.min(bw * 1.2, 70);
 
-  const getFrontColor = d => d.arbre === "Eucalyptus" ? "var(--vert-elec)"  : "rgba(255,255,255,0.22)";
-  const getTopColor   = d => d.arbre === "Eucalyptus" ? "#7fffc4"           : "rgba(255,255,255,0.38)";
-  const getSideColor  = d => d.arbre === "Eucalyptus" ? "#00a152"           : "rgba(255,255,255,0.10)";
+  const getFrontColor = d => d.arbre === "Eucalyptus" ? "var(--vert-elec)" : "rgba(255,255,255,0.22)";
 
-  // Face latérale droite (dessinée en premier, reste derrière la face avant)
-  trees.append("polygon")
-    .attr("points", `${bw},${height} ${bw+depth3d},${height-depth3d} ${bw+depth3d},${height-depth3d} ${bw},${height}`)
-    .attr("fill", getSideColor)
-    .transition().duration(1200).ease(d3.easeCubicOut)
-    .attrTween("points", d => {
-      const endY = y(d.total);
-      return t => {
-        const cy = height + (endY - height) * t;
-        return `${bw},${cy} ${bw+depth3d},${cy-depth3d} ${bw+depth3d},${height-depth3d} ${bw},${height}`;
-      };
-    });
-
-  // Face avant
+  // Barre simple (sans 3D)
   trees.append("rect")
     .attr("x", 0)
     .attr("y", height)
@@ -105,22 +89,9 @@ export function drawTreeChart(containerSelector) {
     .attr("y", d => y(d.total))
     .attr("height", d => height - y(d.total));
 
-  // Face du dessus
-  trees.append("polygon")
-    .attr("points", `0,${height} ${depth3d},${height-depth3d} ${bw+depth3d},${height-depth3d} ${bw},${height}`)
-    .attr("fill", getTopColor)
-    .transition().duration(1200).ease(d3.easeCubicOut)
-    .attrTween("points", d => {
-      const endY = y(d.total);
-      return t => {
-        const cy = height + (endY - height) * t;
-        return `0,${cy} ${depth3d},${cy-depth3d} ${bw+depth3d},${cy-depth3d} ${bw},${cy}`;
-      };
-    });
-
   // Image au-dessus de la barre
   const fo = trees.append("foreignObject")
-    .attr("x", (bw + depth3d - imgSize) / 2)
+    .attr("x", (bw - imgSize) / 2)
     .attr("y", height)
     .attr("width", imgSize)
     .attr("height", imgSize)
@@ -175,7 +146,7 @@ export function drawTreeChart(containerSelector) {
   // Valeur numérique
   trees.append("text")
     .attr("class", d => d.arbre === "Eucalyptus" ? "tree-label label-euca" : "tree-label")
-    .attr("x", (bw + depth3d) / 2)
+    .attr("x", bw / 2)
     .attr("y", height)
     .attr("text-anchor", "middle")
     .attr("fill", "#ffffff")
