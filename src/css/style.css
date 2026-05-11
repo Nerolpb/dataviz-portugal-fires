@@ -658,7 +658,37 @@ body {
 
 .tree-image-overlay.is-visible {
   opacity: 1;
+  pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
+}
+
+.tree-wiki-link {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.tree-wiki-link:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .tree-image-overlay img {

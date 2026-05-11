@@ -5,11 +5,11 @@ export function drawTreeChart(containerSelector) {
   if (!container) return;
 
   const dataArbres = [
-    { arbre: "Eucalyptus", total: 35941 },
-    { arbre: "Pin maritim", total: 32095 },
-    { arbre: "Chêne-liège", total: 30366 },
-    { arbre: "Chêne vert", total: 14629 },
-    { arbre: "Pin parasol", total: 8812 }
+    { arbre: "Eucalyptus", total: 35941, wiki: "https://fr.wikipedia.org/wiki/Eucalyptus" },
+    { arbre: "Pin maritim", total: 32095, wiki: "https://fr.wikipedia.org/wiki/Pinus_pinaster" },
+    { arbre: "Chêne-liège", total: 30366, wiki: "https://fr.wikipedia.org/wiki/Ch%C3%AAne-li%C3%A8ge" },
+    { arbre: "Chêne vert",  total: 14629, wiki: "https://fr.wikipedia.org/wiki/Ch%C3%AAne_vert" },
+    { arbre: "Pin parasol", total:  8812, wiki: "https://fr.wikipedia.org/wiki/Pin_parasol" }
   ];
 
   const getImageFile = (arbre) => {
@@ -22,6 +22,32 @@ export function drawTreeChart(containerSelector) {
       default: return "arbre1.png";
     }
   };
+
+  // ── Overlay : logique d'ouverture/fermeture avec délai ──
+  let closeTimer = null;
+
+  const overlay  = document.getElementById("tree-image-overlay");
+  const largeImg = document.getElementById("tree-image-large");
+  const wikiLink = document.getElementById("tree-wiki-link");
+
+  function openOverlay(d) {
+    clearTimeout(closeTimer);
+    if (!overlay || !largeImg) return;
+    largeImg.src = `./assets/${getImageFile(d.arbre)}`;
+    if (wikiLink) wikiLink.href = d.wiki;
+    overlay.classList.add("is-visible");
+  }
+
+  function scheduleClose() {
+    closeTimer = setTimeout(() => {
+      if (overlay) overlay.classList.remove("is-visible");
+    }, 300);
+  }
+
+  if (overlay) {
+    overlay.addEventListener("mouseenter", () => clearTimeout(closeTimer));
+    overlay.addEventListener("mouseleave", scheduleClose);
+  }
 
   const svgSelection = d3.select(containerSelector);
   svgSelection.selectAll("svg").remove();
@@ -117,20 +143,14 @@ export function drawTreeChart(containerSelector) {
     .style("transition", "transform 0.4s ease, opacity 0.3s ease, object-position 0.4s ease")
     .style("cursor", "crosshair")
     .on("mouseover", function(event, d) {
-      const overlay  = document.getElementById("tree-image-overlay");
-      const largeImg = document.getElementById("tree-image-large");
-      if (overlay && largeImg) {
-        largeImg.src = `./assets/${getImageFile(d.arbre)}`;
-        overlay.classList.add("is-visible");
-      }
+      openOverlay(d);
       const el = d3.select(this);
       el.style("opacity", 0.7)
         .style("transform", (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") ? "scale(1)" : "scale(1.1)");
       if (d.arbre === "Chêne-liège") el.style("object-position", "100% center");
     })
     .on("mouseout", function(event, d) {
-      const overlay = document.getElementById("tree-image-overlay");
-      if (overlay) overlay.classList.remove("is-visible");
+      scheduleClose();
       const el = d3.select(this);
       el.style("opacity", 1)
         .style("transform", (d.arbre === "Eucalyptus" || d.arbre === "Pin maritim") ? "scale(1.4)" : "scale(1)");
