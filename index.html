@@ -463,13 +463,13 @@
           </section>
 
           <section class="hero-part" id="s17-step-2" style="background: #0c0c0a;">
-            <div style="display: flex; flex-direction: column; gap: var(--space-l); max-width: 600px; text-align: left;">
+            <div style="display: flex; flex-direction: column; gap: var(--space-l); max-width: 600px; text-align: center; align-items: center;">
               <div class="s17-stats-row fade-up" data-delay="0">
                 <div class="s17-stat">
                   <span class="s17-stat-num">66</span>
                   <span class="s17-stat-label">victimes<br>en une nuit</span>
                 </div>
-                <div class="s17-stat-sep">·</div>
+                <div class="s17-stat-sep"></div>
                 <div class="s17-stat">
                   <span class="s17-stat-num">45<span class="s17-stat-unit">km</span></span>
                   <span class="s17-stat-label">parcourus<br>par le feu</span>
@@ -635,6 +635,144 @@
             La question n'est pas tranchée. Entre économie, environnement et mémoire des victimes, le Portugal cherche encore son équilibre.
           </p>
 
+        </div>
+      </section>
+
+      <!-- ====== MÉTHODOLOGIE 1 — Intro ====== -->
+      <section class="snap-section methodo-section" id="screen-methodology-intro" style="background: #0c0c0a;">
+        <div class="methodo-intro fade-up">
+          <h2 class="methodo-big-title">Comment avons-nous<br>construit cette visualisation ?</h2>
+          <p class="methodo-intro-text">Les données proviennent de sources officielles portugaises et internationales. Elles ont été nettoyées, reprojetées et transformées avant d'être intégrées. Cette section détaille chaque source et le traitement appliqué.</p>
+        </div>
+      </section>
+
+      <!-- ====== MÉTHODOLOGIE 2 — Données cartographiques ====== -->
+      <section class="snap-section methodo-section" id="screen-methodology-maps" style="background: #0c0c0a;">
+        <div class="methodo-split">
+          <div class="methodo-split-label fade-up">
+            <span class="methodo-step">01</span>
+            <h2 class="methodo-section-title">Données<br>cartographiques</h2>
+            <p class="methodo-section-sub">Les deux jeux de données géographiques utilisés pour les cartes interactives, issus de l'inventaire officiel de l'État portugais.</p>
+          </div>
+          <div class="methodo-split-content">
+
+            <div class="methodo-item fade-up" data-delay="100">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Parcelles d'eucalyptus</span>
+                <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" class="methodo-link" target="_blank" rel="noopener noreferrer">ICNF – Géocatalogue ↗</a>
+              </div>
+              <p class="methodo-desc">Toutes les parcelles d'eucalyptus du Portugal continental, superficie en hectares. IFN 2015.</p>
+              <p class="methodo-treatment">Polygones → centroïdes · PT-TM06 → WGS84 · Grille 0,05° pour le rendu 3D</p>
+            </div>
+
+            <div class="methodo-item fade-up" data-delay="200">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Incendies 1975–2024</span>
+                <a href="https://geocatalogo.icnf.pt/catalogo_tema5.html" class="methodo-link" target="_blank" rel="noopener noreferrer">ICNF – Géocatalogue ↗</a>
+              </div>
+              <p class="methodo-desc">Périmètres de tous les incendies sur 50 ans — année et surface brûlée par foyer.</p>
+              <p class="methodo-treatment">50 shapefiles fusionnés · Centroïdes · Même reprojection · Agrégation par année et cellule</p>
+            </div>
+
+            <div class="methodo-item fade-up" data-delay="300">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Contour du Portugal continental</span>
+              </div>
+              <p class="methodo-desc">Frontière utilisée comme masque sur les trois cartes pour ne révéler que le territoire portugais.</p>
+              <p class="methodo-treatment">Union des 18 districts · Simplification topologique (0,0003°) via @turf · 9 000 → 33 points</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== MÉTHODOLOGIE 3 — Données graphiques ====== -->
+      <section class="snap-section methodo-section" id="screen-methodology-charts" style="background: #0c0c0a;">
+        <div class="methodo-split">
+          <div class="methodo-split-label fade-up">
+            <span class="methodo-step">02</span>
+            <h2 class="methodo-section-title">Données<br>graphiques</h2>
+            <p class="methodo-section-sub">Les données chiffrées qui alimentent les graphiques et les statistiques du récit.</p>
+          </div>
+          <div class="methodo-split-content">
+
+            <div class="methodo-item fade-up" data-delay="100">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Superficie par espèce forestière</span>
+                <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" class="methodo-link" target="_blank" rel="noopener noreferrer">ICNF – Inventaire 2015 ↗</a>
+              </div>
+              <p class="methodo-desc">Superficie des cinq essences principales : eucalyptus, pin maritime, chêne-liège, chêne vert, pin parasol.</p>
+            </div>
+
+            <div class="methodo-item fade-up" data-delay="200">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Concentration mondiale d'eucalyptus</span>
+              </div>
+              <p class="methodo-desc">Part d'eucalyptus dans la forêt nationale : Portugal 26 %, Espagne 4 %, Chine 2,5 %, Brésil 1,5 %, Australie 1 %.</p>
+              <div class="methodo-links">
+                <a href="https://geocatalogo.icnf.pt/catalogo_tema3.html" class="methodo-link" target="_blank" rel="noopener noreferrer">ICNF – Portugal ↗</a>
+                <a href="https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html" class="methodo-link" target="_blank" rel="noopener noreferrer">MITECO – Espagne ↗</a>
+                <a href="https://iba.org" class="methodo-link" target="_blank" rel="noopener noreferrer">IBÁ – Brésil ↗</a>
+                <a href="https://www.fao.org/forest-resources-assessment/en/" class="methodo-link" target="_blank" rel="noopener noreferrer">FAO ↗</a>
+                <a href="https://www.agriculture.gov.au/abares/research-topics/forests" class="methodo-link" target="_blank" rel="noopener noreferrer">ABARES – Australie ↗</a>
+              </div>
+            </div>
+
+            <div class="methodo-item fade-up" data-delay="300">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Catastrophes de 2017</span>
+              </div>
+              <p class="methodo-desc">Pedrógão Grande (juin) : 66 victimes · Ouragan Ophélia (octobre) : 500 foyers, 45 morts. Total 2017 : 106 morts, 450 000 ha.</p>
+              <p class="methodo-treatment">Rapports officiels du gouvernement portugais et archives journalistiques</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== MÉTHODOLOGIE 4 — Traitement & Outils ====== -->
+      <section class="snap-section methodo-section" id="screen-methodology-tools" style="background: #0c0c0a;">
+        <div class="methodo-split">
+          <div class="methodo-split-label fade-up">
+            <span class="methodo-step">03</span>
+            <h2 class="methodo-section-title">Traitement<br>&amp; outils</h2>
+            <p class="methodo-section-sub">Les technologies utilisées pour préparer les données et construire les visualisations.</p>
+          </div>
+          <div class="methodo-split-content">
+
+            <div class="methodo-item fade-up" data-delay="100">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Préparation des données brutes</span>
+              </div>
+              <p class="methodo-desc">Shapefiles ICNF (PT-TM06) convertis en GeoJSON, reprojetés en WGS84 et simplifiés pour le web.</p>
+              <div class="methodo-links">
+                <a href="https://mapshaper.org" class="methodo-link" target="_blank" rel="noopener noreferrer">Mapshaper ↗</a>
+                <a href="https://gdal.org" class="methodo-link" target="_blank" rel="noopener noreferrer">GDAL ↗</a>
+              </div>
+            </div>
+
+            <div class="methodo-item fade-up" data-delay="200">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Visualisation interactive</span>
+              </div>
+              <p class="methodo-desc">Graphiques D3.js · Cartes MapLibre GL (fond CartoDB Dark Matter) · Régions via Nominatim.</p>
+              <div class="methodo-links">
+                <a href="https://d3js.org" class="methodo-link" target="_blank" rel="noopener noreferrer">D3.js ↗</a>
+                <a href="https://maplibre.org" class="methodo-link" target="_blank" rel="noopener noreferrer">MapLibre GL ↗</a>
+                <a href="https://carto.com/basemaps" class="methodo-link" target="_blank" rel="noopener noreferrer">CartoDB Basemaps ↗</a>
+                <a href="https://nominatim.org" class="methodo-link" target="_blank" rel="noopener noreferrer">Nominatim / OpenStreetMap ↗</a>
+              </div>
+            </div>
+
+            <div class="methodo-item fade-up" data-delay="300">
+              <div class="methodo-item-header">
+                <span class="methodo-item-name">Code source</span>
+                <a href="https://github.com/Nerolpb/dataviz-portugal-fires" class="methodo-link" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+              </div>
+              <p class="methodo-desc">Code open source. Construit avec Vite, sans framework.</p>
+            </div>
+
+          </div>
         </div>
       </section>
 

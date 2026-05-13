@@ -2260,13 +2260,13 @@ body {
   line-height: 1.4;
 }
 
+
 .s17-stat-sep {
-  font-family: var(--font-display);
-  font-size: 4rem;
-  color: rgba(255, 255, 255, 0.15);
-  font-weight: 300;
-  line-height: 1;
+  width: 1px;
+  height: 4rem;
+  background: rgba(255, 255, 255, 0.15);
   align-self: center;
+  flex-shrink: 0;
 }
 
 /* ── Grand chiffre 500 (étape 5) ── */
@@ -2559,6 +2559,190 @@ body {
   margin-top: 2.6rem;
   display: flex;
   justify-content: center;
+}
+
+/* ============================================================
+   MÉTHODOLOGIE
+   ============================================================ */
+
+.methodo-section {
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-l);
+  overflow: visible;
+}
+
+.methodo-split-content {
+  overflow: visible;
+}
+
+/* ── Section intro ── */
+.methodo-intro {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.methodo-step {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--vert-elec);
+}
+
+.methodo-big-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--blanc);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.methodo-intro-text {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.methodo-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: var(--space-s);
+  padding-top: var(--space-s);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.methodo-nav-item {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.methodo-nav-sep {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.8rem;
+}
+
+/* ── Sections 2-3-4 : layout deux colonnes ── */
+.methodo-split {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  align-items: start;
+  gap: var(--space-xl);
+  max-width: 1000px;
+  width: 100%;
+}
+
+.methodo-split-label {
+  align-self: start;
+}
+
+.methodo-split-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.methodo-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: var(--blanc);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.methodo-section-sub {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+.methodo-split-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Items ── */
+.methodo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: var(--space-m) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.methodo-item:first-child {
+  padding-top: 0;
+}
+
+.methodo-item:last-child {
+  border-bottom: none;
+}
+
+.methodo-item-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.methodo-item-name {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blanc);
+}
+
+.methodo-desc {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.methodo-treatment {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.28);
+  font-style: italic;
+  margin: 0;
+}
+
+.methodo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+  margin-top: 0.2rem;
+}
+
+.methodo-link {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.methodo-link:hover {
+  color: var(--vert-elec);
+}
+
+@media (max-width: 800px) {
+  .methodo-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-m);
+  }
 }
 
 /* ============================================================
