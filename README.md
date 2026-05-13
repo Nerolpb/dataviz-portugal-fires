@@ -1,5 +1,8 @@
 > **Projet réalisé dans le cadre du cours VisualDon (Visualisation de données) à la HEIG-VD.**
 
+Disponible aussi à :
+https://dataviz-portugal-fires.onrender.com
+
 # 1. Contexte du Projet
 
 **Le Sujet :**
@@ -21,10 +24,10 @@ Pour prouver ce lien, nous utilisons des données publiques qui proviennent d'in
 * **Incendies (Historique) et Eucalyptus :** Les données viennent de l'[ICNF (Institut pour la Conservation de la Nature et des Forêts)](https://geocatalogo.icnf.pt/catalogo_tema3.html).
 * **Concentration mondiale d'eucalyptus (graphique top 5 pays) :** Les pourcentages de surface d'eucalyptus par rapport à la superficie forestière totale ont été collectés manuellement depuis plusieurs sources officielles :
   * 🇵🇹 Portugal : [ICNF](https://geocatalogo.icnf.pt/catalogo_tema3.html)
-  * 🇪🇸 Espagne : [MITECO — Inventario Forestal Nacional](https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html)
-  * 🇧🇷 Brésil : [IBÁ — Indústria Brasileira de Árvores](https://iba.org)
-  * 🇦🇺 Australie : [ABARES — Australian Bureau of Agricultural and Resource Economics](https://www.agriculture.gov.au/abares/research-topics/forests)
-  * Données comparatives générales : [FAO — Forest Resources Assessment](https://www.fao.org/forest-resources-assessment/en/)
+  * 🇪🇸 Espagne : [MITECO - Inventario Forestal Nacional](https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html)
+  * 🇧🇷 Brésil : [IBÁ - Indústria Brasileira de Árvores](https://iba.org)
+  * 🇦🇺 Australie : [ABARES - Australian Bureau of Agricultural and Resource Economics](https://www.agriculture.gov.au/abares/research-topics/forests)
+  * Données comparatives générales : [FAO - Forest Resources Assessment](https://www.fao.org/forest-resources-assessment/en/)
 * **Maplibre :** Pour les cartes interactives.
 
 **Quels sont les biais ou les problèmes rencontrés ?**
