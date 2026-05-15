@@ -3,7 +3,7 @@
 Disponible aussi à :
 https://dataviz-portugal-fires.onrender.com
 
-## Lancer le projet en local
+# Lancer le projet en local
 
   **Prérequis :** [Node.js](https://nodejs.org/) (v18 ou supérieur)
 
@@ -19,7 +19,7 @@ https://dataviz-portugal-fires.onrender.com
   npm run dev
 
   Le projet est accessible sur http://localhost:5173.
-
+  ```
 # 1. Contexte du Projet
 
 **Le Sujet :**
