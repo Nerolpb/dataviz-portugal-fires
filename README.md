@@ -3,6 +3,23 @@
 Disponible aussi à :
 https://dataviz-portugal-fires.onrender.com
 
+## Lancer le projet en local
+
+  **Prérequis :** [Node.js](https://nodejs.org/) (v18 ou supérieur)
+
+  **1. Cloner le dépôt**
+  ```bash
+  git clone https://github.com/Nerolpb/dataviz-portugal-fires.git
+  cd dataviz-portugal-fires
+
+  2. Installer les dépendances
+  npm install
+
+  3. Démarrer le serveur de développement
+  npm run dev
+
+  Le projet est accessible sur http://localhost:5173.
+
 # 1. Contexte du Projet
 
 **Le Sujet :**
@@ -23,10 +40,10 @@ Pour prouver ce lien, nous utilisons des données publiques qui proviennent d'in
 
 * **Incendies (Historique) et Eucalyptus :** Les données viennent de l'[ICNF (Institut pour la Conservation de la Nature et des Forêts)](https://geocatalogo.icnf.pt/catalogo_tema3.html).
 * **Concentration mondiale d'eucalyptus (graphique top 5 pays) :** Les pourcentages de surface d'eucalyptus par rapport à la superficie forestière totale ont été collectés manuellement depuis plusieurs sources officielles :
-  * 🇵🇹 Portugal : [ICNF](https://geocatalogo.icnf.pt/catalogo_tema3.html)
-  * 🇪🇸 Espagne : [MITECO - Inventario Forestal Nacional](https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html)
-  * 🇧🇷 Brésil : [IBÁ - Indústria Brasileira de Árvores](https://iba.org)
-  * 🇦🇺 Australie : [ABARES - Australian Bureau of Agricultural and Resource Economics](https://www.agriculture.gov.au/abares/research-topics/forests)
+  * Portugal : [ICNF](https://geocatalogo.icnf.pt/catalogo_tema3.html)
+  * Espagne : [MITECO - Inventario Forestal Nacional](https://www.miteco.gob.es/es/biodiversidad/temas/inventarios-nacionales/inventario-forestal-nacional.html)
+  * Brésil : [IBÁ - Indústria Brasileira de Árvores](https://iba.org)
+  * Australie : [ABARES - Australian Bureau of Agricultural and Resource Economics](https://www.agriculture.gov.au/abares/research-topics/forests)
   * Données comparatives générales : [FAO - Forest Resources Assessment](https://www.fao.org/forest-resources-assessment/en/)
 * **Maplibre :** Pour les cartes interactives.
 
