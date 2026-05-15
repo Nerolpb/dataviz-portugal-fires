@@ -77,9 +77,6 @@ document.getElementById("btn-restart").addEventListener("click", () => {
   mainScroll.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-document.getElementById("btn-end").addEventListener("click", () => {
-  mainScroll.scrollTo({ top: mainScroll.scrollHeight, behavior: "smooth" });
-});
 
 // ─────────────────────────────────────────────────────────────
 // Comparaison Ronaldo/Stade (Section 1)

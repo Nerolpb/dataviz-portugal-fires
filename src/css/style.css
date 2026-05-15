@@ -2114,12 +2114,6 @@ body {
   transform: translateY(-2px);
 }
 
-#btn-end:hover {
-  background-color: var(--vert-elec);
-  color: #000000;
-  transform: translateY(2px);
-}
-
 #dev-nav svg {
   flex-shrink: 0;
 }
